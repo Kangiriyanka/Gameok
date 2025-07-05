@@ -1,3 +1,9 @@
+
+# Virtual environments
+**/.env*
+**/.venv*
+
+
 # Logs
 logs
 *.log
@@ -22,3 +28,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+#python
+__pycache__/
+
+#database
+
+backend/instance/

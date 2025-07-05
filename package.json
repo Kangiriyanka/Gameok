@@ -7,12 +7,15 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "backend": "cd backend && .venv/bin/flask run --no-debugger",
+    "create-venv": "cd backend && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt"
   },
   "dependencies": {
     "motion": "^12.23.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router": "^7.6.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

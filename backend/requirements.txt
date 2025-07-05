@@ -1,0 +1,7 @@
+###### Requirements without Version Specifiers ######
+flask_sqlalchemy
+flask_login
+flask_jwt_extended
+flask
+flask_cors
+python-dotenv
