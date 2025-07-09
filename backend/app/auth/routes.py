@@ -58,21 +58,16 @@ def add_user():
         try: 
             # Data is a dictionary with keys username, email, and password
             data = request.get_json()
-            print(data)
-            print(type(data))
-        
-            
-
             email_exists= User.query.filter_by(email=data["email"]).first()
             username_exists= User.query.filter_by(username=data["username"]).first()
             
 
             # Check if the email or username exists in the database 
             if email_exists:
-                return ("This e-mail address has already been taken")
+                return "This e-mail address has already been taken"
                 
             elif username_exists:
-                return ("This username has already been taken")
+                return "This username has already been taken"
 
             # Create a new user 
             else:

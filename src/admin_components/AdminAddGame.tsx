@@ -1,91 +1,99 @@
-import React from "react";
+
 import {useState} from 'react'
-import axios from "axios";
-import Dropdown from "./Dropdown.jsx"
-import { useNavigate } from "react-router-dom";
-import './AddGame.css';
+import ConsoleDropdown from "../game_components/ConsoleDropdown.tsx"
+import { useAuthContext } from "../context/AuthContext.js";
+import '../assets/styles/add_game.css';
+
+type GameData = {
+  title: string;
+  year: string;
+  series: string;
+  console: string;
+  memories: string;
+  coverPhoto: File | null;
+}
 
 
-
-function AddGame(props) {
+function AddGame() {
 
   const [response, setResponse] = useState("")
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
   const [series, setSeries] = useState("");
-  const [console, setConsole] = useState('');
-  
+  const [consoleName, setConsoleName] = useState('');
   const [memories, setMemories] = useState("");
-  const [coverPhoto, setCoverPhoto] = useState(null);
+  const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
+  const {token} = useAuthContext();
+  
 
-  const navigate = useNavigate();
-
-
-  const config = {
-    headers: {
-      'Content-Type':  'multipart/form-data',
-      'Access-Control-Allow-Origin': '*', // Set the Content-Type header to application/json
-      Authorization: 'Bearer ' + props.token
-     
-    }
-  };
-
-  function sendDataToFlask(data) {
+  async function sendDataToFlask(data: GameData) {
 
     const formData = new FormData();
-    formData.append('coverPhoto', data.coverPhoto);
+    if (data.coverPhoto) {
+      formData.append('coverPhoto', data.coverPhoto);
+    }
     formData.append('title', data.title);
     formData.append('year', data.year);
     formData.append('series', data.series);
     formData.append('console', data.console);
     formData.append('memories', data.memories);
 
+   try {
+    const response = await fetch('/add_game', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + token
+        },
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+
+      const result = await response.json();
+      setResponse(result.data.msg);
+      
+  } catch (error) {
+      console.error('Error:', error);
+      setResponse("An error occurred while submitting the form.");
+    }
+  
+}
+
+
+  function handleFileUpload(e: React.ChangeEvent<HTMLInputElement> ) {
+  
+   if (e.target.files && e.target.files.length > 0) {
+      setCoverPhoto(e.target.files[0]);
+}
    
-    axios
-      .post('/add_game', formData, config)
-      .then(response => {
-        setResponse(response.data);
-        
-        
-      })
-      .catch(error => {
-
-        console.log(error)
-  });
-
-  }
-
-
-  function handleFileUpload(e) {
-  
-    setCoverPhoto(e.target.files[0]);
     
     
   }
   
   
 
-  function submitGame(e) {
+  function submitGame(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
    
-    const data = {
+    const data: GameData = {
       "title": title,
       "year": year,
       "series": series,
-      "console": console,
+      "console": consoleName,
       "memories": memories,
-      "coverPhoto": coverPhoto
+      "coverPhoto": coverPhoto 
     }
 
-    
-
+  
     sendDataToFlask(data)
   }
      
 
     //  Function to pass as props to the dropdown component
-     const handleConsoleSelect = (value) => {
-      setConsole(value);
+     const handleConsoleSelect = (value: string) => {
+      setConsoleName(value);
     }
 
    
@@ -108,12 +116,12 @@ function AddGame(props) {
           type="number"
           value={year}
           min="1972"
-          max="2023"
+          max={new Date().getFullYear()}
           onChange={(e) => setYear(e.target.value)}/>
       </label>
       <label>
         Console:
-         <Dropdown onConsoleSelect={handleConsoleSelect} token={props.token}/>
+         <ConsoleDropdown onConsoleSelect={handleConsoleSelect}/>
       </label>
       <label>
         Series:

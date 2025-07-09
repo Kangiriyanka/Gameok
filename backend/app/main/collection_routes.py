@@ -6,7 +6,7 @@ from flask_jwt_extended import get_jwt_identity,  jwt_required
              
 
 # Get all games owned by the user
-@bp.route('/get_games', methods = ["GET"])
+@bp.route('/collection/get_games', methods = ["GET"])
 @jwt_required()
 def get_games():
     
@@ -25,7 +25,7 @@ def get_games():
 
 # Game Ownership routes
 # These routes handle getting and editing the memories related to each game.
-@bp.route('/get_game_memories/<a_game_id>/', methods = ["GET"])
+@bp.route('/collection/get_game_memories/<a_game_id>/', methods = ["GET"])
 @jwt_required()
 def get_game_memories(a_game_id):
     
@@ -37,7 +37,7 @@ def get_game_memories(a_game_id):
 
 
 
-@bp.route('/edit_game_memories/<a_game_id>/', methods = ["POST"])
+@bp.route('/collection/edit_game_memories/<a_game_id>/', methods = ["POST"])
 @jwt_required()
 def edit_game_memories(a_game_id):
     
@@ -57,7 +57,7 @@ def edit_game_memories(a_game_id):
 
         
 # Get all games owned by the user for a specific console
-@bp.route('/get_console_games/<console_id>/', methods = ["GET"])
+@bp.route('/collection/get_console_games/<console_id>/', methods = ["GET"])
 @jwt_required()
 def get_console_games(console_id):
     
@@ -74,7 +74,7 @@ def get_console_games(console_id):
 
 
 
-@bp.route('/user_add_game', methods= ["POST"])
+@bp.route('/collection/user_add_game', methods= ["POST"])
 @jwt_required()
 def user_add_game():
     

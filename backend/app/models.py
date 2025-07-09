@@ -47,9 +47,6 @@ class Console(db.Model):
 # Primary Key: ID
 # Games have a title, a year of release, a series, a cover_photo
 # Games have many-to-many relationships with both the User and Console classes.
-
-
-
 class Game(db.Model):
     __tablename__ = "games"
     id = db.Column(db.Integer, primary_key=True)
@@ -72,7 +69,7 @@ class Game(db.Model):
         }
     
 
-    
+
 # Relationship table for Users and Games.
 # Primary Keys: game_id and user_id
 # Memories are stored in the relationship, since every user has a unique memory related to the game

@@ -1,0 +1,95 @@
+h2 {
+    color: rgba(255, 255, 255, 0.882);
+    padding: 20px;
+}
+.input_title {
+    text-align: left;
+    color: rgba(255, 255, 255, 0.882);
+    font-style: italic;
+}
+
+
+
+
+.login-container{
+
+    background-color: rgba(0, 0, 0, 0.772);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 40px;
+    gap: 60px;
+    width: 35%;
+    height: 600px;
+    border-radius: 30px;
+    box-shadow:rgb(7, 8, 16);
+    padding: 50px;
+   
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+}
+
+
+
+.login-button {
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 2px;
+    color: rgba(255, 255, 255, 0.563);
+    margin-top: 30px;
+    border: thin solid rgba(255, 255, 255, 0.563);
+
+    
+}
+
+
+.dark_input {
+    
+    color: white;
+    border-style: none none solid none;
+    outline: none;
+    background-color: transparent;
+    border-width: 2px;
+    margin: 5px 0 20px 0;
+    
+}
+
+
+
+
+
+
+::placeholder {
+    color: white;
+    font-style: oblique;
+    font-size: smaller;
+    opacity: 0.4;
+}
+
+.registerBox {
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.registerBox  p {
+
+    color: rgba(255, 255, 255, 0.563);
+
+}
+.registerBox a {
+    
+    color: white;
+}
+
+
+.error_message {
+    color: white;
+    padding: 10px;
+}

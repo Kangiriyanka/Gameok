@@ -1,59 +1,64 @@
-import React from "react";
+
 import {useState} from 'react'
-import axios from "axios";
-import GameDropdown from "./GameDropdown.jsx"
-import { useNavigate } from "react-router-dom";
-import './AddGame.css';
+
+import { useLoaderData } from 'react-router';
+import { useAuthContext } from '../context/AuthContext.tsx';
+import GameDropdown from "./GameDropdown.tsx"
+import '../assets/styles/add_game.css';
 
 
-function UserAddGame(props) {
+type GameData = {
+  title: string;
+  memories: string;
+}
+
+function UserAddGame() {
 
 
     const [response, setResponse] = useState('')
     const [gameTitle, setGameTitle] = useState('')
     const [memories, setMemories] = useState('')
+    const games = useLoaderData(); 
+    const {token} = useAuthContext(); 
+    
 
 
-    const navigate = useNavigate();
-
-
-    const config = {
-      headers: {
-        'Content-Type':  'multipart/form-data',
-        'Access-Control-Allow-Origin': '*', // Set the Content-Type header to application/json
-        Authorization: 'Bearer ' + props.token
-       
-      }
-    };
-
-    const handleGameSelect = (value) => {
+    const handleGameSelect = (value: string) => {
         setGameTitle(value);
       }
 
-    function sendDataToFlask(data) {
+    async function sendDataToFlask(data: GameData) {
 
         const formData = new FormData();
         formData.append('title', data.title);
         formData.append('memories', data.memories);
     
     
-        axios
-          .post('/user_add_game', formData, config)
-          .then(response => {
-            setResponse(response.data);
-            
-          })
-          .catch(error => {
-            console.log(error)
-      });
+        try {
+          const response = await fetch("/user_add_game", {
+            method: "POST",
+            headers: {Authorization: 'Bearer ' + token},
+            body: JSON.stringify(data)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const result = await response.json();
+          setResponse(result)
+          
+        } catch (error) {
+          console.error('Error:', error);
+          setResponse("An error occurred while submitting the form.");
+        }
+         
+      
     
       }
     
     
-     
-      
-    
-      function submitGame(e) {
+      function submitGame(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
     
         const data = {
@@ -69,16 +74,14 @@ function UserAddGame(props) {
 
 
         <div className= "d-flex flex-column justify-content-center">
-
-    
         <form onSubmit={submitGame} className="d-flex flex-column game_form">
         <h1> Add a Game </h1>
        
      
         <label>
             Game:
-            {/* <Dropdown onConsoleSelect={handleConsoleSelect} token={props.token}/> */}
-            <GameDropdown onGameSelect={handleGameSelect} token={props.token}/>
+  
+            <GameDropdown onGameSelect={handleGameSelect} games ={games}/>
         </label>
        
         <label>

@@ -1,12 +1,12 @@
 import React from "react";
 import {useState} from 'react'
-import axios from "axios";
+import { useAuthContext } from "../context/AuthContext";
 import { useNavigate, useParams, useLocation} from "react-router-dom";
-import './AddGame.css';
+import '../assets/styles/add_game.css';
 
 
 
-function EditMemories(props) {
+function EditMemories() {
 
   
   const [response, setResponse] = useState("")
@@ -14,50 +14,52 @@ function EditMemories(props) {
   const { edit_memories} = location.state;
   const [new_memories, setNewMemories] = useState(edit_memories)
   const { game_id, title } = useParams();
-  console.log(title)
+  const { token } = useAuthContext();
   const navigate = useNavigate();
 
   
+  type MemoryData = {
+    memories: string;
+  }
   
   
 
-  const config = {
-    headers: {
-      'Content-Type':  'multipart/form-data',
-      'Access-Control-Allow-Origin': '*', // Set the Content-Type header to application/json
-      Authorization: 'Bearer ' + props.token
-     
-    }
-  };
-
-  function sendDataToFlask(data) {
+  async function sendDataToFlask(data: MemoryData) {
 
     const formData = new FormData();
-
     formData.append('memories', data.memories);
 
+    try {
 
-    axios
-      .post(`/edit_game_memories/${game_id}`, formData, config)
-      .then(response => {
-       
-        setResponse(response.data);
-        navigate(`/game/${game_id}/${title}`)
-        
-      })
-      .catch(error => {
-        console.log(error)
-  });
+      const response = await fetch(`/edit_memory/${game_id}`, {
+        method: 'POST',
+        headers: {  
+            Authorization: 'Bearer ' + token
+        },
+        body: formData
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
 
+      const result = await response.json();
+      setResponse(result.message);
+      navigate('/games');
+
+
+    } catch (error: any) {
+      console.error('Error:', error);
+      setResponse("Error: " + error.message);
+
+    }
+ 
   }
 
-  function submitMemories(e) {
+  function submitMemories(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const data = {
-      
+    const data: MemoryData = {
       "memories": new_memories,
-    
     }
 
     sendDataToFlask(data)

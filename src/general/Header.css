@@ -1,0 +1,25 @@
+.user_info {
+   
+    color: white;
+    margin: 0 auto;
+}
+
+.user_info  p {
+    margin: 0 auto;
+    color: white;
+}
+
+.btn.btn-dark.logout_button {
+   margin: 0 auto;
+   width: 75%;
+   background-color: #ed143d61;
+   
+}
+
+.dropdown-item-custom {
+    display: flex;
+}
+
+.nav-link.dropdown-toggle {
+    font-size: 18px;
+}

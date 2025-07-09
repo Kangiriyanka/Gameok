@@ -1,71 +1,78 @@
 import React from "react";
 import {useState} from 'react'
-
-import axios from "axios";
+import { useAuthContext } from "../context/AuthContext";
 import { useNavigate, useParams} from "react-router-dom";
-import './AddGame.css';
+import '../assets/styles/add_game.css';
 
-
-
-function EditGame(props) {
+function EditGame() {
 
   
   const [response, setResponse] = useState("")
   const { game_id, series, title, year } = useParams();
-  const [newTitle, setNewTitle] = useState(title);
-  const [newYear, setNewYear] = useState(year);
-  const [newSeries, setNewSeries] = useState(series);
-  const [newCoverPhoto, setNewCoverPhoto] = useState(null);
+  const [newTitle, setNewTitle] = useState(title ?? "");
+  const [newYear, setNewYear] = useState(year ?? "");
+  const [newSeries, setNewSeries] = useState(series ?? "");
+  const [newCoverPhoto, setNewCoverPhoto] = useState<File | null>(null);
   const navigate = useNavigate();
+  const { token } = useAuthContext();
 
   
-  
-
-  const config = {
-    headers: {
-      'Content-Type':  'multipart/form-data',
-      'Access-Control-Allow-Origin': '*', // Set the Content-Type header to application/json
-      Authorization: 'Bearer ' + props.token
-     
-    }
-  };
+ type EditGameData = {
+  title: string;
+  year: string;
+  series: string;
+  coverPhoto: File | null;
+}
 
 
-  function handleFileUpload(e) {
-   
-    setNewCoverPhoto(e.target.files[0]);
-    
-  }
-
-  function sendDataToFlask(data) {
+  async function sendDataToFlask(data: EditGameData) {
 
     const formData = new FormData();
-    formData.append('coverPhoto', data.coverPhoto);
+    if (data.coverPhoto) {
+      // Append the cover photo file to the FormData object
+      formData.append('coverPhoto', data.coverPhoto);
+    }
     formData.append('title', data.title);
     formData.append('year', data.year);
     formData.append('series', data.series);
    
     
-    
+    try {
+      const response = await fetch(`/edit_game/${game_id}`, {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + token
+        },
+        body: formData
+      });
 
-    axios
-      .post(`/edit_game/${game_id}`, formData, config)
-      .then(response => {
-       
-        setResponse(response.data);
-        navigate(`/my_games`)
-        
-      })
-      .catch(error => {
-        console.log(error)
-  });
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+
+      const result = await response.json();
+      setResponse(result)
+      navigate('/games');
+    } catch (error) {
+      console.error('Error:', error);
+      setResponse("An error occurred while submitting the form.");
+    }
+    
 
   }
 
-  function submitEditedGame(e) {
+   function handleFileUpload(e: React.ChangeEvent<HTMLInputElement> ) {
+  
+   if (e.target.files && e.target.files.length > 0) {
+      setNewCoverPhoto(e.target.files[0]);
+}
+   
+  }
+
+  function submitEditedGame(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const data = {
+    const data: EditGameData = {
       "title" : newTitle,
       "year" : newYear,
       "series" : newSeries,
@@ -73,16 +80,12 @@ function EditGame(props) {
     
     }
 
-    console.log(data)
 
-    sendDataToFlask(data)
+    sendDataToFlask(data) 
   }
 
 
 
-     
-
-   
   return (
     <div >
 
@@ -112,7 +115,7 @@ function EditGame(props) {
           type="number"
           value={newYear}
           min="1972"
-          max="2023"
+          max={new Date().getFullYear()}
           onChange={(e) => setNewYear(e.target.value)}/>
       </label>
 

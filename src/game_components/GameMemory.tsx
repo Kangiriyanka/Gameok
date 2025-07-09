@@ -1,48 +1,45 @@
-import React from "react";
-import './Game.css';
+import '../assets/styles/game.css';
 import { useState, useEffect } from 'react'
-import axios from "axios";
 import { Link, useParams} from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext.tsx";
 
 
-function GameMemory(props) {
+function GameMemory() {
 
     const [memories, setMemories] = useState([])
     const { game_id, title } = useParams();
+    const {token} = useAuthContext();
     
    
 
-  useEffect(() => {
-    async function fetchMemories() {
-      axios({
+ useEffect(() => {
+  async function fetchMemories() {
+    try {
+      const response = await fetch(`/get_game_memories/${game_id}/`, {
         method: "GET",
-        url: `/get_game_memories/${game_id}/`,
         headers: {
-          Authorization: 'Bearer ' + props.token
+          Authorization: 'Bearer ' + token
         }
-  
-        
-      })
-        .then(response => {
-          const res= response.data
-          console.log(response.data);
-          setMemories(res)
-          
-        })
-      
-        .catch(error => {
-              console.log(error.response)
-        });
-      
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const res = await response.json();
+      setMemories(res);
+
+    } catch (error) {
+      console.error("Fetch error:", error);
     }
-    fetchMemories();
-  }, []);
-  
+  }
+
+  fetchMemories();
+}, []);
 
     
     return (
         <div className= "memory_fragment ">
-           
            <h1>{title}</h1>
            <p > {memories}</p>
            
