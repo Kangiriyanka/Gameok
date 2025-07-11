@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router";
 import Console from "./Console.tsx"
-import './Consoles.css';
+import '../assets/styles/Consoles.css';
 
 
 

@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 
 
 
-@bp.route('/admin/add_console', methods= ["POST"])
+@bp.route('/api/admin/add_console', methods= ["POST"])
 @jwt_required()
 @admin_only
 def add_console():
@@ -56,7 +56,7 @@ def add_console():
 
 
 
-@bp.route("/admin/edit_game/<a_game_id>", methods=["POST", "GET"])
+@bp.route("/api/admin/edit_game/<a_game_id>", methods=["POST", "GET"])
 @jwt_required()
 @admin_only
 def game_edit(a_game_id):

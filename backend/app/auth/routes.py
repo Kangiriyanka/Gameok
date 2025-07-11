@@ -11,11 +11,11 @@ from sqlalchemy.exc import SQLAlchemyError
 # Creates a token if the user enters an exisitng username with the correct password
 # 401 error code --> Unauthorized access
 # 500 error code --> Internal Server Error, i.e. All purpose error
-@bp.route('/token', methods=["POST"])
+@bp.route('/api/auth/get_token', methods=["POST"])
 def create_token():
-
     # Data Sent from the Login Component.
     data = request.get_json()
+  
  
 
     try:
@@ -50,7 +50,7 @@ def create_token():
 
 # User Routes
 # Add user with Try-Except Block
-@bp.route('/add_user', methods= ["POST"])
+@bp.route('/api/auth/add_user', methods= ["POST"])
 def add_user():
     
     if request.method == "POST":
@@ -85,7 +85,7 @@ def add_user():
     
 
 # The data type here sent is application/json, data is simply a dict.
-@bp.route('/edit_password', methods= ["POST"])
+@bp.route('/api/auth/edit_password', methods= ["POST"])
 @jwt_required()
 def edit_password():
     
@@ -114,7 +114,7 @@ def edit_password():
     
 
 
-@bp.route("/logout", methods=["POST"])
+@bp.route("/api/auth/logout", methods=["POST"])
 def logout():
     response = jsonify({"msg": "You have successfully logged out "})
     # Function which deletes the cookies containing the access token

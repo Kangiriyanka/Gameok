@@ -6,7 +6,7 @@ from flask import request,jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
-@bp.route('/console/get_owned_consoles', methods = ["GET", "POST"])
+@bp.route('/api/console/get_owned_consoles', methods = ["GET", "POST"])
 @jwt_required()
 def get_my_consoles():
    
@@ -40,7 +40,7 @@ def get_my_consoles():
 # Adding a game requires associating it with a console
 # On the AddGame component, we use a form that has a dropdown entry with all the consoles
 # This route will  populate the Dropdown Menu Component with the consoles from the consoles table.
-@bp.route('/console/get_consoles', methods = ["GET", "POST"])
+@bp.route('/api/console/get_consoles', methods = ["GET", "POST"])
 @jwt_required()
 def get_consoles():
     console_names = []

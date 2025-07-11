@@ -1,6 +1,6 @@
-import EditGame from '../game_components/EditGame.tsx';
-import AddGame from '../admin_components/AdminAddGame.tsx';
-import AddConsole from '../console_components/AddConsole.tsx';
+import AdminEditGame from '../admin_components/AdminEditGame.tsx';
+import AdminAddGame from '../admin_components/AdminAddGame.tsx';
+import AdminAddConsole from '../admin_components/AdminAddConsole.tsx';
 import AdminRoute from '../general/AdminRoute.tsx';
 
 
@@ -11,15 +11,15 @@ export const adminRoutes = [
     children: [
       {
         path: "add_consoles",
-        Component: AddConsole
+        Component: AdminAddConsole
       },
       {
         path: "add_games",
-        Component: AddGame
+        Component: AdminAddGame
       },
       {
         path: "game/edit/:game_id/:series/:title/:year",
-        Component: EditGame
+        Component: AdminEditGame
       }
     ]
   }

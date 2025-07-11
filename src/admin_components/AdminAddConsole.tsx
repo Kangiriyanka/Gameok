@@ -24,7 +24,7 @@ function AddConsole() {
   async function sendDataToFlask(data: ConsoleData ) {
 
     try {
-      const response = await fetch("/add_console", {
+      const response = await fetch("/api/admin/add_console", {
         method: "POST",
         headers:  {Authorization: 'Bearer ' + token},
         body: JSON.stringify(data)

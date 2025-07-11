@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 from flask import request
 from app.main.helpers import allowed_file
 
-@bp.route('/game/get_all_game_titles', methods = ["GET"])
+@bp.route('/api/game/get_all_game_titles', methods = ["GET"])
 @jwt_required()
 def get_all_game_titles():
     
@@ -27,7 +27,7 @@ def get_all_game_titles():
 
 
 
-@bp.route('/game/add_game', methods= ["POST"])
+@bp.route('/api/game/add_game', methods= ["POST"])
 @jwt_required()
 def add_game():
  try:
@@ -142,7 +142,7 @@ def add_game():
         return f"An error occurred: {str(e)}"
  
 
-@bp.route("/game/delete_game/<a_game_id>", methods=["DELETE"])
+@bp.route("/api/game/delete_game/<a_game_id>", methods=["DELETE"])
 @jwt_required()
 def delete_game(a_game_id):
     

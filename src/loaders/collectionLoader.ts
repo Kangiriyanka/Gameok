@@ -2,7 +2,7 @@ export async function collectionLoader() {
 
   const token = localStorage.getItem("token");
   try {
-    const response = await fetch("/get_games", {
+    const response = await fetch("/api/collection/get_games", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token

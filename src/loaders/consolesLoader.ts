@@ -12,7 +12,7 @@ export async function consolesLoader() {
     throw new Response("Unauthorized", { status: 401 });
   }
 
-  const response = await fetch("/console/get_owned_consoles", {
+  const response = await fetch("/api/console/get_owned_consoles", {
     headers: {
       Authorization: "Bearer " + token,
     },

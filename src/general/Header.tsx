@@ -2,7 +2,7 @@
 
 import {  useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
-import "./Header.css"
+
 
 
 
@@ -14,7 +14,7 @@ function Header() {
 
  async function logOut() {
   try {
-    const response = await fetch("/auth/logout", {
+    const response = await fetch("/api/auth/logout", {
       method: "POST",
     });
 
@@ -24,9 +24,9 @@ function Header() {
 
     // Call the prop function to remove token and redirect
     removeToken();
-    navigate("/login");
+    navigate("/");
 
-  }   catch (error) {
+  }  catch (error) {
     console.error("Fetch error:", error);
   }
 }

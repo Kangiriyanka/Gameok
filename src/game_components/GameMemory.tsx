@@ -15,7 +15,7 @@ function GameMemory() {
  useEffect(() => {
   async function fetchMemories() {
     try {
-      const response = await fetch(`/get_game_memories/${game_id}/`, {
+      const response = await fetch(`/api/collection/get_game_memories/${game_id}/`, {
         method: "GET",
         headers: {
           Authorization: 'Bearer ' + token

@@ -31,7 +31,7 @@ function EditMemories() {
 
     try {
 
-      const response = await fetch(`/edit_memory/${game_id}`, {
+      const response = await fetch(`/api/collection/edit_memory/${game_id}`, {
         method: 'POST',
         headers: {  
             Authorization: 'Bearer ' + token

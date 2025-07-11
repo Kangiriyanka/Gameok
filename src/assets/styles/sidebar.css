@@ -1,0 +1,112 @@
+#sidebar {
+  box-sizing: border-box;
+  height: 100vh;
+  width: 10rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--base-clr);
+  border-right: 1px solid var(--line-clr);
+  transition: 300ms ease-in-out;
+  text-wrap: no-wrap;
+
+}
+
+#sidebar.close {
+    padding: 5px;
+    width: 3rem;
+    overflow: hidden;
+}
+
+#sidebar ul {
+  list-style: none;
+}
+
+#sidebar > ul > li:first-child {
+
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+
+}
+
+#sidebar ul.li.active a {
+    color: var(--accent-clr);
+
+}
+
+#sidebar a, #sidebar .dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-clr);
+    border-radius: .5rem;
+    padding: 0.85rem;
+    text-decoration: none;
+
+}
+
+
+/* Flex grow makes sure the parent elements are filled */
+#sidebar a span, #sidebar .dropdown-btn span {
+
+    flex-grow: 1;
+}
+
+#sidebar a:hover, #sidebar .dropdown-btn:hover {
+
+    background-color: var(--hover-clr);
+}
+
+/* This doesn't work with height auto */
+/* Hide child elements that don't fit in the container */
+#sidebar .sub-menu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: 300ms ease-in-out;
+
+    > div {
+        overflow:hidden;
+    }
+
+}
+
+#sidebar .sub-menu.show {
+   grid-template-rows: 1fr;
+}
+
+#sidebar svg {
+    flex-shrink: 1;
+    fill: var(--text-clr);
+}
+
+/* Make the rotating apparent, it's going to show the rotation */
+.dropdown-btn svg {
+    transition: 200ms ease;
+}
+
+/* Rotate the arrow and not the leftmost icon */
+.rotate svg:last-child {
+    rotate: 180deg;
+}
+
+
+#sidebar .sub-menu a {
+    padding-left: 2em;
+}
+
+/* Pushes your Gameok to the left */
+#toggle-btn{
+    margin-left: auto;
+    padding: 1em;
+    border: none;
+    border-radius: .5em;
+    background:none;
+    cursor: pointer;
+
+    svg {
+        transition: rotate 150ms ease;
+    }
+}
+
+#toggle-btn:hover {
+    background-color: var(--hover-clr);
+}

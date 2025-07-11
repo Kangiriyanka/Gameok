@@ -2,7 +2,7 @@
 import {useState} from 'react'
 import Game from '../game_components/Game.tsx'
 import { useAuthContext } from '../context/AuthContext'
-import './Consoles.css';
+import '../assets/styles/consoles.css';
 
 type ConsoleProps = {
     console_id: number;
@@ -26,7 +26,7 @@ function Console({console_id, console_name}: ConsoleProps) {
     async function getConsoleGames(console_id: ConsoleProps["console_id"]) {
        
       try {
-        const response = await fetch("/get_console_games/" + console_id, {
+        const response = await fetch("/api/collection/get_console_games/" + console_id, {
           method: "GET",
            headers: {
             Authorization: 'Bearer ' + token

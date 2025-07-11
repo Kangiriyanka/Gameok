@@ -8,7 +8,7 @@ export  async function gamesLoader() {
     const token = localStorage.getItem("token");
     
     try {
-      const response = await fetch("/get_all_game_titles", {
+      const response = await fetch("/api/game/get_all_game_titles", {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token

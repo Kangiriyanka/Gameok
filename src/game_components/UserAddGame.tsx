@@ -35,7 +35,7 @@ function UserAddGame() {
     
     
         try {
-          const response = await fetch("/user_add_game", {
+          const response = await fetch("/api/game/user_add_game", {
             method: "POST",
             headers: {Authorization: 'Bearer ' + token},
             body: JSON.stringify(data)

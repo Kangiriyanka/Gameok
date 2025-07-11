@@ -38,7 +38,7 @@ function EditGame() {
    
     
     try {
-      const response = await fetch(`/edit_game/${game_id}`, {
+      const response = await fetch(`/api/admin/edit_game/${game_id}`, {
         method: 'POST',
         headers: {
           Authorization: 'Bearer ' + token

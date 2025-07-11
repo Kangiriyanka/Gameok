@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Login.css';
+import '../assets/styles/login.css';
 import { useAuthContext } from '../context/AuthContext';
 
 
@@ -8,6 +8,7 @@ import { useAuthContext } from '../context/AuthContext';
 function Login() {
 
   const {setToken, setUserInfo } = useAuthContext(); 
+  const [response, setResponse] = useState("")
   const [loginForm, setLoginForm] = useState({
       username: "",
       password: ""
@@ -19,7 +20,7 @@ function Login() {
       event.preventDefault()
 
       try { 
-      const response = await fetch("/token", {
+      const response = await fetch("/api/auth/get_token", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -35,13 +36,17 @@ function Login() {
       }
 
       const json = await response.json();
-      setToken(json.data.access_token);
+    
+      console.log("Response from server:", json);
+      console.log(json);
+      
+      setToken(json.access_token);
       setUserInfo(json.data.username);
      
     } catch(error: any) {
 
       console.error('Error:', error);
-      setErrorMessage(error.response.data.msg);
+      setResponse(error);
 
     }
 
@@ -51,9 +56,7 @@ function Login() {
      // Keep the same object with ... operator  but only change the field "name" with the value inputted in the input field
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) { 
       
-     
-      const {size} = e.target
-      console.log(size)
+  
       const {value, name} = e.target
       setLoginForm(prevNote => ({
           ...prevNote, [name]: value})
@@ -79,6 +82,7 @@ function Login() {
                   value={loginForm.password} />
 
           <button type="submit" className="login-button" >Login</button>
+          
           <div className="registerBox d-flex flex "> 
           
 

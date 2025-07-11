@@ -39,7 +39,7 @@ function AddGame() {
     formData.append('memories', data.memories);
 
    try {
-    const response = await fetch('/add_game', {
+    const response = await fetch('/api/admin/add_game', {
         method: 'POST',
         headers: {
           Authorization: 'Bearer ' + token

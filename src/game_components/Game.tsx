@@ -25,7 +25,7 @@ export default function Game({game_id,game_series, game_year, game_title, game_c
       setActive(false);
 
       try {
-        const response = await fetch(`/delete_game/${game_id}`, {
+        const response = await fetch(`/api/game/delete_game/${game_id}`, {
           method: 'DELETE',
           headers: {
              Authorization: 'Bearer ' + token

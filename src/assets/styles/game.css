@@ -1,6 +1,3 @@
-h6 {
-    color: black;
-}
 
 .games {
   background-color: #5b7b7a;
@@ -8,15 +5,12 @@ h6 {
 
 .gameCard {
 
-  padding: 10px;
-  border: 1px thin black;
-  text-align: left;
+ 
    
 }
 
 .gameCard img {
-  width: 100px;
-  height: 100px;
+ 
   
 }
 
@@ -25,14 +19,12 @@ h6 {
 
 
 .game_link {
-  text-decoration: none;
-  font-size: 20px;
-  color: black;
+
 
 }
 
 .delete_button {
-  width: 100px;
+  
 }
 
 

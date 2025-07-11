@@ -1,4 +1,5 @@
 from flask import Blueprint, app
+import os 
 from app import db 
 from app.models import User
 import click
@@ -19,9 +20,9 @@ def init_database():
 # The admin has more privileges than the regular users such as adding consoles to the database.
 @bp.cli.command('create-admin')
 def create_admin():
-    admin_username = app["ADMIN"]
-    admin_email = app.config["EMAIL"]
-    admin_password = app.config["PASSWORD"]
+    admin_username = os.getenv("ADMIN")
+    admin_email = os.getenv("EMAIL")
+    admin_password = os.getenv("PASSWORD")
     admin= User(username = admin_username, email= admin_email, password= admin_password)
     db.session.add(admin)
     db.session.commit()
@@ -33,7 +34,7 @@ def create_admin():
 # A collection of Table objects and their associated schema constructs.
 
 
-@bp.cli.command('/drop-tables')
+@bp.cli.command('drop-tables')
 def drop_all_tables():
     try:
       

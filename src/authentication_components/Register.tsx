@@ -23,7 +23,7 @@ export default function Register() {
 
   async function sendDataToFlask(data: UserData) {
    try {
-      const response = await fetch('/user/add_user', {
+      const response = await fetch('/api/auth/add_user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data), 
