@@ -1,9 +1,5 @@
 
 type GameTitle = string;
-
-
-
-
 export  async function gamesLoader() {
     const token = localStorage.getItem("token");
     

@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../assets/styles/login.css';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 
 
 
-function Login() {
+export default function Login() {
 
   const {setToken, setUserInfo } = useAuthContext(); 
-  const [response, setResponse] = useState("")
+  const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState({
       username: "",
       password: ""
@@ -36,17 +35,20 @@ function Login() {
       }
 
       const json = await response.json();
-    
-      console.log("Response from server:", json);
       console.log(json);
       
       setToken(json.access_token);
-      setUserInfo(json.data.username);
+      setUserInfo(json.username);
+      
+
+      navigate("/")
+      
      
     } catch(error: any) {
-
+   
       console.error('Error:', error);
-      setResponse(error);
+      setErrorMessage(error.msg)
+     
 
     }
 
@@ -62,38 +64,48 @@ function Login() {
           ...prevNote, [name]: value})
       )}
 
+    
     return (
-      <div className="login-container d-flex s">
+      <div className="">
+           <div className="page-header" style={{textAlign: "center"}}>
+           <h1> Gameok Login </h1>
+           
+        </div> 
+          <form className="reg-form"  style={{margin: "0 auto"}}onSubmit={loginUser}>
         
-          <form className="login-form" onSubmit={loginUser}>
-          <h2> Login</h2>
-            <h6 className="input_title"> Username </h6>
-            <input size={30} className="dark_input" onChange={handleChange} 
+          
+            <label>
+              Username
+            <input
+               
+                  onChange={handleChange} 
                   type="text"
                   // This is the name it used in the handleChange function.
                   name="username" 
                   placeholder="Your username" 
                   value={loginForm.username} />
-            <h6 className="input_title"> Password </h6>
-            <input size={30} className="dark_input" onChange={handleChange} 
+            </label>
+            <label> Password
+            <input 
+                  onChange={handleChange} 
                   type="password"
                   name="password" 
                   placeholder="Your password" 
                   value={loginForm.password} />
+            </label>
 
-          <button type="submit" className="login-button" >Login</button>
+          <button type="submit" className="form-button" >Login</button>
           
-          <div className="registerBox d-flex flex "> 
+          <div style= {{margin: "-1.5rem auto"}}> 
           
+          
+          Not a member? Sign up <Link className=" underline text-[var(--accent-clr)]"to="/register">here</Link> 
 
- <p> Not a member? Sign up <Link to="/register">here</Link> </p>
-
-          
           </div>
           
      
            
-          <span className="error_message">{errorMessage}</span>
+          <span className="error-message">{errorMessage}</span>
              
         </form>
        
@@ -101,4 +113,3 @@ function Login() {
     );
 }
 
-export default Login;

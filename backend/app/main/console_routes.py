@@ -29,7 +29,9 @@ def get_my_consoles():
         .all() 
 
     
+
     consoles_json = [console.to_json() for console in consoles]
+
    
     
     return jsonify(consoles=consoles_json)

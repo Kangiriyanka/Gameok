@@ -64,10 +64,11 @@ def add_user():
 
             # Check if the email or username exists in the database 
             if email_exists:
-                return "This e-mail address has already been taken"
+             
+                return {"msg": "Wrong password. Try again!"}, 401
                 
             elif username_exists:
-                return "This username has already been taken"
+                return {"msg": "Oops, this username has already been taken."}, 401
 
             # Create a new user 
             else:
@@ -90,6 +91,8 @@ def add_user():
 def edit_password():
     
     data = request.get_json()
+ 
+    print(data)
     for value in data.values():
             
             if value == "":
@@ -104,13 +107,14 @@ def edit_password():
    
     
     if data["currentPassword"] != current_user_password:
-        return "The current password you entered is  incorrect"
+
+        return {"msg": "The current password you entered is incorrect"}, 401
     elif data["newPassword"] != data["confirmPassword"]:
-        return "The new password doesn't match with the confirmation"
+        return {"msg": "The new password doesn't match "}, 401
     else:
         user.password = data["newPassword"]
         db.session.commit()
-        return "Sucessfully changed passwords"
+        return "Successfully changed passwords"
     
 
 

@@ -49,7 +49,7 @@
 }
 
 /* A row inside the sidebar */
-#sidebar a, #sidebar .dropdown-btn, #sidebar .logo {
+#sidebar a, #sidebar .dropdown-btn, #sidebar .logo, #logout-btn{
     display: flex;
     align-items: center;
     gap: 1em;
@@ -102,6 +102,8 @@
     padding-left: 2em;
 }
 
+
+
 #sidebar svg {
     flex-shrink: 0;
     fill: var(--text-clr);
@@ -116,6 +118,7 @@
 .rotate svg:last-child {
     rotate: 180deg;
 }
+
 
 
 /* Pushes your Gameok to the left */

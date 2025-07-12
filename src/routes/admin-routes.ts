@@ -5,6 +5,7 @@ import AdminRoute from '../general/AdminRoute.tsx';
 
 
 export const adminRoutes = [
+  
   {
     path: "/admin",
     Component: AdminRoute,

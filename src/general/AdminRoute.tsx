@@ -5,13 +5,13 @@ import { useAuthContext } from "../context/AuthContext";
 export default function AdminRoute() {
 
 
-    const auth = useAuthContext();
+    const {token, storedUserInfo} = useAuthContext();
 
-    if (!auth?.token) {
+    if (token) {
         return <Navigate to="/" replace />;
     }
 
-    if (auth.storedUserInfo !== "Kangiriyanka") {
+    if (storedUserInfo !== "Kangiriyanka") {
         return <Navigate to="/" replace />;
     }
 

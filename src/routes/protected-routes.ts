@@ -1,4 +1,4 @@
-import ProtectedRoute from '../general/ProtectedRoute.tsx';
+import Root from '../general/Root.tsx';
 import Consoles from '../console_components/Consoles.tsx';
 import Home from '../general/Home.tsx';
 import EditPassword from '../user_components/EditPassword.tsx';
@@ -16,7 +16,7 @@ export const protectedRoutes = [
     
   {
     path: "/dashboard",
-    Component: ProtectedRoute,
+    Component: Root,
     loader: consolesLoader,
     children: [
       {

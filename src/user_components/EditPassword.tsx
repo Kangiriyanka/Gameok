@@ -1,7 +1,8 @@
 
 import {useState} from 'react'
 import { useAuthContext } from '../context/AuthContext';
-import '../assets/styles/user_components.css';
+import '../assets/styles/forms.css';
+
 
 type PasswordData = {
   currentPassword: string;
@@ -21,10 +22,11 @@ export default function EditPassword() {
 
 async function sendDataToFlask(data: PasswordData) {
   try {
-    const response = await fetch('/edit_password', {
+    const response = await fetch('/api/auth/edit_password', {
       method: 'POST',
       headers: {
-       
+        
+        "Content-Type": "application/json",
         Authorization: 'Bearer ' + token 
       },
       body: JSON.stringify(data)
@@ -35,9 +37,14 @@ async function sendDataToFlask(data: PasswordData) {
     }
 
     const result = await response.json();
+    console.log(result)
+   
     setResponse(result);
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+
+    console.log("Result" + error.msg)
+    
+ 
   }
 }
   
@@ -58,11 +65,15 @@ async function sendDataToFlask(data: PasswordData) {
 
   // Form contains inputs for the current password, new password and confirmation of the new password
   return (
-    <div className="d-flex flex-column justify-content-center">
-    <form onSubmit={submitUser} className=" d-flex flex-column reg_form">
-      <h1> Change your Password</h1>
+    <div className="relative">
+        <div className="page-header">
+           <h1> Edit Password</h1>
+           
+        </div>      
+    <form onSubmit={submitUser} className="reg-form">
+     
       <label>
-        Current Password:
+        Current Password
         <input
           type="password"
           value={currentPassword}
@@ -70,7 +81,7 @@ async function sendDataToFlask(data: PasswordData) {
       </label>
 
       <label>
-        New Password:
+        New Password
         <input
           type="password"
           value={newPassword}
@@ -78,14 +89,14 @@ async function sendDataToFlask(data: PasswordData) {
       </label>
 
       <label>
-        Confirm New Password:
+        Confirm  Password
         <input
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}/>
       </label>
       
-      <button type="submit" className=" btn btn-dark form_button" >Register User</button>
+      <button type="submit" className="form-button" >Edit</button>
       <p> {response} </p>
     </form>
 

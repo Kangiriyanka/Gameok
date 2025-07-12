@@ -1,0 +1,95 @@
+.reg-form{
+    position: relative;
+    color: var(--secondary-text-clr);
+    top: 3rem;
+    left: 2rem;
+    height: 22rem;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    gap: 3rem;
+    border-radius: .5rem;
+    border: 1px solid var(--n64-gray-clr);
+    width: 40rem;
+    background-color: var(--n64-gray-clr);
+  
+   
+   
+}
+
+
+
+.reg-form input {
+    border: 2.5px solid  #3f3f45;
+    border-style: none none solid none;
+    outline: none;
+    background-color: transparent;
+    width: 60%;
+    caret-color: var(--line-clr);
+   
+
+}
+
+
+
+.form-button {
+    background-color: var(--background-clr);
+    font-size: 1.2rem;
+    width: 8rem;
+    padding: 0.5rem;
+    height: rem;
+    border: 1px solid gray;
+    border-radius: .5rem;
+    margin: 0 auto;
+    transition: 250ms;
+    
+  
+}
+
+.form-button:hover {
+  
+    background-color: var(--n64-gray-clr);
+}
+
+label {
+    display: flex;
+    font-size: 1.2rem;
+    align-items: flex-end;
+    margin-left: 0.5rem;
+    justify-content: space-between;
+
+}
+
+
+@media(max-width: 800px) {
+
+    .reg-form {
+        margin: 0 auto;
+        width: 70%;
+        height: 60%;
+        left: 0.5rem;
+        
+    }
+
+    .reg-form input{
+        width: 90%;
+    }
+
+    label {
+        margin: 0.3rem 0;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      
+      
+    }
+
+    .form-button {
+        margin: 0 auto;
+    }
+
+
+}
+
+
+

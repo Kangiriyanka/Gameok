@@ -1,6 +1,6 @@
 import React from "react";
 import {useState} from 'react'
-import '../assets/styles/user_components.css';
+import '../assets/styles/forms.css';
 
 type UserData = {
     username: string;
@@ -34,11 +34,15 @@ export default function Register() {
       }
       
       const result = await response.json();
-      setResponse(result.data);
+      console.log("Hey" + result)
+      setResponse(result);
 
-  }   catch (error) {
-        console.error('Error:', error);
-        setResponse("An error occurred while submitting the form.");
+  }   catch (error: any ) {
+
+      console.log(error.response)
+       
+       
+        
       };
     }
   
@@ -62,9 +66,14 @@ export default function Register() {
   // onChange propery  of those inputs will modify the state our username, email and password variables.
 
   return (
-    <div className="d-flex flex-column justify-content-center">
-    <form onSubmit={submitUser} className=" d-flex flex-column reg_form">
-      <h1> Register Now</h1>
+    <div className="">
+
+      <div className="page-header" style= {{textAlign: "center"}}>
+           <h1> Gameok Register </h1>
+           
+        </div> 
+    <form onSubmit={submitUser} style= {{margin: "0 auto"}} className="reg-form">
+    
       <label>
         Username:
         <input type="text" value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
@@ -81,7 +90,7 @@ export default function Register() {
           onChange={(e) => setPassword(e.target.value)}/>
       </label>
       
-      <button type="submit" className=" btn btn-dark form_button" >Register User</button>
+      <button type="submit" className="form-button">Register </button>
       <p> {response} </p>
     </form>
 
