@@ -12,12 +12,19 @@ type GameConsole = {
 
 function Consoles() {
   
-  const allConsoles = useLoaderData() 
+  const allConsoles = useLoaderData()
+  console.log(allConsoles) 
   return (
-    <div className="console_shelf d-flex flex-column ">
+    <div>
+
+        <div className="page-header">
+           <h1> My Consoles</h1>
+           
+        </div>      
 
         
-        {allConsoles.map((console: GameConsole) =>
+        
+        {allConsoles && allConsoles.map((console: GameConsole) =>
         <Console key={console.console_id} console_id={console.console_id} console_name={console.console_name} />)}
 
     </div>

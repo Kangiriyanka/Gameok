@@ -1,19 +1,35 @@
 
 import Register from "../authentication_components/Register.tsx";
-import RootLayout from "../layouts/RootLayout.tsx";
+import EmptyView from "../authentication_components/EmptyView.tsx";
+import Login from "../authentication_components/Login.tsx"
+import Auth from "../authentication_components/AuthLayout.tsx";
 
 
-
+// Users who are logged in  should not log in or register again.
 export const publicRoutes = [
   {
-    path: "/",
-    Component: RootLayout,
-    children: [
+        path: "/",
+        Component: Auth,
+        children: [ 
+  
+       
+        {path: "login", Component: Login},
+      
   
       {
         path: "register",
         Component: Register
-      }
-    ]
-  }
-];
+      },
+       
+    
+    ],
+  },
+
+     {
+        path: "*",
+        Component: EmptyView
+      } 
+  ]
+    
+  
+

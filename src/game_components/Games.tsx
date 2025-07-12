@@ -16,10 +16,13 @@ type Game = {
 function Games() {
 
 
-    const gameCollection = useLoaderData() as Game[];
+    const gameCollection = useLoaderData().games as Game[];
     return (
-        <div className="games d-flex flex-column">
-        <h2>My Collection</h2>
+        <div className=" ">
+         <div className="page-header">
+           <h1> My Games</h1>
+           
+        </div>      
         { gameCollection && gameCollection.map((game: Game) =>
     
     <Game key={game.game_id} 

@@ -1,15 +1,24 @@
-import { useLoaderData } from "react-router"
+
+
+import { useAuthContext } from "../context/AuthContext";
 
 
 export default function Home() {
-    let data = useLoaderData();
+
+    const {storedUserInfo} = useAuthContext()
+   
+  
+
     
 
     return (
-        <div >
+        <div className="flex flex-col">
+        <div className="page-header">
+           <h1> {storedUserInfo}'s Memories</h1>
            
-           <h1> Welcome {data.storedUserInfo}</h1>
-           
+        </div>      
+
+       
            
         </div>
     )

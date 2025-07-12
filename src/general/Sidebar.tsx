@@ -1,12 +1,33 @@
 import { useAuthContext } from "../context/AuthContext";
 import {useRef} from "react"
+import {useNavigate} from "react-router-dom"
 import "../assets/styles/sidebar.css"
 
 
 export default function Sidebar() {
-    const {storedUserInfo} = useAuthContext()
+    const {storedUserInfo, removeToken} = useAuthContext()
     const sidebarRef = useRef<HTMLElement>(null)
     const toggleBtnRef = useRef<HTMLButtonElement>(null);
+    const navigate = useNavigate()
+
+    async function logOut() {
+  try {
+    const response = await fetch("/api/auth/logout", {
+      method: "POST",
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Call the prop function to remove token and redirect
+    removeToken();
+    navigate("/login");
+
+  }  catch (error) {
+    console.error("Fetch error:", error);
+  }
+}
 
 
 
@@ -96,7 +117,7 @@ export default function Sidebar() {
             </button>
             <ul className= "sub-menu">
                 <div>
-                <li><a href="/games"> My Consoles </a></li>
+                <li><a href="/dashboard/consoles"> My Consoles </a></li>
                 {storedUserInfo == "Kangiriyanka" ? <li> <a href="/admin/add_console">Add Console</a></li>: ""}
                 </div>
             </ul>
@@ -111,8 +132,8 @@ export default function Sidebar() {
             </button>
             <ul className="sub-menu">
                 <div>
-                <li> <a href="/games"> My Games </a></li>
-                <li> <a href="/add_game"> Add Games</a></li>
+                <li> <a href="/dashboard/games"> My Games </a></li>
+                <li> <a href="/dashboard/games/add_game"> Add Games</a></li>
                 </div>
             </ul>
            
@@ -129,7 +150,7 @@ export default function Sidebar() {
             <ul className= "sub-menu">
             <div>
             <li> <a href="/dashboard/edit_password">Change Password </a> </li>
-            <li> <a href="/dashboard/edit_password">Logout</a> </li>
+            <li> <button className="dropdown-btn" style={{paddingLeft: "2em"}} onClick={logOut}>Logout </button> </li>
             </div>
             </ul>
 

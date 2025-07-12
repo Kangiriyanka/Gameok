@@ -1,36 +1,80 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
-
+@import "tailwindcss";
 :root {
   font-family: 'Figtree', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  --base-clr: #1A1A1A;
-  --line-clr: rgba(192, 198, 23, 0.393);
-  --hover-clr: #d3b912;
+  --base-clr: #040404;
+  --line-clr: #E3C504;
+  --hover-clr:#31333a;
+  --n64-gray-clr: #6b656955;
+  
   --text-clr: #F4D35E;
+  --secondary-text-clr: #fbebf4d2;
   --accent-clr: #d3b912;
-  --secondary-text-clr: yellow;
+  --box-shadow: rgba(16, 213, 59, 0.16) 0px 1px 4px;
 }
+
 
 * {
   margin: 0;
   padding: 0;
 }
 
+h1 {
+  font-size: 2rem;
+}
+
 
 
 /* 2 Columns, auto calculates the space it needs. */
 body {
-  min-height: 100vh;
+
   min-height: 100dvh;
   background-color: var(--base-clr);
   color: var(--text-clr);
+
+
+}
+
+#layout {
+
   display: grid;
   grid-template-columns: auto 1fr;
 
 }
+
+.page-header {
+
+  position: relative;
+  top: 2rem;
+  left: 3rem;
+  width: 100%;
+
+  
+
+}
+
+
+
+@media(max-width: 800px) {
+
+    .page-header {
+       inset: 2rem 0 0 0;
+       text-align: center;
+     
+      
+    }
+
+
+}
+
+
+
+
+
 
 
 
