@@ -1,52 +1,77 @@
 #sidebar {
   box-sizing: border-box;
   height: 100vh;
-  width: 10rem;
-  padding: 0.5rem 1rem;
+  width: 14.5rem;
+  padding: 0.5em 1em;
   background-color: var(--base-clr);
   border-right: 1px solid var(--line-clr);
   transition: 300ms ease-in-out;
-  text-wrap: no-wrap;
+
+  position: sticky;
+  top: 0;
+  align-self: start;
+  transition: 300ms ease-in-out;
+  overflow: hidden;
+  text-wrap: nowrap;
 
 }
 
 #sidebar.close {
-    padding: 5px;
-    width: 3rem;
-    overflow: hidden;
+    padding: 0.5em 0.3em;
+    width: 60px;
+  
 }
 
 #sidebar ul {
   list-style: none;
 }
 
+
 #sidebar > ul > li:first-child {
 
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1rem;
+    
+    .logo {
+        font-weight: 600;
+    }
 
 }
 
 #sidebar ul.li.active a {
     color: var(--accent-clr);
 
+    svg {
+        fill: var(--accent-clr);
+    }
+
 }
 
-#sidebar a, #sidebar .dropdown-btn {
+/* A row inside the sidebar */
+#sidebar a, #sidebar .dropdown-btn, #sidebar .logo {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1em;
     color: var(--text-clr);
-    border-radius: .5rem;
-    padding: 0.85rem;
+    border-radius: .5em;
+    padding: 0.85em;
     text-decoration: none;
 
 }
 
+.dropdown-btn {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+}
+
 
 /* Flex grow makes sure the parent elements are filled */
-#sidebar a span, #sidebar .dropdown-btn span {
+#sidebar a span, #sidebar .dropdown-btn span{
 
     flex-grow: 1;
 }
@@ -61,7 +86,7 @@
 #sidebar .sub-menu {
     display: grid;
     grid-template-rows: 0fr;
-    transition: 300ms ease-in-out;
+    transition: 250ms ease-in-out;
 
     > div {
         overflow:hidden;
@@ -73,8 +98,12 @@
    grid-template-rows: 1fr;
 }
 
+#sidebar .sub-menu a {
+    padding-left: 2em;
+}
+
 #sidebar svg {
-    flex-shrink: 1;
+    flex-shrink: 0;
     fill: var(--text-clr);
 }
 
@@ -88,10 +117,6 @@
     rotate: 180deg;
 }
 
-
-#sidebar .sub-menu a {
-    padding-left: 2em;
-}
 
 /* Pushes your Gameok to the left */
 #toggle-btn{
@@ -109,4 +134,81 @@
 
 #toggle-btn:hover {
     background-color: var(--hover-clr);
+}
+
+
+@media(max-width: 800px) {
+
+    body {
+        grid-template-columns: 1fr;
+    }
+
+    #sidebar {
+      height: 60px;
+      width: 100%;
+      border-right: none;
+      border-top: 1px solid var(--line-clr);
+      position: fixed;
+      top: unset;
+      bottom: 0;
+      padding: 0;
+
+     > ul {
+      padding: 0;
+      display: grid;
+      grid-auto-columns: 60px;
+      /* Every element will be placed in a column */
+      grid-auto-flow: column;
+      align-items: center;
+      overflow-x: scroll;
+      justify-content: center;
+
+    }
+
+    ul li {
+      height: 100%;
+    }
+
+    ul a, ul .dropdown-btn {
+      width: 60px;
+      height: 60px;
+      padding: 0; 
+      border-radius: 0;
+      justify-content: center;
+    }
+
+     ul li span,  ul li:first-child, .dropdown-btn svg:last-child {
+      display: none;
+
+    }
+
+    ul li .sub-menu.show {
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      box-sizing: border-box;
+      height: 60px;
+      width: 100%;
+      background-color: var(--hover-clr);
+      border-top: 1px solid var(--line-clr);
+      display: flex;
+      justify-content: center;
+    
+    > div {
+      overflow-x: auto;
+    }
+    li {
+      display: inline-flex;
+
+    }
+
+    a {
+      box-sizing: border-box;
+      padding: 1em;
+      width: auto;
+      justify-content: center;
+    }
+  }
+ 
+  }
 }

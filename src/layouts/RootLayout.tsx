@@ -11,7 +11,7 @@ export default function RootLayout() {
     return (
         <div className ="App">
         <Sidebar/>
-        {token?  <Outlet/> : <Login/>}
+        {/* {token?  <Outlet/> : <Login/>} */}
     
         
         </div>
