@@ -4,6 +4,8 @@ import Game from '../game_components/Game.tsx'
 import { useAuthContext } from '../context/AuthContext'
 import '../assets/styles/consoles.css';
 
+
+
 type ConsoleProps = {
     console_id: number;
     console_name: string;

@@ -1,5 +1,6 @@
 
 import {useState} from 'react'
+import {motion} from "motion/react"
 import { useAuthContext } from '../context/AuthContext';
 import '../assets/styles/forms.css';
 
@@ -65,7 +66,7 @@ async function sendDataToFlask(data: PasswordData) {
 
   // Form contains inputs for the current password, new password and confirmation of the new password
   return (
-    <div className="relative">
+    <motion.div transition = {{delay: 1}}>
         <div className="page-header">
            <h1> Edit Password</h1>
            
@@ -101,7 +102,7 @@ async function sendDataToFlask(data: PasswordData) {
     </form>
 
     
-    </div>
+    </motion.div>
   )
 
 }

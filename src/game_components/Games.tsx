@@ -18,6 +18,7 @@ function Games() {
 
     const gameCollection = useLoaderData().games as Game[];
     return (
+   
         <div className=" ">
          <div className="page-header">
            <h1> My Games</h1>
@@ -34,6 +35,7 @@ function Games() {
     )}
   
         </div>
+
 
 
     )
