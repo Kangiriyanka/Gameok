@@ -1,19 +1,25 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import Sidebar from "./Sidebar.tsx"
 
 
 export default function AdminRoute() {
 
 
-    const {token, storedUserInfo} = useAuthContext();
+    const {storedUserInfo} = useAuthContext();
 
-    if (token) {
-        return <Navigate to="/" replace />;
-    }
-
+  
     if (storedUserInfo !== "Kangiriyanka") {
         return <Navigate to="/" replace />;
     }
 
-    return <Outlet />;
+    return (
+    <div id= "layout">
+    <Sidebar/>
+    <main>
+    <Outlet/>
+    </main>
+    </div>
+        
+    );
 }

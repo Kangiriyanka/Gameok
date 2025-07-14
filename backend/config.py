@@ -19,7 +19,7 @@ class Config:
     ADMIN = os.environ.get("ADMIN")
     EMAIL = os.environ.get("EMAIL")
     PASSWORD = os.environ.get("PASSWORD")
-    JWT_ACCESS_TOKEN_EXPIRES  = timedelta(hours=1)
+    JWT_ACCESS_TOKEN_EXPIRES  = timedelta(seconds=10)
     UPLOAD_FOLDER = ""
     
 

@@ -1,6 +1,7 @@
 import { useAuthContext } from "../context/AuthContext";
 import {useRef} from "react"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
+
 import "../assets/styles/sidebar.css"
 
 
@@ -98,10 +99,10 @@ export default function Sidebar() {
         </li>
 
         <li className="active"> 
-            <a href="/">
+            <Link to ="/">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
             <span>Home</span>
-            </a>
+            </Link>
            
         </li>
 
@@ -117,8 +118,8 @@ export default function Sidebar() {
             </button>
             <ul className= "sub-menu">
                 <div>
-                <li><a href="/dashboard/consoles"> My Consoles </a></li>
-                {storedUserInfo == "Kangiriyanka" ? <li> <a href="/admin/add_console">Add Console</a></li>: ""}
+               <Link to="/dashboard/consoles/">My Consoles</Link>
+                {storedUserInfo == "Kangiriyanka" ? <li> <Link to= "/admin/add-consoles">Add Console</Link></li>: ""}
                 </div>
             </ul>
            
@@ -132,8 +133,9 @@ export default function Sidebar() {
             </button>
             <ul className="sub-menu">
                 <div>
-                <li> <a href="/dashboard/games"> My Games </a></li>
-                <li> <a href="/dashboard/games/add_game"> Add Games</a></li>
+                <li><Link to="/dashboard/games/my-games">My Games</Link></li>
+                <li><Link to="/dashboard/games/add-games/">Add Games</Link></li>
+                {storedUserInfo == "Kangiriyanka" ? <li> <Link to= "/admin/add-games">Add Games (Admin)</Link></li>: ""}
                 </div>
             </ul>
            
@@ -149,7 +151,7 @@ export default function Sidebar() {
 
             <ul className= "sub-menu">
             <div>
-            <li> <a href="/dashboard/edit_password">Change Password </a> </li>
+             <li><Link to="/dashboard/edit-password">Change Password</Link></li>
             <li> <button className="dropdown-btn" style={{paddingLeft: "2em"}} onClick={logOut}>Logout </button> </li>
             </div>
             </ul>

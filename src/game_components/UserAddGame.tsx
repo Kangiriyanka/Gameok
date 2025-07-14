@@ -73,14 +73,17 @@ function UserAddGame() {
     return (
 
 
-        <div className= "d-flex flex-column justify-content-center">
-        <form onSubmit={submitGame} className="d-flex flex-column game_form">
-        <h1> Add a Game </h1>
+        <div className= "">
+           <div className="page-header">
+           <h1> Add Games</h1>
+           
+        </div>  
+        <form onSubmit={submitGame} className="reg-form">
+       
        
      
         <label>
             Game:
-  
             <GameDropdown onGameSelect={handleGameSelect} games ={games}/>
         </label>
        
@@ -92,7 +95,7 @@ function UserAddGame() {
           onChange={(e) => setMemories(e.target.value)}/>
       </label>
 
-      <button type="submit" className="form_button btn btn-dark">Add Game</button>
+      <button type="submit" className="form-button">Add Game</button>
       <p> {response} </p>
       </form>
 

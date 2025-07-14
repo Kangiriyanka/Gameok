@@ -3,14 +3,14 @@
     color: var(--secondary-text-clr);
     top: 3rem;
     left: 2rem;
-    height: 22rem;
+    height: 100%;
     display: flex;
     padding: 2rem;
     flex-direction: column;
     gap: 3rem;
     border-radius: .5rem;
     border: 1px solid var(--n64-gray-clr);
-    width: 40rem;
+    width: 45rem;
     background-color: var(--n64-gray-clr);
   
    
@@ -58,6 +58,21 @@ label {
     margin-left: 0.5rem;
     justify-content: space-between;
 
+}
+
+.error-message {
+
+   
+    color: var(--secondary-text-clr);
+    margin-top: 4rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: fit-content;
+    border: 1px solidvar(--secondary-text-clr);
+    padding: 2rem;
+    border-radius: 0.5rem;
+
+    
 }
 
 

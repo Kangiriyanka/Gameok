@@ -3,9 +3,13 @@ from app.main import bp
 from app import db
 from app.models import *
 from flask import request,jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
+                               jwt_required 
+from datetime import datetime,timezone,timedelta
+import json
 
 
+MINUTES = 30
 @bp.route('/api/console/get_owned_consoles', methods = ["GET", "POST"])
 @jwt_required()
 def get_my_consoles():
@@ -42,7 +46,7 @@ def get_my_consoles():
 # Adding a game requires associating it with a console
 # On the AddGame component, we use a form that has a dropdown entry with all the consoles
 # This route will  populate the Dropdown Menu Component with the consoles from the consoles table.
-@bp.route('/api/console/get_consoles', methods = ["GET", "POST"])
+@bp.route('/api/console/get_all_consoles', methods = ["GET", "POST"])
 @jwt_required()
 def get_consoles():
     console_names = []
@@ -54,6 +58,41 @@ def get_consoles():
          
  
     return console_names
+
+
+
+
+@bp.after_request
+def refresh_expiring_jwts(response):
+
+    
+  
+    try:
+      
+        # Create a new access token when it's close to expire
+        # The bigger the number of minutes, the faster it will recreate access tokens 
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes= MINUTES))
+        
+       
+        if target_timestamp > exp_timestamp:
+            print(" Your token is close to expiring")
+            my_access_token = create_access_token(identity=get_jwt_identity())
+            # Extract JSON data from the request body using get_json() to a data type you can manipulate with Python such as dict.
+            data = response.get_json()
+            
+            # Prevent any modifications on requests that are not JSON Object. 
+            # If a route returned a simple string like "Hello World", then we wouldn't be able to add the new access token to it.
+            if type(data) is dict:
+                data["access_token"] = my_access_token 
+                # Reminder: json.dumps takes a Python Object and returns the JSON Object of it 
+                # We modify the data attribute of the Response object
+                response.data = json.dumps(data)
+        return response
+    except (RuntimeError, KeyError):
+        # Case where there is not a valid JWT. Just return the original respone
+        return response
 
 
 

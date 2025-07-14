@@ -2,6 +2,9 @@ import React from "react";
 import {useState} from 'react'
 import { useAuthContext } from '../context/AuthContext'
 import "./AddConsole.css"
+import { motion } from "motion/react";
+import { errorTransitionVariants } from "../assets/scripts/animations";
+import ErrorBox from "../animation_components/ErrorBox";
 
 // Parsed in the backend as an integer, but kept as a string here.
 type ConsoleData = {
@@ -16,6 +19,7 @@ function AddConsole() {
   const [firm, setFirm] = useState("");
   const [year, setYear] = useState("")
   const {token} = useAuthContext() 
+  const [count, setCount] = useState(0)
   
 
 
@@ -26,17 +30,31 @@ function AddConsole() {
     try {
       const response = await fetch("/api/admin/add_console", {
         method: "POST",
-        headers:  {Authorization: 'Bearer ' + token},
+        headers:  {
+          "Content-Type": "application/json",
+          Authorization: 'Bearer ' + token
+        },
         body: JSON.stringify(data)
       });
+      
         if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorResult = await response.json()
+        setCount(prev => prev +1)
+        throw new Error(`Error ${response.status}: ${errorResult.msg}`);
       }
+
+
       const result = await response.json();
-      setResponse(result.data);
-    } catch (error){
-        console.error('Error:', error);
-        setResponse("An error occurred while submitting the form.");
+      setResponse(result.msg);
+      setCount(prev => prev +1)
+      
+      console.log(count)
+    } catch (error: unknown){
+        if (error instanceof Error) {
+              console.error('Error:', error.message);
+              setResponse(error.message)
+        } 
+      
       };
     }
   
@@ -55,10 +73,18 @@ function AddConsole() {
   }
 
   return (
-    <div className="d-flex flex-column justify-content-center" >
+    <div className="" >
+
+       <div className="page-header">
+          
+            <h1>Add Consoles</h1> 
+
+      
+           
+        </div>      
     
-    <form onSubmit={submitConsole} className="console_form d-flex flex-column ">
-    <h1> Add a Console </h1>
+    <form onSubmit={submitConsole} className="reg-form">
+  
       <label>
         Title:
         <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
@@ -77,9 +103,13 @@ function AddConsole() {
         <input type="text" value={firm} onChange={(e) => setFirm(e.target.value)}/>
       </label>
       
-      <button type="submit" className="form_button  btn btn-dark">Add Console</button>
-      <p> {response} </p>
+      <button type="submit" className="form-button">Add Console</button>
+      
     </form>
+
+    <ErrorBox response = {response} count= {count}/>
+    
+  
 
     
     </div>

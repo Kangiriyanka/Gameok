@@ -101,11 +101,13 @@ function AddGame() {
   return (
 
 
-    <div className= "d-flex flex-column justify-content-center">
-    
+    <div >
+      <div className="page-header">
+           <h1> Add Games</h1>
+      </div>
  
-    <form onSubmit={submitGame} className="d-flex flex-column game_form">
-    <h1> Add a Game </h1>
+    <form onSubmit={submitGame} className="reg-form">
+  
       <label>
         Title:
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
@@ -140,7 +142,7 @@ function AddGame() {
   Cover Photo:
   <input type="file" accept="image/*" onChange={handleFileUpload} />
 </label>
-      <button type="submit" className="form_button btn btn-dark">Add Game</button>
+      <button type="submit" className="form-button">Add Game</button>
       <p> {response} </p>
     </form>
 

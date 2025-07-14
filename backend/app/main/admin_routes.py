@@ -1,11 +1,12 @@
 
 import uuid
 import os 
+
 from app.main import bp
 from app import db
 from app.models import Console, Game
 from app.main.helpers import allowed_file
-from flask import request
+from flask import request,jsonify
 from flask_jwt_extended import jwt_required
 from app.main.helpers import admin_only
 from werkzeug.utils import secure_filename
@@ -26,7 +27,7 @@ def add_console():
     for value  in data.values():
         print(value)
         if value == "":
-            return "One of the fields is not filled, please check."
+            return {"msg":"One of the fields is not filled, please check"}, 422
     
    
     console = Console.query.filter_by(name=data["name"]).first()
@@ -35,7 +36,7 @@ def add_console():
 
     if console:
            
-            return "This console already exists"
+            return {"msg":"This console already exists"}, 422
         
     # elif data["title"] == "":
     #     print(data["title"])
@@ -51,7 +52,7 @@ def add_console():
             new_console = Console(name= a_name, year = a_year, firm= a_firm)
             db.session.add(new_console)
             db.session.commit()
-            return "Successfully added console to database"
+            return {"msg" : "Successfully added console to database"}
     
 
 

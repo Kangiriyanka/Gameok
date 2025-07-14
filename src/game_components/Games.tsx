@@ -1,5 +1,5 @@
 
-import { useLoaderData } from "react-router";
+import { useLoaderData, Outlet} from "react-router";
 import Game from "./Game.tsx"
 
 
@@ -16,7 +16,8 @@ type Game = {
 function Games() {
 
 
-    const gameCollection = useLoaderData().games as Game[];
+    const gameCollection = useLoaderData() as Game[];
+   
     return (
    
         <div className=" ">
@@ -34,7 +35,8 @@ function Games() {
           game_cover={game.game_cover}/>
     )}
   
-        </div>
+    
+    </div>
 
 
 

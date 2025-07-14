@@ -1,31 +1,7 @@
-// src/components/PageWrapper.tsx
-import { motion } from "motion/react";
+
+import {  motion } from "motion/react";
 import { gameTransitionVariants } from "../assets/scripts/animations.ts";
-
-/* This is the logic being used.
-
-function Card({ children }) {
-  return (
-    <div className="card">
-      {children}
-    </div>
-  );
-}
-
-export default function Profile() {
-  return (
-    <Card>
-      <Avatar
-        size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi',
-          imageId: 'YfeOqp2'
-        }}
-      />
-    </Card>
-  );
-}
-*/
+import { useLocation } from "react-router-dom";
 
 
 type PageWrapperProps = {
@@ -35,10 +11,11 @@ type PageWrapperProps = {
 
 
 export default function AnimationWrapper({ children }: PageWrapperProps) {
-
+  const location = useLocation()
   return (
+  
     <motion.div
-
+      key= {location.pathname}
       variants={gameTransitionVariants}
       initial="initial"
       animate="animate"
@@ -47,5 +24,6 @@ export default function AnimationWrapper({ children }: PageWrapperProps) {
      
       {children}
     </motion.div>
+   
   );
 }

@@ -9,15 +9,17 @@ import EditMemories from '../game_components/EditMemories.tsx';
 import {consolesLoader} from '../loaders/consolesLoader.ts';
 import {gamesLoader} from '../loaders/gamesLoader.ts';
 import { collectionLoader } from '../loaders/collectionLoader.ts';
+import GameLayout from '../game_components/GameLayout.tsx';
+import  ErrorBoundary  from '../general/ErrorBoundary.tsx';
 
 
-
-export const protectedRoutes = [
+export  const protectedRoutes = [
     
   {
     path: "/dashboard",
     Component: Root,
     loader: consolesLoader,
+    ErrorBoundary : {ErrorBoundary},
     children: [
       {
         index: true,  
@@ -28,26 +30,37 @@ export const protectedRoutes = [
         Component: Consoles,
       },
       {
-        path: "edit_password",
+        path: "edit-password",
         Component: EditPassword
       },
+
+   
+
+    
      
       {
         path: "games",
-        Component: Games,
+        Component: GameLayout,
         loader: collectionLoader,
         children: [
-            { path: "add_game",
+
+           {path: "my-games",
+            Component: Games,
+           },
+
+          
+              { path: "add-games",
              Component: UserAddGame, 
              loader: gamesLoader,
             },
+          
             
           {
-            path: ":game_id/:title",
+            path: ":game-id/:title",
             Component: GameMemory
           },
           {
-            path: "edit_memory/:game_id/:title",
+            path: "edit-memory/:game-id/:title",
             Component: EditMemories
           }
         ]
