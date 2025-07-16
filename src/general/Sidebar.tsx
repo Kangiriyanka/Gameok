@@ -1,19 +1,19 @@
 import { useAuthContext } from "../context/AuthContext";
 import {useRef} from "react"
 import {useNavigate, Link} from "react-router-dom"
-
 import "../assets/styles/sidebar.css"
+import { fetchWithCSRF } from "../assets/scripts/csrf";
 
 
 export default function Sidebar() {
-    const {storedUserInfo, removeToken} = useAuthContext()
+    const {setUserInfo, storedUserInfo} = useAuthContext()
     const sidebarRef = useRef<HTMLElement>(null)
     const toggleBtnRef = useRef<HTMLButtonElement>(null);
     const navigate = useNavigate()
 
-    async function logOut() {
+  async function logOut() {
   try {
-    const response = await fetch("/api/auth/logout", {
+    const response = await fetchWithCSRF("/api/auth/logout", {
       method: "POST",
     });
 
@@ -21,9 +21,9 @@ export default function Sidebar() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // Call the prop function to remove token and redirect
-    removeToken();
-    navigate("/login");
+    localStorage.removeItem("username")
+    setUserInfo("")
+    navigate("/")
 
   }  catch (error) {
     console.error("Fetch error:", error);

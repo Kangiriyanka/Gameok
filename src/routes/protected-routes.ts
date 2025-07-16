@@ -18,8 +18,9 @@ export  const protectedRoutes = [
   {
     path: "/dashboard",
     Component: Root,
-    loader: consolesLoader,
-    ErrorBoundary : {ErrorBoundary},
+    ErrorBoundary: ErrorBoundary,
+ 
+
     children: [
       {
         index: true,  
@@ -28,6 +29,8 @@ export  const protectedRoutes = [
       {
         path: "consoles",
         Component: Consoles,
+        loader: consolesLoader,
+        ErrorBoundary : ErrorBoundary,
       },
       {
         path: "edit-password",

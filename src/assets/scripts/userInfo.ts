@@ -17,11 +17,17 @@ export default function userInfo() {
         setUserInfo(username)
     }
 
+    function removeUserInfo() {
+        localStorage.removeItem('username')
+        setUserInfo(null)
+    }
+
     
     return {
         
         storedUserInfo,
-        setUserInfo: saveUserInfo
+        setUserInfo: saveUserInfo,
+        removeUserInfo
     }
 }
 

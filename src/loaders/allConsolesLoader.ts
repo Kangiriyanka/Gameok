@@ -1,18 +1,15 @@
+import { fetchWithCSRF } from "../assets/scripts/csrf";
+
 type GameConsole = {
   console_id: number;
   console_name: string;
 }
 
 export async function allConsolesLoader() {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    throw new Response("Unauthorized", { status: 401 });
-  }
+ 
 
-  const response = await fetch("/api/console/get_all_consoles", {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
+  const response = await fetchWithCSRF("/api/console/get_all_consoles", {
+   
   });
 
   if (!response.ok) {

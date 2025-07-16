@@ -1,26 +1,21 @@
 
+
 type GameConsole = {
   console_id: number;
   console_name: string;
 }
 
 export async function consolesLoader() {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    throw new Response("Unauthorized", { status: 401 });
-  }
+
+
 
   const response = await fetch("/api/console/get_owned_consoles", {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
+    credentials: "include",
   });
 
   if (response.status === 401) {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
-
-    
     throw new Response("Failed to fetch consoles", { status: response.status });
   }
 
@@ -29,6 +24,7 @@ export async function consolesLoader() {
     throw new Response("Failed to fetch consoles", { status: response.status });
   }
 
+  
   const consoles = await response.json();
   return consoles as GameConsole[]
 }

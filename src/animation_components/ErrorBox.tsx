@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 type ErrorBoxProps = {
   response: string;
-  count?: number; // optional, in case you want to pass in a key differentiator
+  count?: number; 
 };
 const errorTransitionVariants = {
   initial: { opacity: 0 },
@@ -23,7 +23,7 @@ export default function ErrorBox({ response, count = 0 }: ErrorBoxProps) {
       className="error-message"
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      {response}
+      <p>{response}</p>
     </motion.div>
 
   

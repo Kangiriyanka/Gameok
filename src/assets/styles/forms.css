@@ -3,17 +3,18 @@
     color: var(--secondary-text-clr);
     top: 3rem;
     left: 2rem;
-    height: 100%;
+    
+   
     display: flex;
     padding: 2rem;
     flex-direction: column;
+    justify-content: center;
     gap: 3rem;
     border-radius: .5rem;
     border: 1px solid var(--n64-gray-clr);
     width: 45rem;
-    background-color: var(--n64-gray-clr);
-  
-   
+    background-color: #171617;
+    
    
 }
 
@@ -68,6 +69,7 @@ label {
     font-size: 1.5rem;
     font-weight: bold;
     height: fit-content;
+    text-align: center;
     border: 1px solidvar(--secondary-text-clr);
     padding: 2rem;
     border-radius: 0.5rem;

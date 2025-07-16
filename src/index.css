@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
 @import "tailwindcss";
+
 :root {
   font-family: 'Figtree', sans-serif;
   line-height: 1.5;
@@ -18,10 +19,6 @@
 }
 
 
-* {
-  margin: 0;
-  padding: 0;
-}
 
 h1 {
   font-size: 2rem;
@@ -35,6 +32,7 @@ body {
   min-height: 100dvh;
   background-color: var(--base-clr);
   color: var(--text-clr);
+  background: #0d1314;
 
 
 }

@@ -1,7 +1,6 @@
 
 import {useState} from 'react'
 import Game from '../game_components/Game.tsx'
-import { useAuthContext } from '../context/AuthContext'
 import '../assets/styles/consoles.css';
 
 
@@ -21,7 +20,7 @@ type ConsoleGame = {
 
 
 function Console({console_id, console_name}: ConsoleProps) {
-    const {token} = useAuthContext() 
+
     const [consoleGames, setConsoleGames] = useState<ConsoleGame[]>([]);
 
 
@@ -30,9 +29,7 @@ function Console({console_id, console_name}: ConsoleProps) {
       try {
         const response = await fetch("/api/collection/get_console_games/" + console_id, {
           method: "GET",
-           headers: {
-            Authorization: 'Bearer ' + token
-          }});
+           credentials: "include"});
 
         if (!response.ok) {
            throw new Error(`HTTP error! status: ${response.status}`);

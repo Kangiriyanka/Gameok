@@ -1,8 +1,8 @@
 
 import {useState} from 'react'
-import {motion} from "motion/react"
-import { useAuthContext } from '../context/AuthContext';
 import '../assets/styles/forms.css';
+import { fetchWithCSRF } from '../assets/scripts/csrf';
+import ErrorBox from '../animation_components/ErrorBox';
 
 
 type PasswordData = {
@@ -17,33 +17,41 @@ export default function EditPassword() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const {token} = useAuthContext();
+  const [count, setCount] = useState(0)
+
 
 
 
 async function sendDataToFlask(data: PasswordData) {
   try {
-    const response = await fetch('/api/auth/edit_password', {
+    const response = await fetchWithCSRF('/api/auth/edit_password', {
       method: 'POST',
       headers: {
         
         "Content-Type": "application/json",
-        Authorization: 'Bearer ' + token 
+     
       },
       body: JSON.stringify(data)
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+            const errorResult = await response.json()
+            setCount(prev => prev +1)
+            throw new Error(`Error ${response.status}: ${errorResult.msg}`);
     }
 
     const result = await response.json();
-    console.log(result)
+    setResponse(result.msg);
+    setCount(prev => prev +1)
    
     setResponse(result);
-  } catch (error: any) {
+  } catch (error: unknown) {
 
-    console.log("Result" + error.msg)
+     if (error instanceof Error) {
+              
+        console.error(error.message);
+        setResponse(error.message)
+    } 
     
  
   }
@@ -66,7 +74,7 @@ async function sendDataToFlask(data: PasswordData) {
 
   // Form contains inputs for the current password, new password and confirmation of the new password
   return (
-    <motion.div transition = {{delay: 1}}>
+    <div>
         <div className="page-header">
            <h1> Edit Password</h1>
            
@@ -97,12 +105,14 @@ async function sendDataToFlask(data: PasswordData) {
           onChange={(e) => setConfirmPassword(e.target.value)}/>
       </label>
       
-      <button type="submit" className="form-button" >Edit</button>
-      <p> {response} </p>
+      <button type="submit" className="form-button " >Edit</button>
+      
     </form>
 
+    <ErrorBox response = {response} count = {count}/>
+
     
-    </motion.div>
+    </div>
   )
 
 }

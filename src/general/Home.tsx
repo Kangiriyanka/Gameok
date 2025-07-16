@@ -7,6 +7,7 @@ import AnimationWrapper from "../animation_components/AnimationWrapper";
 export default function Home() {
 
     const {storedUserInfo} = useAuthContext()
+    
    
   
 

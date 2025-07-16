@@ -1,10 +1,8 @@
 import React from "react";
 import {useState} from 'react'
-import { useAuthContext } from '../context/AuthContext'
 import "./AddConsole.css"
-import { motion } from "motion/react";
-import { errorTransitionVariants } from "../assets/scripts/animations";
 import ErrorBox from "../animation_components/ErrorBox";
+import { fetchWithCSRF } from "../assets/scripts/csrf";
 
 // Parsed in the backend as an integer, but kept as a string here.
 type ConsoleData = {
@@ -18,7 +16,6 @@ function AddConsole() {
   const [name, setName] = useState("");
   const [firm, setFirm] = useState("");
   const [year, setYear] = useState("")
-  const {token} = useAuthContext() 
   const [count, setCount] = useState(0)
   
 
@@ -28,11 +25,11 @@ function AddConsole() {
   async function sendDataToFlask(data: ConsoleData ) {
 
     try {
-      const response = await fetch("/api/admin/add_console", {
+      const response = await fetchWithCSRF("/api/admin/add_console", {
         method: "POST",
         headers:  {
           "Content-Type": "application/json",
-          Authorization: 'Bearer ' + token
+          
         },
         body: JSON.stringify(data)
       });
@@ -48,7 +45,7 @@ function AddConsole() {
       setResponse(result.msg);
       setCount(prev => prev +1)
       
-      console.log(count)
+
     } catch (error: unknown){
         if (error instanceof Error) {
               console.error('Error:', error.message);

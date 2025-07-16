@@ -1,14 +1,13 @@
 
 type GameTitle = string;
+
 export  async function gamesLoader() {
-    const token = localStorage.getItem("token");
+  
     
     try {
       const response = await fetch("/api/game/get_all_game_titles", {
         method: "GET",
-        headers: {
-          Authorization: "Bearer " + token
-        }
+         credentials: "include",
       });
 
       if (!response.ok) {

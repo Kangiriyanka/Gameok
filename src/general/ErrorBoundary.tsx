@@ -1,15 +1,23 @@
-import { useRouteError, isRouteErrorResponse } from "react-router-dom";
+import { useRouteError, isRouteErrorResponse, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function ErrorBoundary() {
-
   const error = useRouteError();
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  if (isRouteErrorResponse(error)) {
-    if (error.status === 401) {
-      return <p>Your session expired. Please log in again.</p>;
+  useEffect(() => {
+
+    if (isRouteErrorResponse(error) && (error.status === 401 || error.status === 422)) {
+
+      setShouldRedirect(true);
     }
-    return <p>Error: {error.status} {error.statusText}</p>;
+  }, [error]);
+
+  if (shouldRedirect) {
+    return <Navigate to="/" replace />;
   }
 
-  return <p>Unexpected error occurred.</p>;
+
+
+  return <p style ={{}}className= "">Unexpected error occurred.</p>;
 }

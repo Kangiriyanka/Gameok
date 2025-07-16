@@ -1,6 +1,7 @@
 import React from "react";
 import {useState} from 'react'
 import '../assets/styles/forms.css';
+import ErrorBox from "../animation_components/ErrorBox";
 
 type UserData = {
     username: string;
@@ -15,6 +16,7 @@ export default function Register() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [count, setCount] = useState(0)
   
 
   // Post to the add_user route in the database, the JSON.stringify turns the Javascript data to JSON.
@@ -30,19 +32,22 @@ export default function Register() {
       });
     
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorResult = await response.json()
+        setCount(prev => prev+1)
+        throw new Error(`Error ${response.status}: ${errorResult.msg}`);
       }
       
       const result = await response.json();
-      console.log("Hey" + result)
-      setResponse(result);
+      console.log(result)
+      setResponse(result.msg);
+      setCount(prev => prev +1)
 
-  }   catch (error: any ) {
-
-      console.log(error.response)
-       
-       
-        
+  }  catch (error: unknown){
+        if (error instanceof Error) {
+              console.error('Error:', error.message);
+              setResponse(error.message)
+        } 
+      
       };
     }
   
@@ -91,8 +96,10 @@ export default function Register() {
       </label>
       
       <button type="submit" className="form-button">Register </button>
-      <p> {response} </p>
+     
     </form>
+
+    <ErrorBox response={response} count={count}/>
 
     
     </div>

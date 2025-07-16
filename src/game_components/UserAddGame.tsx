@@ -2,9 +2,10 @@
 import {useState} from 'react'
 
 import { useLoaderData } from 'react-router';
-import { useAuthContext } from '../context/AuthContext.tsx';
 import GameDropdown from "./GameDropdown.tsx"
 import '../assets/styles/add_game.css';
+import { fetchWithCSRF } from '../assets/scripts/csrf.ts';
+import ErrorBox from '../animation_components/ErrorBox.tsx';
 
 
 type GameData = {
@@ -18,8 +19,9 @@ function UserAddGame() {
     const [response, setResponse] = useState('')
     const [gameTitle, setGameTitle] = useState('')
     const [memories, setMemories] = useState('')
+    const [count, setCount] = useState(0)
     const games = useLoaderData(); 
-    const {token} = useAuthContext(); 
+   
     
 
 
@@ -35,23 +37,31 @@ function UserAddGame() {
     
     
         try {
-          const response = await fetch("/api/game/user_add_game", {
+          const response = await fetchWithCSRF("/api/game/user_add_game", {
             method: "POST",
-            headers: {Authorization: 'Bearer ' + token},
-            body: JSON.stringify(data)
+            body: formData,
+          
           });
 
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errorResult = await response.json()
+            setCount(prev => prev +1)
+            throw new Error(`Error ${response.status}: ${errorResult.msg}`);
           }
 
           const result = await response.json();
-          setResponse(result)
+ 
+          setResponse(result.msg);
+          setCount(prev => prev +1)
           
-        } catch (error) {
-          console.error('Error:', error);
-          setResponse("An error occurred while submitting the form.");
-        }
+        } catch (error: unknown){
+          if (error instanceof Error) {
+              
+              console.error(error.message);
+              setResponse(error.message)
+        } 
+      
+      };
          
       
     
@@ -96,8 +106,10 @@ function UserAddGame() {
       </label>
 
       <button type="submit" className="form-button">Add Game</button>
-      <p> {response} </p>
+      
       </form>
+
+      <ErrorBox response = {response} count= {count}/>
 
         
 

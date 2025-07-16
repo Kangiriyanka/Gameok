@@ -34,7 +34,9 @@ function Games() {
           game_series= {game.game_series}  
           game_cover={game.game_cover}/>
     )}
-  
+
+ 
+
     
     </div>
 

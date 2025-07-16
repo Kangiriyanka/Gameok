@@ -1,8 +1,9 @@
 
 import {useState} from 'react'
 import ConsoleDropdown from "../game_components/ConsoleDropdown.tsx"
-import { useAuthContext } from "../context/AuthContext.js";
 import '../assets/styles/add_game.css';
+import { fetchWithCSRF } from '../assets/scripts/csrf.ts';
+import ErrorBox from '../animation_components/ErrorBox.tsx';
 
 type GameData = {
   title: string;
@@ -23,7 +24,8 @@ function AddGame() {
   const [consoleName, setConsoleName] = useState('');
   const [memories, setMemories] = useState("");
   const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
-  const {token} = useAuthContext();
+  const [count, setCount] = useState(0)
+
   
 
   async function sendDataToFlask(data: GameData) {
@@ -39,25 +41,28 @@ function AddGame() {
     formData.append('memories', data.memories);
 
    try {
-    const response = await fetch('/api/admin/add_game', {
+    const response = await fetchWithCSRF('/api/admin/add_game', {
         method: 'POST',
-        headers: {
-          Authorization: 'Bearer ' + token
-        },
         body: formData
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
+        const errorResult = await response.json()
+        setCount(prev => prev+1)
+        throw new Error(`Error ${response.status}: ${errorResult.msg}`);
       }
 
       const result = await response.json();
-      setResponse(result.data.msg);
+      setResponse(result.msg);
+      setCount(prev => prev +1)
       
-  } catch (error) {
-      console.error('Error:', error);
-      setResponse("An error occurred while submitting the form.");
-    }
+  } catch (error: unknown){
+        if (error instanceof Error) {
+              console.error('Error:', error.message);
+              setResponse(error.message)
+        } 
+      
+      };
   
 }
 
@@ -73,7 +78,6 @@ function AddGame() {
   }
   
   
-
   function submitGame(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
    
@@ -143,8 +147,10 @@ function AddGame() {
   <input type="file" accept="image/*" onChange={handleFileUpload} />
 </label>
       <button type="submit" className="form-button">Add Game</button>
-      <p> {response} </p>
+     
     </form>
+
+       <ErrorBox response = {response} count= {count}/>
 
     
     </div>

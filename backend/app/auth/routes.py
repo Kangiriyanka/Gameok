@@ -3,7 +3,7 @@ from app.auth import bp
 from app.models import User 
 from flask import request, jsonify
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
-                               unset_jwt_cookies, jwt_required, JWTManager    
+                               unset_jwt_cookies, jwt_required, set_access_cookies 
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime,timezone,timedelta
 import json
@@ -14,8 +14,7 @@ MINUTES = 30
 
 
 # Creates a token if the user enters an exisitng username with the correct password
-# 401 error code --> Unauthorized access
-# 500 error code --> Internal Server Error, i.e. All purpose error
+# 422 Error -> Request was understood, but the contents were wrong.
 @bp.route('/api/auth/get_token', methods=["POST"])
 def create_token():
     # Data Sent from the Login Component.
@@ -32,17 +31,18 @@ def create_token():
         if user is not None :
 
             if user.password == data["password"]:
-                my_access_token = create_access_token(identity=user.username)
-                response = {"access_token": my_access_token, "username": user.username}
+                access_token = create_access_token(identity=user.username)
+                response = jsonify({"username": user.username})
+                set_access_cookies(response, access_token)
                 
                 return response
         
             else:
-                return {"msg": "Wrong password"}, 401
+                return {"msg": "Wrong password"}, 422
             
         else:
         
-             return {"msg": "No user with this username has been found"}, 401
+             return {"msg": "No user with this username has been found"}, 422
 
     # Catch any other unexpected errors
     
@@ -53,8 +53,8 @@ def create_token():
         return {"msg": error_msg}, 500
 
 
-# User Routes
-# Add user with Try-Except Block
+
+
 @bp.route('/api/auth/add_user', methods= ["POST"])
 def add_user():
     
@@ -63,17 +63,24 @@ def add_user():
         try: 
             # Data is a dictionary with keys username, email, and password
             data = request.get_json()
-            email_exists= User.query.filter_by(email=data["email"]).first()
-            username_exists= User.query.filter_by(username=data["username"]).first()
+        
+            email= User.query.filter_by(email=data["email"]).first()
+            username= User.query.filter_by(username=data["username"]).first()
             
+            if (not data["email"]):
+                return {"msg": "Please enter an e-mail"}, 422
 
+            if (not data["username"]):
+                return {"msg": "Please enter a username"}, 422
+            
+      
             # Check if the email or username exists in the database 
-            if email_exists:
+            if email:
              
-                return {"msg": "Wrong password. Try again!"}, 401
+                return {"msg": "Oops, this e-mail has already been registered with"}, 422
                 
-            elif username_exists:
-                return {"msg": "Oops, this username has already been taken."}, 401
+            elif username:
+                return {"msg": "Oops, this username has already been taken."}, 422
 
             # Create a new user 
             else:
@@ -84,26 +91,13 @@ def add_user():
                     new_user = User(username= a_username, email= a_email, password= a_password)
                     db.session.add(new_user)
                     db.session.commit()
-                    return "Successfully registered"
+                    return {"msg": "Successfully registered."}
         except Exception as e:
-            return str(e)
+            return str(e) 
         
     
 
 
-@bp.route('/api/token_expiry', methods=["GET"])
-@jwt_required()
-def token_expiry():
-    exp_timestamp = get_jwt()["exp"]
-    now = datetime.now(timezone.utc).timestamp()
-    remaining = exp_timestamp - now
-
-    return jsonify({
-        "expires_at": exp_timestamp,
-        "current_time": now,
-        "seconds_remaining": int(remaining),
-        "minutes_remaining": round(remaining / 60, 2)
-    })
 
 # The data type here sent is application/json, data is simply a dict.
 @bp.route('/api/auth/edit_password', methods= ["POST"])
@@ -117,7 +111,7 @@ def edit_password():
             
             if value == "":
                 
-                return "One of the fields is not filled, please check."
+                return {"msg": "One of the fields is not filled, please check."}, 422
             
     current_user = get_jwt_identity()
     user= User.query.filter_by(username=current_user).first() 
@@ -128,9 +122,9 @@ def edit_password():
     
     if data["currentPassword"] != current_user_password:
 
-        return {"msg": "The current password you entered is incorrect"}, 401
+        return {"msg": "The current password you entered is incorrect."}, 422
     elif data["newPassword"] != data["confirmPassword"]:
-        return {"msg": "The new password doesn't match "}, 401
+        return {"msg": "The new password doesn't match. "}, 422
     else:
         user.password = data["newPassword"]
         db.session.commit()
@@ -141,12 +135,9 @@ def edit_password():
 
 @bp.route("/api/auth/logout", methods=["POST"])
 def logout():
-    response = jsonify({"msg": "You have successfully logged out"})
+    response = jsonify({"msg": "You have successfully logged out."})
     unset_jwt_cookies(response)
     return response
-
-
-
 
 
 # Authentication using JWT
@@ -157,24 +148,24 @@ def logout():
 # A clearer tutorial can be found here https://dev.to/nagatodev/how-to-add-login-authentication-to-a-flask-and-react-application-23i7
 
 
+# If you make a request to any route in this Blueprint, this function runs.
+
 
 @bp.after_request
 def refresh_expiring_jwts(response):
 
-    print(response)
-    print(" WE HERE")
+    
   
     try:
       
         # Create a new access token when it's close to expire
         # The bigger the number of minutes, the faster it will recreate access tokens 
         exp_timestamp = get_jwt()["exp"]
-        print(str(exp_timestamp))
         now = datetime.now(timezone.utc)
         target_timestamp = datetime.timestamp(now + timedelta(minutes= MINUTES))
-        
-       
+     
         if target_timestamp > exp_timestamp:
+           
             print(" Your token is close to expiring")
             my_access_token = create_access_token(identity=get_jwt_identity())
             # Extract JSON data from the request body using get_json() to a data type you can manipulate with Python such as dict.
@@ -187,7 +178,9 @@ def refresh_expiring_jwts(response):
                 # Reminder: json.dumps takes a Python Object and returns the JSON Object of it 
                 # We modify the data attribute of the Response object
                 response.data = json.dumps(data)
+         
         return response
+    
     except (RuntimeError, KeyError):
         # Case where there is not a valid JWT. Just return the original respone
         return response

@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router";
 import Console from "./Console.tsx"
 import '../assets/styles/Consoles.css';
-import { useIsPresent } from "motion/react"
+
 
 type GameConsole = {
   console_id: number;
@@ -11,9 +11,9 @@ type GameConsole = {
 
 function Consoles() {
   
-  const allConsoles = useLoaderData()
-  console.log(allConsoles) 
-  console.log("Hey" + useIsPresent())
+  const allConsoles = useLoaderData().consoles as GameConsole[]
+
+ 
   return (
 
     <div>

@@ -7,24 +7,20 @@ import { Navigate, Outlet } from "react-router-dom";
 
 
 
-export default function ProtectedRoutes() {
-    const {token} = useAuthContext() 
-    if (!token) return <Navigate to="/login" replace />;
+export default function Root() {
+  
+
+    const {storedUserInfo} = useAuthContext()
+    console.log(storedUserInfo)
+    if (!storedUserInfo) return <Navigate to="/" replace />;
 
  
     return (
         <div id= "layout">
         <Sidebar/>
-        
-
         <main>
-        
         <Outlet/>
-  
-     
-      
         </main>
-
         </div>
 
     )
