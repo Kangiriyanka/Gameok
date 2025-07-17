@@ -32,12 +32,10 @@ def get_all_game_titles():
 @jwt_required()
 def user_add_game():
     
- 
   try:
  
    # Check if any of the fields is empty
    for key, value in request.form.items():
-            print(value)
             if value == "":
                 if key == "title":
                      return {"msg": "Please select a game"}, 422
@@ -56,7 +54,7 @@ def user_add_game():
    
    has_game = GameOwnership.query.filter_by(user_id=current_user_id, game_id=current_game.id).first()
    if has_game: 
-        return {"msg", "This game already exists in your library."}, 422
+        return {"msg": "This game already exists in your library."}, 422
     
    else:
             
@@ -67,7 +65,7 @@ def user_add_game():
             
         
             
-        return f"{a_title}  was added to your collection"
+        return {"msg": f"{a_title}  was added to your collection"}
 
 
   except Exception as e:

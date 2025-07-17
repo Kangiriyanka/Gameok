@@ -2,7 +2,7 @@ export async function collectionLoader() {
 
 
   try {
-    const response = await fetch("/api/collection/get_games", {
+    const response = await fetch("/api/collection/get_owned_games", {
       method: "GET",
       credentials: "include",
     });

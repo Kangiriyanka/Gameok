@@ -35,6 +35,7 @@ def get_my_consoles():
     
 
     consoles_json = [console.to_json() for console in consoles]
+    print(consoles_json)
 
    
     

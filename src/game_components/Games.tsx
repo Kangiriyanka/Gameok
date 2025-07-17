@@ -1,39 +1,54 @@
 
 import { useLoaderData, Outlet} from "react-router";
-import Game from "./Game.tsx"
+import GameCard from "./GameCard.tsx"
+import EmptyCollection from "../general/EmptyCollection.tsx";
 
 
 
 type Game = {
-    game_id: number;
-    game_series: string;
-    game_year: string;
-    game_title: string;
-    game_cover: string;
+    id: number;
+    series: string;
+    year: string;
+    title: string;
+    cover: string;
 
 }
 
 function Games() {
 
 
-    const gameCollection = useLoaderData() as Game[];
+    const gameCollection = useLoaderData().games as Game[];
+    
    
     return (
    
-        <div className=" ">
+        <div className=" main-container">
          <div className="page-header">
            <h1> My Games</h1>
            
+           
         </div>      
-        { gameCollection && gameCollection.map((game: Game) =>
+
+
+
+        
+        { gameCollection && gameCollection.length > 0 ? (
+            gameCollection.map((game: Game) =>
+              
     
-    <Game key={game.game_id} 
-          game_id= {game.game_id}  
-          game_title= {game.game_title} 
-          game_year= {game.game_year}  
-          game_series= {game.game_series}  
-          game_cover={game.game_cover}/>
-    )}
+    <GameCard key={game.id} 
+          game_id= {game.id}  
+          game_title= {game.title} 
+          game_year= {game.year}  
+          game_series= {game.series}  
+          game_cover={game.cover}/>
+  
+    )) : 
+
+    (
+       <EmptyCollection message="You currently have no games in your collection."/>
+    )
+     }
 
  
 

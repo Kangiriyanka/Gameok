@@ -12,6 +12,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 
 
+
 class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY") or 'denied'
     SQLALCHEMY_DATABASE_URI  =  os.environ.get("DATABASE_URL")
@@ -21,7 +22,7 @@ class Config:
     PASSWORD = os.environ.get("PASSWORD")
     JWT_ACCESS_TOKEN_EXPIRES  = timedelta(hours=1)
     JWT_TOKEN_LOCATION = ["cookies"]
-    UPLOAD_FOLDER = ""
+    UPLOAD_FOLDER = os.path.join(basedir, 'covers')
     
 
 

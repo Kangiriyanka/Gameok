@@ -33,11 +33,79 @@
     justify-content: flex-end;
     margin-bottom: 1rem;
     
-    .logo {
+
+    
+    .logo,svg {
         font-weight: 600;
+        font-size: 1.4rem;
+       
+
+ 
+        
+      
     }
+    
+
 
 }
+
+#sidebar > ul > li:nth-child(2)  {
+
+  span {
+  color:  var(--n64-start-light-clr);
+}
+ svg {
+  fill:  var(--n64-start-light-clr);
+ }
+  
+}
+
+#sidebar > ul > li:nth-child(3){
+  span {
+  color:  var(--n64-b-light-clr);
+  }
+
+   svg {
+  fill:  var(--n64-b-light-clr);
+ }
+
+  
+}
+
+
+#sidebar > ul > li:nth-child(4) {
+
+  span {
+  color:  var(--n64-a-light-clr);
+  }
+     svg {
+  fill:  var(--n64-a-light-clr);
+ }
+
+
+
+  
+}
+
+#sidebar > ul > li:nth-child(5) {
+
+  span {
+    color: var(--n64-c-clr);
+  }
+  svg {
+    fill: var(--n64-c-clr);
+  }
+
+ 
+
+  
+}
+
+
+
+
+
+
 
 #sidebar ul.li.active a {
     color: var(--accent-clr);
@@ -104,6 +172,7 @@
 
 
 
+
 #sidebar svg {
     flex-shrink: 0;
     fill: var(--text-clr);
@@ -124,7 +193,7 @@
 /* Pushes your Gameok to the left */
 #toggle-btn{
     margin-left: auto;
-    padding: 1em;
+    padding: 0.8em;
     border: none;
     border-radius: .5em;
     background:none;
@@ -138,6 +207,7 @@
 #toggle-btn:hover {
     background-color: var(--hover-clr);
 }
+
 
 
 @media(max-width: 800px) {

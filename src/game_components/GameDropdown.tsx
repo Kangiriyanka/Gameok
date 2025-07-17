@@ -26,7 +26,7 @@ const gameSelects = games.map((game: GameTitle) =>
    return (
 
 
-    <select name="selectedGame"  onChange={handleGameSelect}>
+    <select className= "border-1 rounded p-2 w-60" name="selectedGame"  onChange={handleGameSelect}>
 
       <option key="default" value="">Select a game</option>
       {gameSelects}

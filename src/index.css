@@ -6,18 +6,28 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  --base-clr: #040404;
-  --line-clr: #E3C504;
-  --hover-clr:#31333a;
-  --n64-gray-clr: #6b656955;
-  
-  --text-clr: #F4D35E;
-  --secondary-text-clr: #fbebf4d2;
-  --accent-clr: #d3b912;
-  --box-shadow: rgba(16, 213, 59, 0.16) 0px 1px 4px;
-}
+  color: hsla(0, 0%, 100%, 0.87);
 
+ --base-clr: hsla(220, 4%, 32%, 0.2);
+--base-n64-clr: hsl(221, 12%, 73%);
+--line-clr: hsl(44, 95%, 30%);
+--hover-clr: hsl(228, 9%, 21%);
+--n64-gray-clr: hsla(270, 4%, 41%, 0.33);
+--n64-dark-gray-clr: hsla(280, 4%, 17%, 0.331);
+--n64-a-clr: hsl(214, 97%, 32%);
+--n64-a-light-clr: hsl(214, 94%, 50%);
+--n64-b-clr: hsl(161, 100%, 28%);
+--n64-b-light-clr: hsl(161, 93%, 43%);
+--n64-c-clr: hsl(44, 95%, 58%);
+--n64-start-clr: hsl(358, 74%, 50%);
+--n64-start-light-clr: hsla(0, 73%, 55%, 0.83);
+--text-clr: hsl(0, 1%, 80%);
+--secondary-text-clr: hsla(316, 57%, 94%, 0.82);
+--accent-clr: hsl(51, 73%, 46%);
+--box-shadow: hsla(131, 86%, 45%, 0.16) 0px 1px 4px;
+
+
+}
 
 
 h1 {
@@ -30,9 +40,8 @@ h1 {
 body {
 
   min-height: 100dvh;
-  background-color: var(--base-clr);
   color: var(--text-clr);
-  background: #0d1314;
+  background: var(--n64-dark-gray-clr);
 
 
 }
@@ -43,6 +52,14 @@ body {
   grid-template-columns: auto 1fr;
 
 }
+
+
+.main-container {
+  height: 100vh;
+  width: 100%;
+}
+
+
 
 .page-header {
 

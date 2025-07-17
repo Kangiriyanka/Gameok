@@ -99,7 +99,9 @@ export default function Register() {
      
     </form>
 
+     <div className="flex justify-center ">
     <ErrorBox response={response} count={count}/>
+    </div>
 
     
     </div>

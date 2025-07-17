@@ -1,17 +1,21 @@
 import { useLoaderData } from "react-router";
 import Console from "./Console.tsx"
 import '../assets/styles/Consoles.css';
+import EmptyCollection from "../general/EmptyCollection.tsx";
 
 
 type GameConsole = {
-  console_id: number;
-  console_name: string;
+  id: number;
+  name: string;
+  year: number;
 }
 
 
 function Consoles() {
   
   const allConsoles = useLoaderData().consoles as GameConsole[]
+  console.log(allConsoles)
+
 
  
   return (
@@ -19,19 +23,26 @@ function Consoles() {
     <div>
       
 
-        <div className="page-header">
+       
           
-            <h1>My Consoles</h1> 
+            <h1 className="page-header">My Consoles</h1> 
+    
 
+      <div className="console-shelf" > 
       
-           
-        </div>      
-
-        
-        
-        {allConsoles && allConsoles.map((console: GameConsole) =>
-        <Console key={console.console_id} console_id={console.console_id} console_name={console.console_name} />)}
-
+      {allConsoles && allConsoles.length > 0 ? (
+    allConsoles.map((console: GameConsole) => (
+      <Console
+        key={console.id}
+        console_id={console.id}
+        console_name={console.name}
+        console_year={console.year}
+      />
+    ))
+  ) : (
+    <EmptyCollection message="Consoles will appear once you add games to your collection." />
+  )}
+    </div>
     </div>
 
   );

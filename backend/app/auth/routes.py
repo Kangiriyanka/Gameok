@@ -73,6 +73,9 @@ def add_user():
             if (not data["username"]):
                 return {"msg": "Please enter a username"}, 422
             
+            if (not data["password"]):
+                return {"msg": "Please enter a password"}, 422
+            
       
             # Check if the email or username exists in the database 
             if email:
@@ -128,7 +131,7 @@ def edit_password():
     else:
         user.password = data["newPassword"]
         db.session.commit()
-        return "Successfully changed passwords"
+        return {"msg": "Successfully changed passwords."}
     
 
 

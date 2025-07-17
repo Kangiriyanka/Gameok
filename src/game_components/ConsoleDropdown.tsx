@@ -27,7 +27,7 @@ const consoleOptions = consoles.map((console: ConsoleOption) =>
 
  
    return (
-    <select name="selectedConsole"  onChange={handleConsoleSelect}>
+    <select className= "border-1 rounded p-2 w-60" name="selectedConsole"  onChange={handleConsoleSelect}>
 
       <option key="default" value="">Select a console</option>
       {consoleOptions}

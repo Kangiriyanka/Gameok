@@ -2,6 +2,7 @@
 import uuid
 import os 
 from app.main import bp
+from flask import current_app
 from app import db
 from app.models import Console, Game, GameConsole, GameOwnership, User
 from app.main.helpers import allowed_file
@@ -16,11 +17,8 @@ from werkzeug.utils import secure_filename
 def add_game():
  try:
  
-     # Check if any of the fields is empty
-     
-     
    for key, value in request.form.items():
-            print(key)
+ 
             if value == "":
                 if key == "console":
                     return {"msg": "Please select a console"}, 422
@@ -30,23 +28,17 @@ def add_game():
    a_title = request.form['title']
    a_year = int(request.form['year'])
    a_series = request.form['series']
-   some_memories = request.form['memories']
+  
    
    posted_game = Game(title=a_title, year=a_year, series=a_series)
 
     
     # Get the username
    current_user= get_jwt_identity()
-  
-    
-   
    current_game = Game.query.filter_by(title=request.form["title"]).first()
-   
-   
    console= Console.query.filter_by(name=request.form["console"]).first()
-   
    user= User.query.filter_by(username=current_user).first() 
-  
+ 
 
   
     # If the game doesn't exist in the Games table , add it to the games table and establish relationships
@@ -54,10 +46,8 @@ def add_game():
            
          # Handle the cover photo upload
             cover_photo = request.files['coverPhoto']
-            print(cover_photo)
           
-          
-           
+
             
             # Check if the cover photo exists and if it's either in a jpg or jpeg format.
             if cover_photo and allowed_file(cover_photo.filename):
@@ -65,25 +55,22 @@ def add_game():
                 # Generate a unique filename for the cover photo
                 filename = secure_filename(cover_photo.filename)
                 filename = f"{str(uuid.uuid4())}-{filename}"
-                file_path = os.path.join(os.get['UPLOAD_FOLDER'], filename)
-           
-                print(filename)
-             
+                filepath = os.path.abspath(os.path.join(current_app.config["UPLOAD_FOLDER"],filename))
+                
                 
 
                 # Save the cover photo to the specified path
                 cover_photo.seek(0)
-                cover_photo.save(file_path)
+                cover_photo.save(filepath)
                
         
                 # Set the cover photo path for the game
-                posted_game.cover_photo = "/images/" + filename
+                posted_game.cover_photo = "/covers/" + filename
                 db.session.commit()
             else:
                 
                 return {"msg": "Please add a cover photo in either .jpg or .jpeg format"}, 422
-            
-            print(posted_game)
+
             db.session.add(posted_game)
             db.session.commit()
             
@@ -91,10 +78,6 @@ def add_game():
             db.session.refresh(posted_game)
        
           
-            # Add the relationship between the game and the user
-            new_game_ownership= GameOwnership(game_id = posted_game.id, user_id= user.id, memories= some_memories)
-            db.session.add(new_game_ownership)
-            db.session.commit()
             
             # Add the relationship between the game and the console
             
@@ -102,7 +85,7 @@ def add_game():
             db.session.add(new_game_console_combo)
             db.session.commit()
             
-            return f"{a_title}  was added to your collection"
+            return {"msg": f"{a_title}  was added to your collection"}
         
     # If the game exists in the table and the user has the game then tell the user they already own the game.
    elif  current_game : 
@@ -126,7 +109,8 @@ def add_game():
 
         
  except Exception as e:
-        return {"msg": f"Wozzack: {str(e)}"}, 401
+       
+        return {"msg": f"Wozzack Error: {str(e)}"}, 401
 
 @bp.route('/api/admin/add_console', methods= ["POST"])
 @jwt_required()

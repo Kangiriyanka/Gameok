@@ -6,7 +6,8 @@ from flask_jwt_extended import get_jwt_identity,  jwt_required
              
 
 # Get all games owned by the user
-@bp.route('/api/collection/get_games', methods = ["GET"])
+# 
+@bp.route('/api/collection/get_owned_games', methods = ["GET"])
 @jwt_required()
 def get_games():
     
@@ -17,6 +18,8 @@ def get_games():
     games = Game.query.join(GameOwnership).filter(GameOwnership.user_id == user_id).order_by((Game.title)).all()
     
     games_json = [game.to_json() for game in games]
+   
+
     
     #Returns a response object with the application/json mimetype
     return jsonify(games=games_json)

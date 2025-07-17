@@ -50,3 +50,23 @@ export const errorTransitionVariants = {
 
 
 }
+
+export const buttonVariants = {
+  initial: {
+    rotate: 0
+  },
+
+  animate: {
+    rotate: [0, 2, -2, 2, 0], 
+    
+    transition: {
+      duration: 0.4,
+      ease: [0.33, 1, 0.68, 1] as [number, number, number, number],
+    },
+  },
+
+  exit: {
+    rotate: 0
+  }
+
+}

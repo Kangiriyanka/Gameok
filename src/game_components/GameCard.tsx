@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { useState } from 'react'
 import { useAuthContext } from "../context/AuthContext";
+import { fetchWithCSRF } from "../assets/scripts/csrf";
 
 type GameProps = {
     game_id: number;
@@ -12,11 +13,11 @@ type GameProps = {
 
 }
 
-export default function Game({game_id,game_series, game_year, game_title, game_cover}: GameProps) {
+export default function GameCard({game_id,game_series, game_year, game_title, game_cover}: GameProps) {
 
     const [response, setResponse] = useState("")
     const [isActive, setActive] = useState(true)
-    const {token, storedUserInfo} = useAuthContext()
+    const {storedUserInfo} = useAuthContext()
 
 
 
@@ -25,11 +26,9 @@ export default function Game({game_id,game_series, game_year, game_title, game_c
       setActive(false);
 
       try {
-        const response = await fetch(`/api/game/delete_game/${game_id}`, {
+        const response = await fetchWithCSRF(`/api/game/delete_game/${game_id}`, {
           method: 'DELETE',
-          headers: {
-             Authorization: 'Bearer ' + token
-          },
+        
         });
         // Axios handles the response automatically, but with fetch we need to check if the response is ok.
         if (!response.ok) {
@@ -50,7 +49,7 @@ export default function Game({game_id,game_series, game_year, game_title, game_c
       <div> 
       { isActive ? ( 
 
-          <div  className= "gameCard d-flex flex-column  ">
+          <div className= " border-1 w-30  ">
         
           <img src={game_cover} alt="cover" />
           <Link  className="game_link" to={{pathname: `/game/${game_id}/${game_title}`}} 

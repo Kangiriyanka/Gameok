@@ -44,7 +44,7 @@ async function sendDataToFlask(data: PasswordData) {
     setResponse(result.msg);
     setCount(prev => prev +1)
    
-    setResponse(result);
+   
   } catch (error: unknown) {
 
      if (error instanceof Error) {

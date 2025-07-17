@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy 
 from flask_cors import CORS  
 from config import Config
-
 from functools import wraps
 import json
 import uuid

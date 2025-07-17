@@ -8,11 +8,10 @@ export default function GameLayout() {
  
  
     return (
-        <div id= "layout">
+        
         <Outlet/>
 
-        </div>
-
+     
     )
 
 

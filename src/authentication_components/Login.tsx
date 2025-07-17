@@ -76,7 +76,7 @@ export default function Login() {
            <h1> Gameok Login </h1>
            
         </div> 
-          <form className="reg-form"  style={{margin: "0 auto"}}onSubmit={loginUser}>
+          <form className="reg-form centered"  style={{margin: "0 auto"}}onSubmit={loginUser}>
         
           
             <label>
@@ -133,8 +133,10 @@ whileTap={{
     
              
         </form>
-       
+
+          <div className="flex justify-center ">
           <ErrorBox response= {response} count={count}/>
+          </div>
         
        
       </div>

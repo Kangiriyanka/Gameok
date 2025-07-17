@@ -44,11 +44,12 @@ export  const protectedRoutes = [
       {
         path: "games",
         Component: GameLayout,
-        loader: collectionLoader,
+       
         children: [
 
            {path: "my-games",
             Component: Games,
+            loader: collectionLoader,
            },
 
           

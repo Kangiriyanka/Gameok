@@ -10,7 +10,6 @@ type GameData = {
   year: string;
   series: string;
   console: string;
-  memories: string;
   coverPhoto: File | null;
 }
 
@@ -22,7 +21,6 @@ function AddGame() {
   const [year, setYear] = useState("");
   const [series, setSeries] = useState("");
   const [consoleName, setConsoleName] = useState('');
-  const [memories, setMemories] = useState("");
   const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
   const [count, setCount] = useState(0)
 
@@ -38,7 +36,7 @@ function AddGame() {
     formData.append('year', data.year);
     formData.append('series', data.series);
     formData.append('console', data.console);
-    formData.append('memories', data.memories);
+  
 
    try {
     const response = await fetchWithCSRF('/api/admin/add_game', {
@@ -86,7 +84,6 @@ function AddGame() {
       "year": year,
       "series": series,
       "console": consoleName,
-      "memories": memories,
       "coverPhoto": coverPhoto 
     }
 
@@ -133,13 +130,7 @@ function AddGame() {
         Series:
         <input type="text" value={series} onChange={(e) => setSeries(e.target.value)}/>
       </label>
-      <label>
-        Memories:
-        <input
-          type="textarea"
-          value={memories}
-          onChange={(e) => setMemories(e.target.value)}/>
-      </label>
+    
 
       
       <label>

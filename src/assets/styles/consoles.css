@@ -1,22 +1,50 @@
-.btn_dark {
+.console-shelf {
+
+  position: relative;
+  display: grid;
  
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  margin-top: 4rem;
+  left: 3rem;
+
   
-    
-    
-}
-
-.console_button {
-    
-
-    
-}
-
-.console_shelf {
 
 }
 
-.console_box {
-  
-     
+
+
+.console-container {
+
+    border: 2px solid var(--n64-gray-clr);
+    padding: 2rem;
+    text-align:center;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    width: 12rem;
+    margin: 1rem 1rem 0 1rem;
+}
+
+.console-shelf > .console-container:nth-of-type(n) {
+  border-color: var(--n64-c-clr);
+}
+.console-shelf > .console-container:nth-of-type(2n) {
+  border-color: var(--n64-a-clr);
+}
+.console-shelf > .console-container:nth-of-type(3n) {
+  border-color: var(--n64-b-clr);
+}
+
+
+
+
+@media(max-width: 800px) {
+
+    .console-shelf {
+
+          grid-template-columns: 1fr 1fr 
+    }
+
+
+
 }
 

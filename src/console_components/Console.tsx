@@ -1,13 +1,15 @@
 
 import {useState} from 'react'
-import Game from '../game_components/Game.tsx'
+import Game from '../game_components/GameCard.tsx'
 import '../assets/styles/consoles.css';
+
 
 
 
 type ConsoleProps = {
     console_id: number;
     console_name: string;
+    console_year: number;
 }
 
 type ConsoleGame = {
@@ -19,24 +21,29 @@ type ConsoleGame = {
 }
 
 
-function Console({console_id, console_name}: ConsoleProps) {
+function Console({console_id, console_name, console_year}: ConsoleProps) {
 
     const [consoleGames, setConsoleGames] = useState<ConsoleGame[]>([]);
+    const [showGames, setShowGames] = useState(false)
 
 
     async function getConsoleGames(console_id: ConsoleProps["console_id"]) {
        
       try {
-        const response = await fetch("/api/collection/get_console_games/" + console_id, {
+
+        const response = await fetch(`/api/collection/get_console_games/${console_id}/`, {
           method: "GET",
-           credentials: "include"});
+          credentials: 'include'
+        
+        });
 
         if (!response.ok) {
            throw new Error(`HTTP error! status: ${response.status}`);
         }
        
         const result = await response.json();
-        setConsoleGames(result.data.console_games);
+        console.log(result)
+        setConsoleGames(result.console_games);
         
           
   
@@ -46,17 +53,29 @@ function Console({console_id, console_name}: ConsoleProps) {
         
       }
 
+      function toggleGames(console_id: number) {
+        setShowGames(prev => !prev)
+        getConsoleGames(console_id)
+      }
+ 
     
 
 
 
     return (
-        <div className="d-flex flex-column">
+        <div className="console-container">
            
           
-           <div className= " console_box d-flex flex-row">
-           <button className="btn btn-dark console_button" onClick= {() => getConsoleGames(console_id)}> {console_name}</button>
-           {consoleGames && consoleGames.map((consoleGame) =>
+           <div className= "">
+
+           <button  className="" onClick= {() => toggleGames(console_id)}> 
+         
+            <p >{console_name}</p>
+            <p className= "text-base opacity-50">{console_year}</p>
+        
+            
+            </button>
+           {consoleGames && showGames && consoleGames.map((consoleGame) =>
           
            <Game key={consoleGame.game_id} 
                  game_id= {consoleGame.game_id}  
@@ -69,6 +88,9 @@ function Console({console_id, console_name}: ConsoleProps) {
                  />)}
            
             </div>
+
+
+       
            
           
            
