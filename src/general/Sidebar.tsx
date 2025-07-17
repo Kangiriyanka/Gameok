@@ -119,7 +119,7 @@ export default function Sidebar() {
             <ul className= "sub-menu">
                 <div>
                <Link to="/dashboard/consoles/">My Consoles</Link>
-                {storedUserInfo == "Kangiriyanka" ? <li> <Link to= "/admin/add-consoles">Add Console</Link></li>: ""}
+                {storedUserInfo == "Kangiriyanka" ? <li> <Link to= "/admin/add-consoles">Add Console (Admin)</Link></li>: ""}
                 </div>
             </ul>
            

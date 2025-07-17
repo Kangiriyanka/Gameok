@@ -8,22 +8,32 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.utils import secure_filename
 from flask import jsonify, request
 from app.main.helpers import allowed_file
+from collections import defaultdict
 
 @bp.route('/api/game/get_all_game_titles', methods = ["GET"])
 @jwt_required()
 def get_all_game_titles():
     
    
-    game_names = []
-    games = db.session.query(Game).all()
+    game_console = defaultdict(list)
+    game_consoles = Game.query \
+    .join(GameConsole, GameConsole.game_id == Game.id) \
+    .join(Console, Console.id == GameConsole.console_id) \
+    .add_entity(Console) \
+    .all()
+   
+    
+    
+    for game, console  in game_consoles:
+          game = game.to_json()
+          console= console.to_json()
+          game_console[console["name"]].append(game["title"])
+     
 
-   
-   
-    for game in games:
-         game_names.append(game.title)
-         
- 
-    return game_names
+    game_console = dict(game_console)
+
+
+    return jsonify(game_console)
 
 
 
@@ -42,7 +52,7 @@ def user_add_game():
                 return {"msg": "One of the fields is not filled, please check."}, 422
    
    a_title = request.form['title']
-   some_memories = request.form['memories']
+ 
   
     
     # Get the username
@@ -59,7 +69,7 @@ def user_add_game():
    else:
             
          # Add the relationship between the game and the user
-        new_game_ownership= GameOwnership(game_id = current_game.id, user_id= current_user_id, memories= some_memories)
+        new_game_ownership= GameOwnership(game_id = current_game.id, user_id= current_user_id, memories= '')
         db.session.add(new_game_ownership)
         db.session.commit()
             

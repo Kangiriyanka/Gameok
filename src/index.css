@@ -23,7 +23,7 @@
 --n64-start-light-clr: hsla(0, 88%, 60%, 0.966);
 --text-clr: hsl(0, 1%, 80%);
 --secondary-text-clr: hsla(316, 57%, 94%, 0.82);
---accent-clr: hsl(51, 73%, 46%);
+--accent-clr: hsla(51, 92%, 53%, 0.785);
 --box-shadow: hsla(131, 86%, 45%, 0.16) 0px 1px 4px;
 
 
@@ -33,6 +33,10 @@
 h1 {
   font-size: 2rem;
 }
+h2 {
+  font-size: 1.6rem;
+}
+
 
 
 

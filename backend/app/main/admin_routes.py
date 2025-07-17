@@ -104,13 +104,15 @@ def add_game():
             
         
 
-            return f"{a_title}  was added to your collection"
+            return {"msg": f"{a_title}  was added to your collection"}
        
 
         
  except Exception as e:
        
         return {"msg": f"Wozzack Error: {str(e)}"}, 401
+ 
+ 
 
 @bp.route('/api/admin/add_console', methods= ["POST"])
 @jwt_required()

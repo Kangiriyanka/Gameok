@@ -1,8 +1,10 @@
 import React from "react";
 import {useState} from 'react'
-import { useAuthContext } from "../context/AuthContext";
 import { useNavigate, useParams, useLocation} from "react-router-dom";
 import '../assets/styles/add_game.css';
+import { fetchWithCSRF } from "../assets/scripts/csrf";
+import Editor from "..//general/Editor.tsx"
+import '@mdxeditor/editor/style.css'
 
 
 
@@ -14,7 +16,7 @@ function EditMemories() {
   const { edit_memories} = location.state;
   const [new_memories, setNewMemories] = useState(edit_memories)
   const { game_id, title } = useParams();
-  const { token } = useAuthContext();
+
   const navigate = useNavigate();
 
   
@@ -31,11 +33,9 @@ function EditMemories() {
 
     try {
 
-      const response = await fetch(`/api/collection/edit_memory/${game_id}`, {
+      const response = await fetchWithCSRF(`/api/collection/edit_memory/${game_id}`, {
         method: 'POST',
-        headers: {  
-            Authorization: 'Bearer ' + token
-        },
+        
         body: formData
       });
       if (!response.ok) {
@@ -70,25 +70,15 @@ function EditMemories() {
 
    
   return (
-    <div className= "d-flex flex-column justify-content-center">
-    
-    
- 
-    <form  onSubmit={submitMemories} className="d-flex flex-column game_form">
-    <h3> Edit Memories for  {title} </h3>
-    
-      <label>
-        Memories:
-        <input
-          type="textarea"
-          value={new_memories}
-          onChange={(e) => setNewMemories(e.target.value)}/>
-      </label>
 
-      
-      <button type="submit" className="form_button btn btn-dark">Edit Memories</button>
-      <p> {response} </p>
-    </form>
+    <div className= "">
+       <h1 className="page-header">Edit Memories of {title} </h1> 
+
+      <form>
+      <Editor/>
+      <button type="submit" className="form-button">Edit Memories</button>
+       </form>
+   
       
     </div>
   )

@@ -1,39 +1,38 @@
 
 import {useState} from 'react'
-
 import { useLoaderData } from 'react-router';
-import GameDropdown from "./GameDropdown.tsx"
 import '../assets/styles/add_game.css';
 import { fetchWithCSRF } from '../assets/scripts/csrf.ts';
 import ErrorBox from '../animation_components/ErrorBox.tsx';
+import ConsoleOption from './ConsoleOption.tsx';
+import { select } from 'motion/react-client';
+import GameOption from './GameOption.tsx';
 
 
 type GameData = {
-  title: string;
-  memories: string;
+  gameTitle: string;
 }
 
 function UserAddGame() {
 
-
+    const game_consoles = useLoaderData(); 
+  
     const [response, setResponse] = useState('')
-    const [gameTitle, setGameTitle] = useState('')
-    const [memories, setMemories] = useState('')
     const [count, setCount] = useState(0)
-    const games = useLoaderData(); 
+    const [consoles, setConsoles] = useState(Object.keys(game_consoles))
+    const [isConsoleSelected, setIsConsoleSelected] = useState(false);
+    const [isGameSelected, setIsGameSelected] = useState(false)
+    const [filteredGames, setFilteredGames] = useState([])
+    const [selectedConsole, setSelectedConsole] = useState('')
+    const [selectedGame, setSelectedGame] = useState('')
+   
    
     
-
-
-    const handleGameSelect = (value: string) => {
-        setGameTitle(value);
-      }
-
-    async function sendDataToFlask(data: GameData) {
+    async function sendDataToFlask() {
 
         const formData = new FormData();
-        formData.append('title', data.title);
-        formData.append('memories', data.memories);
+        formData.append('title', selectedGame);
+    
     
     
         try {
@@ -68,17 +67,22 @@ function UserAddGame() {
       }
     
     
-      function submitGame(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+
+      const filterGames = (console_name: string) => {
+
     
-        const data = {
-          "title": gameTitle,
-          "memories": memories,
-          
-        }
-    
-        sendDataToFlask(data)
+        setSelectedConsole(console_name)
+        setSelectedGame("")
+        setIsConsoleSelected(prev => !prev)
+        setFilteredGames(game_consoles[console_name])
+        
       }
+
+      const selectGame = (game_title: string) => {
+        setSelectedGame(game_title)
+        setIsGameSelected(prev =>!prev)
+      }
+   
 
     return (
 
@@ -88,26 +92,43 @@ function UserAddGame() {
            <h1> Add Games</h1>
            
         </div>  
-        <form onSubmit={submitGame} className="reg-form">
-       
+        
+         
+        <div className="mt-5 relative top-8 left-12" >
+        <h2 > Select a console</h2>
+
+        <div className= "console-selector">
+              
+         {consoles && consoles.map((console: string) => (
+          <ConsoleOption onConsoleSelect= {filterGames} name={console}/>
+
+          
+  
+))}
+</div>
+  <div className="mt-8" >
+  <h2 > Select a game</h2>
+  <div className= "game-selector">
+    
+              
+         {filteredGames && filteredGames.map((console: string) => (
+          <GameOption onGameSelect= {selectGame} name={console}/>
+
+          
+  
+))}
+</div>
+</div>
+</div>
+
+
        
      
-        <label>
-            Game:
-            <GameDropdown onGameSelect={handleGameSelect} games ={games}/>
-        </label>
-       
-        <label>
-        Memories:
-        <input
-          type="textarea"
-          value={memories}
-          onChange={(e) => setMemories(e.target.value)}/>
-      </label>
-
-      <button type="submit" className="form-button">Add Game</button>
-      
-      </form>
+      {isConsoleSelected && isGameSelected &&   (
+      <button type="submit"  onClick ={sendDataToFlask} className="form-button">Add Game</button>
+    )
+  }
+    
 
       <ErrorBox response = {response} count= {count}/>
 

@@ -1,6 +1,8 @@
 import '../assets/styles/game.css';
+import '../assets/styles/memories.css';
 import { useState, useEffect } from 'react'
 import { Link, useParams} from "react-router-dom";
+import {motion} from "motion/react"
 
 
 
@@ -44,17 +46,44 @@ function GameMemory() {
 
     
     return (
-        <div className= "">
+        <div className= "page-header">
           
-           <h1>{title}</h1>
-           <p > {memories}</p>
-           
-           <Link  className="game_link" to={{pathname: `/dashboard/games/edit-memory/${game_id}/${title}`}} 
-           state= {{edit_memories: memories}} 
+           <div className= "flex items-center gap-3">
+           <h1 className="flex items-center"> 
+            Memories of {title} </h1> 
+            <motion.div
+            
+            whileHover = {{
+              scale: 1.1,
+              x: 2,
+             
+              
+             
+            }}
+            >
+             <Link  className="game_link" to={{pathname: `/dashboard/games/edit-memory/${game_id}/${title}`}} 
+           state= {{edit_memories: memories}}>
+
+       
+             <svg className= "fill-[var(--accent-clr)]" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+
+            </Link>
+            </motion.div>
+
+            </div>
+
+            <article className="memory-article">
+
+            {memories ? (
+              <p>{memories}</p>
+            ) : null}
+                          
+              
+
+
+
+           </article>
      
-        > Edit Memories</Link>
-           
-           
         </div>
 
 

@@ -12,6 +12,7 @@
     "create-venv": "cd backend && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt"
   },
   "dependencies": {
+    "@mdxeditor/editor": "^3.39.1",
     "@tailwindcss/vite": "^4.1.11",
     "motion": "^12.23.0",
     "react": "^19.1.0",
