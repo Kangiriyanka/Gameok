@@ -1,6 +1,6 @@
 
 import {useState} from 'react'
-import Game from '../game_components/GameCard.tsx'
+import GameCard from '../game_components/GameCard.tsx'
 import '../assets/styles/consoles.css';
 
 
@@ -77,7 +77,7 @@ function Console({console_id, console_name, console_year}: ConsoleProps) {
             </button>
            {consoleGames && showGames && consoleGames.map((consoleGame) =>
           
-           <Game key={consoleGame.game_id} 
+           <GameCard key={consoleGame.game_id} 
                  game_id= {consoleGame.game_id}  
                  game_series= {consoleGame.game_series} 
                  game_year = {consoleGame.game_year} 

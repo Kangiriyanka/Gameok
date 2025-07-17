@@ -1,7 +1,8 @@
 
-import { useLoaderData, Outlet} from "react-router";
-import GameCard from "./GameCard.tsx"
+import { useLoaderData} from "react-router";
+
 import EmptyCollection from "../general/EmptyCollection.tsx";
+import GameListItem from "./GameListItem.tsx";
 
 
 
@@ -31,17 +32,25 @@ function Games() {
 
 
 
-        
+     <ul className= "game-list">
+
+        <div className="flex"> 
+         
+        </div> 
         { gameCollection && gameCollection.length > 0 ? (
             gameCollection.map((game: Game) =>
+
+  
+   
               
-    
-    <GameCard key={game.id} 
+  
+    <GameListItem key={game.id} 
           game_id= {game.id}  
           game_title= {game.title} 
           game_year= {game.year}  
           game_series= {game.series}  
-          game_cover={game.cover}/>
+         />
+  
   
     )) : 
 
@@ -49,6 +58,7 @@ function Games() {
        <EmptyCollection message="You currently have no games in your collection."/>
     )
      }
+    </ul>
 
  
 

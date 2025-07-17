@@ -1,26 +1,17 @@
+.game-list {
 
-.gameCard {
-
- 
-   
-}
-
-.gameCard img {
- 
-  
-}
-
-
-
-
-
-.game_link {
-
+    position: relative;
+    top: 3rem;
+    left: 3rem;
 
 }
 
-.delete_button {
-  
+.game-list li {
+
+    font-size: 1.2rem;
+    margin-top: 1rem;
+
+
 }
 
 

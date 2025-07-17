@@ -11,7 +11,7 @@
  --base-clr: hsla(220, 4%, 32%, 0.2);
 --base-n64-clr: hsl(221, 12%, 73%);
 --line-clr: hsl(44, 95%, 30%);
---hover-clr: hsl(228, 9%, 21%);
+--hover-clr: hsla(266, 6%, 22%, 0.317);
 --n64-gray-clr: hsla(270, 4%, 41%, 0.33);
 --n64-dark-gray-clr: hsla(280, 4%, 17%, 0.331);
 --n64-a-clr: hsl(214, 97%, 32%);
@@ -20,7 +20,7 @@
 --n64-b-light-clr: hsl(161, 93%, 43%);
 --n64-c-clr: hsl(44, 95%, 58%);
 --n64-start-clr: hsl(358, 74%, 50%);
---n64-start-light-clr: hsla(0, 73%, 55%, 0.83);
+--n64-start-light-clr: hsla(0, 88%, 60%, 0.966);
 --text-clr: hsl(0, 1%, 80%);
 --secondary-text-clr: hsla(316, 57%, 94%, 0.82);
 --accent-clr: hsl(51, 73%, 46%);

@@ -64,7 +64,7 @@ export  const protectedRoutes = [
             Component: GameMemory
           },
           {
-            path: "edit-memory/:game-id/:title",
+            path: "edit-memory/:game-id/:game-title",
             Component: EditMemories
           }
         ]

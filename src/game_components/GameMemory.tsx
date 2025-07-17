@@ -1,14 +1,14 @@
 import '../assets/styles/game.css';
 import { useState, useEffect } from 'react'
 import { Link, useParams} from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext.tsx";
+
 
 
 function GameMemory() {
 
     const [memories, setMemories] = useState([])
     const { game_id, title } = useParams();
-    const {token} = useAuthContext();
+    
     
    
 
@@ -17,21 +17,26 @@ function GameMemory() {
     try {
       const response = await fetch(`/api/collection/get_game_memories/${game_id}/`, {
         method: "GET",
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
+        credentials: "include",
+       
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const res = await response.json();
-      setMemories(res);
+      const result = await response.json();
+      setMemories(result.msg);
 
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
+    }  catch (error: unknown){
+          if (error instanceof Error) {
+              
+              console.error(error.message);
+              
+        } 
+      
+      };
+         
   }
 
   fetchMemories();
@@ -39,11 +44,12 @@ function GameMemory() {
 
     
     return (
-        <div className= "memory_fragment ">
+        <div className= "">
+          
            <h1>{title}</h1>
            <p > {memories}</p>
            
-           <Link  className="game_link" to={{pathname: `/game/edit_memory/${game_id}/${title}`}} 
+           <Link  className="game_link" to={{pathname: `/dashboard/games/edit-memory/${game_id}/${title}`}} 
            state= {{edit_memories: memories}} 
      
         > Edit Memories</Link>

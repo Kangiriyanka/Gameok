@@ -19,5 +19,5 @@ export default function ErrorBoundary() {
 
 
 
-  return <p style ={{}}className= "">Unexpected error occurred.</p>;
+  return <h1 className= "p-3">Unexpected error occurred  :(. </h1>;
 }

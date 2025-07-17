@@ -4,7 +4,8 @@
   width: 14.5rem;
   padding: 0.5em 1em;
   background-color: var(--base-clr);
-  border-right: 1px solid var(--line-clr);
+  border-right: 1px solid var(--base-clr);
+  box-shadow: 1px 0px 2px var(--base-clr);
   transition: 300ms ease-in-out;
 
   position: sticky;
