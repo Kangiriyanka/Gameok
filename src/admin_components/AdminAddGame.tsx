@@ -1,7 +1,6 @@
 
 import {useState} from 'react'
 import ConsoleDropdown from "../game_components/ConsoleDropdown.tsx"
-import '../assets/styles/add_game.css';
 import { fetchWithCSRF } from '../assets/scripts/csrf.ts';
 import ErrorBox from '../animation_components/ErrorBox.tsx';
 

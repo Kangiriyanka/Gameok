@@ -1,7 +1,7 @@
 from flask import Blueprint, app
 import os 
 from app import db 
-from app.models import User
+from app.models import User,Console
 import click
 
 
@@ -32,6 +32,35 @@ def create_admin():
 # Drop all tables using the MetaData Object
 # SQLALchemy Metadata documentation: 
 # A collection of Table objects and their associated schema constructs.
+
+
+@bp.cli.command('add-consoles')
+def add_consoles():
+    popular_consoles = [
+    {"name": "Game Boy", "firm": "Nintendo", "year": 1989},
+    {"name": "Game Boy Color", "firm": "Nintendo", "year": 1998},
+    {"name": "Nintendo 64", "firm": "Nintendo", "year": 1996},
+    {"name": "Nintendo DS", "firm": "Nintendo", "year": 2004},
+    {"name": "Nintendo Switch", "firm": "Nintendo", "year": 2017},
+    {"name": "Super Nintendo", "firm": "Nintendo", "year": 1991},
+    {"name": "Wii", "firm": "Nintendo", "year": 2006},
+    {"name": "Xbox 360", "firm": "Microsoft", "year": 2005},
+    {"name": "Xbox One", "firm": "Microsoft", "year": 2013},
+    {"name": "Xbox Series X/S", "firm": "Microsoft", "year": 2020},
+    {"name": "Sega Genesis", "firm": "Sega", "year": 1989},
+    {"name": "PlayStation", "firm": "Sony", "year": 1994},
+    {"name": "PlayStation 2", "firm": "Sony", "year": 2000},
+    {"name": "PlayStation 3", "firm": "Sony", "year": 2006},
+    {"name": "PlayStation 4", "firm": "Sony", "year": 2013},
+    {"name": "PlayStation 5", "firm": "Sony", "year": 2020}
+]
+    
+    for console in popular_consoles:
+        c = Console(name= console["name"], year= console["year"], firm= console["firm"])
+        db.session.add(c)
+    db.session.commit()
+    return f"Successfully added popular consoles"
+
 
 
 @bp.cli.command('drop-tables')

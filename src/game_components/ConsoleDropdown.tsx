@@ -1,5 +1,4 @@
 import React from "react";
-import '../assets/styles/add_game.css';
 import { useLoaderData } from "react-router";
 
 type DropdownProps = {

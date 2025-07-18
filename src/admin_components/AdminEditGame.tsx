@@ -1,8 +1,7 @@
 import React from "react";
 import {useState} from 'react'
-import { useAuthContext } from "../context/AuthContext";
 import { useNavigate, useParams} from "react-router-dom";
-import '../assets/styles/add_game.css';
+
 
 function EditGame() {
 
@@ -14,7 +13,7 @@ function EditGame() {
   const [newSeries, setNewSeries] = useState(series ?? "");
   const [newCoverPhoto, setNewCoverPhoto] = useState<File | null>(null);
   const navigate = useNavigate();
-  const { token } = useAuthContext();
+
 
   
  type EditGameData = {

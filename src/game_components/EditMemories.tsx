@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from 'react'
 import { useNavigate, useParams, useLocation} from "react-router-dom";
-import '../assets/styles/add_game.css';
+import '../assets/styles/add-game.css';
 import { fetchWithCSRF } from "../assets/scripts/csrf";
 import Editor from "..//general/Editor.tsx"
 import '@mdxeditor/editor/style.css'

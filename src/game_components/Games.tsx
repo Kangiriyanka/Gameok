@@ -1,19 +1,11 @@
 
 import { useLoaderData} from "react-router";
-
+import type {Game} from "../tables/columns"
+import { columns,  } from "../tables/columns"
+import { DataTable } from "../tables/data-table"
 import EmptyCollection from "../general/EmptyCollection.tsx";
-import GameListItem from "./GameListItem.tsx";
 
 
-
-type Game = {
-    id: number;
-    series: string;
-    year: string;
-    title: string;
-    cover: string;
-
-}
 
 function Games() {
 
@@ -32,39 +24,12 @@ function Games() {
 
 
 
-     <ul className= "game-list">
-
-        <div className="flex"> 
-         
-        </div> 
-        { gameCollection && gameCollection.length > 0 ? (
-            gameCollection.map((game: Game) =>
-
-  
-   
-              
-  
-    <GameListItem key={game.id} 
-          game_id= {game.id}  
-          game_title= {game.title} 
-          game_year= {game.year}  
-          game_series= {game.series}  
-         />
-  
-  
-    )) : 
-
-    (
-       <EmptyCollection message="You currently have no games in your collection."/>
-    )
-     }
-    </ul>
+     <DataTable columns={columns} data={gameCollection} />
+    </div>
 
  
 
-    
-    </div>
-
+ 
 
 
     )

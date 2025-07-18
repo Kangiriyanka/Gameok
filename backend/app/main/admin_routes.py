@@ -65,7 +65,7 @@ def add_game():
                
         
                 # Set the cover photo path for the game
-                posted_game.cover_photo = "/covers/" + filename
+                posted_game.cover_photo = filename
                 db.session.commit()
             else:
                 

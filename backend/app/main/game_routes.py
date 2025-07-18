@@ -6,7 +6,7 @@ from app import db
 from app.models import *
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.utils import secure_filename
-from flask import jsonify, request
+from flask import jsonify, request, current_app, send_from_directory
 from app.main.helpers import allowed_file
 from collections import defaultdict
 
@@ -83,11 +83,12 @@ def user_add_game():
 
  
 
-@bp.route("/api/game/delete_game/<a_game_id>", methods=["DELETE"])
+@bp.route('/api/game/delete/<a_game_id>/', methods=["DELETE"])
 @jwt_required()
 def delete_game(a_game_id):
     
     id = a_game_id
+    print(id)
     user= get_jwt_identity()
     a_user_id= User.query.filter_by(username=user).first().id
     print(a_user_id)
@@ -96,3 +97,19 @@ def delete_game(a_game_id):
     return "Succesfully deleted game from the user's library"
     
 
+
+
+@bp.route('/api/game/fetch_cover/<a_game_title>/', methods= ["GET"])
+def fetch_image(a_game_title):
+    
+     filename = Game.query.filter_by(title=a_game_title).first().cover_photo
+     print(f"Serving filename: {filename}")
+     print(f"From folder: {current_app.config['UPLOAD_FOLDER']}")
+     return send_from_directory(current_app.config["UPLOAD_FOLDER"], filename)
+     
+     
+     
+
+     
+
+     

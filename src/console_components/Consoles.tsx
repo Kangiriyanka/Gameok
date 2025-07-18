@@ -21,31 +21,27 @@ function Consoles() {
   return (
 
     <div>
-      
+  <h1 className="page-header">My Consoles</h1>
 
-       
-          
-            <h1 className="page-header">My Consoles</h1> 
-    
-
-      <div className="console-shelf" > 
-      
-      {allConsoles && allConsoles.length > 0 ? (
-    allConsoles.map((console: GameConsole) => (
-      <Console
-        key={console.id}
-        console_id={console.id}
-        console_name={console.name}
-        console_year={console.year}
-      />
-    ))
+  <div className="relative top-12 left-12">
+  {allConsoles && allConsoles.length > 0 ? (
+    <div className="console-shelf">
+      {allConsoles.map((console: GameConsole) => (
+        <Console
+          key={console.id}
+          console_id={console.id}
+          console_name={console.name}
+          console_year={console.year}
+        />
+      ))}
+    </div>
   ) : (
     <EmptyCollection message="Consoles will appear once you add games to your collection." />
   )}
-    </div>
-    </div>
-
-  );
+</div>
+</div>
+  )
+  
 }
 
 export default Consoles;

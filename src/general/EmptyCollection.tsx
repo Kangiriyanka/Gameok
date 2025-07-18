@@ -11,8 +11,8 @@ export default function EmptyCollection({message}: EmptyCollectionProps) {
 
     return (
 
-    <div className= " mt-10 ml-12">
-     <div className= "flex gap-2 items-center">
+    <div className= "">
+     <div className= " flex gap-2 items-center">
     <p className="text-xl">{message}</p>
     <Link to="/dashboard/games/add-games/">
         <motion.button 

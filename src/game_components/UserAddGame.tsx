@@ -1,17 +1,15 @@
 
 import {useState} from 'react'
 import { useLoaderData } from 'react-router';
-import '../assets/styles/add_game.css';
+import '../assets/styles/add-game.css';
 import { fetchWithCSRF } from '../assets/scripts/csrf.ts';
 import ErrorBox from '../animation_components/ErrorBox.tsx';
 import ConsoleOption from './ConsoleOption.tsx';
-import { select } from 'motion/react-client';
 import GameOption from './GameOption.tsx';
+import { AnimatePresence, motion } from 'motion/react';
 
 
-type GameData = {
-  gameTitle: string;
-}
+
 
 function UserAddGame() {
 
@@ -25,7 +23,13 @@ function UserAddGame() {
     const [filteredGames, setFilteredGames] = useState([])
     const [selectedConsole, setSelectedConsole] = useState('')
     const [selectedGame, setSelectedGame] = useState('')
+    const [coverPhoto, setCoverPhoto] =  useState<string | null>(null);
    
+
+    function fetchCover(game_title: string) {
+      setCoverPhoto(`/api/game/fetch_cover/${game_title}/`);
+  
+    }
    
     
     async function sendDataToFlask() {
@@ -67,70 +71,143 @@ function UserAddGame() {
       }
     
     
+      // Selecting the same console will remove it
+      const filterConsoleGames = (console_name: string) => {
 
-      const filterGames = (console_name: string) => {
+        if (selectedConsole == console_name) {
+          setSelectedConsole("")
+          setSelectedGame("")
+          setIsConsoleSelected(false)
+          setCoverPhoto(null)
+        
+        }
 
-    
+        else {
         setSelectedConsole(console_name)
+        setIsConsoleSelected(true)
         setSelectedGame("")
-        setIsConsoleSelected(prev => !prev)
+        setIsGameSelected(false)
         setFilteredGames(game_consoles[console_name])
+        setCoverPhoto(null)
+        }
         
       }
 
       const selectGame = (game_title: string) => {
-        setSelectedGame(game_title)
-        setIsGameSelected(prev =>!prev)
+        if (selectedGame == game_title) {
+          setSelectedGame("")
+          setIsGameSelected(false)
+          setCoverPhoto(null)
+        }
+
+        else {
+          setSelectedGame(game_title)
+          setIsGameSelected(true)
+          fetchCover(game_title)
+        }
+       
       }
    
 
     return (
 
 
-        <div className= "">
+        <div className= "add-game-container">
            <div className="page-header">
            <h1> Add Games</h1>
            
         </div>  
         
          
-        <div className="mt-5 relative top-8 left-12" >
+        <div className="mt-5 relative top-8 left-12  flex gap-30 " >
+
+        <div className="options">
         <h2 > Select a console</h2>
 
         <div className= "console-selector">
               
          {consoles && consoles.map((console: string) => (
-          <ConsoleOption onConsoleSelect= {filterGames} name={console}/>
+          <ConsoleOption onConsoleSelect= {filterConsoleGames} name={console} selected ={selectedConsole}/>
 
           
   
 ))}
 </div>
-  <div className="mt-8" >
+
+<AnimatePresence mode="wait"> 
+
+{isConsoleSelected && (
+
+
+  <motion.div className="mt-12" 
+      key={selectedConsole}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit = {{opacity:0 }}
+   
+      transition={{ duration: 0.2 }}>
   <h2 > Select a game</h2>
   <div className= "game-selector">
     
               
          {filteredGames && filteredGames.map((console: string) => (
-          <GameOption onGameSelect= {selectGame} name={console}/>
+          <GameOption onGameSelect= {selectGame} name={console} selected={selectedGame}/>
 
           
   
 ))}
-</div>
-</div>
-</div>
+      </div>
+      </motion.div>
+      
+)}
+
+</AnimatePresence>
 
 
-       
-     
-      {isConsoleSelected && isGameSelected &&   (
+{/* 
+        {isConsoleSelected && isGameSelected && (
+  <div>
+    <div className="flex mt-12">
+      <h2> You're about to add {selectedGame} on the {selectedConsole}</h2>
       <button type="submit"  onClick ={sendDataToFlask} className="form-button">Add Game</button>
-    )
-  }
+    </div>
+  </div>
+  )} */}
+
+  </div>
+  
+ <AnimatePresence mode="wait">
+  {coverPhoto && (
+    <motion.div
+      className="cover-container"
+      key={selectedGame}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      onClick={() => sendDataToFlask()}
+      exit={{ opacity: 0 }}
+      whileHover = {{ scale: 1.1 , rotateX: 40}}
+      transition={{ duration: 0.3 }}
+    >
+      <img 
+        src={coverPhoto} 
+        alt="Game cover" 
+      />
+    </motion.div>
+  )}
+</AnimatePresence>
+  
+  
+  
+
+
+   <ErrorBox response = {response} count= {count}/>
+  
+      </div>
+
+
+
     
 
-      <ErrorBox response = {response} count= {count}/>
 
         
 

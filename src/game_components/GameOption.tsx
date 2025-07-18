@@ -1,12 +1,19 @@
+import { motion } from "motion/react";
+
 type GameOptionProps = {
   name: string;
+  selected: string;
   onGameSelect: (console: string) => void;
 };
 
-export default function GameOption({ name, onGameSelect }: GameOptionProps) {
+export default function GameOption({ name, selected, onGameSelect }: GameOptionProps) {
   return (
-    <button onClick = {() => onGameSelect(name)} className="p-2 border rounded-md shadow-sm">
+    <motion.button 
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9}}
+      onClick = {() => onGameSelect(name)} 
+      className= {` p-2 border rounded-md shadow-sm ${selected == name ? "active-game" : ""}` }>
       {name}
-    </button>
+    </motion.button>
   );
 }

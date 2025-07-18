@@ -14,21 +14,4 @@
 
 }
 
-.console-selector {
-    position: relative;
-    margin-top: 1rem;
-    display: flex;
-    gap: 1rem;
-    
-}
-
-.game-selector {
-    position: relative;
-    margin-top: 1rem;
-    display: flex;
-    gap: 1rem;
-    
-}
-
-
 

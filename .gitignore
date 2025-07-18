@@ -30,9 +30,11 @@ dist-ssr
 *.sw?
 
 
+
 #python
 __pycache__/
 
 #database
 
-backend/instance/
+/backend/instance/
+/backend/covers/
