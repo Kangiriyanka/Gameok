@@ -1,10 +1,46 @@
 .memory-article {
     position: relative;
-    top: 4rem;
+    top: 8rem;
 }
 
 
-.mdxeditor-toolbar {
-    background-color: blue;
+.mdxeditor {
+    position: relative;
+    top: 1rem;
+    width: 70%;
+}
+.mdxeditor-toolbar._toolbarRoot_sects_162.toto{
+    background-color: var(--n64-gray-clr);
+    width: 100%;
+
+   
+ 
     
+    
+    
+}
+
+._toolbarToggleSingleGroup_sects_224:hover {
+    color: var(--hover-clr);
+}
+
+.prose {
+  
+    color: var(--n64-a-clr);
+    border-radius: 0.1rem;
+    border-bottom: 2px solid var(--base-clr);
+
+    
+}
+
+.prose p,li, h1, h2,h3, h4, h5, h6{
+    color: var(--text-clr);
+}
+
+
+#save-button{
+    margin-left: auto;
+    padding: 0.2rem;
+    color: var(--text-clr);
+
 }

@@ -4,6 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
 :root {
   font-family: 'Figtree', sans-serif;
   line-height: 1.5;
@@ -23,12 +24,17 @@
 --n64-b-clr: hsl(161, 100%, 28%);
 --n64-b-light-clr: hsl(161, 93%, 43%);
 --n64-c-clr: hsl(44, 95%, 58%);
+--n64-c-light-clr: hsla(44, 95%, 62%, 0.91);
 --n64-start-clr: hsl(358, 74%, 50%);
 --n64-start-light-clr: hsla(0, 88%, 60%, 0.966);
 --text-clr: hsl(0, 1%, 80%);
 --secondary-text-clr: hsla(316, 57%, 94%, 0.82);
 --accent-clr: hsla(51, 92%, 53%, 0.785);
 --box-shadow: hsla(131, 86%, 45%, 0.16) 0px 1px 4px;
+
+
+
+/* From the lord of packages */
 --radius: 0.625rem;
 --background: oklch(1 0 0);
 --foreground: oklch(0.13 0.028 261.692);

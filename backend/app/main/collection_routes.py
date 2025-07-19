@@ -6,7 +6,6 @@ from flask_jwt_extended import get_jwt_identity,  jwt_required
              
 
 # Get all games owned by the user
-# 
 @bp.route('/api/collection/get_owned_games', methods = ["GET"])
 @jwt_required()
 def get_games():
@@ -34,9 +33,12 @@ def get_game_memories(a_game_id):
     
     user= get_jwt_identity()
     a_user_id= User.query.filter_by(username=user).first().id
+    print(a_game_id)
+
     game_memories = GameOwnership.query.filter_by(game_id= a_game_id, user_id= a_user_id).first().memories
+   
     
-    return game_memories
+    return {"msg": game_memories}
 
 
 

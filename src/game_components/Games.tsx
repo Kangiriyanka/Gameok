@@ -3,14 +3,58 @@ import { useLoaderData} from "react-router";
 import type {Game} from "../tables/columns"
 import { columns,  } from "../tables/columns"
 import { DataTable } from "../tables/data-table"
-import EmptyCollection from "../general/EmptyCollection.tsx";
-
+import { useState } from "react";
+import { fetchWithCSRF } from "../assets/scripts/csrf";
+import { filter } from "@mdxeditor/editor";
 
 
 function Games() {
 
 
     const gameCollection = useLoaderData().games as Game[];
+    const [collection, setCollection] = useState(gameCollection)
+
+
+
+    async function deleteGame(id: number, game_title: string)  {
+
+        try { 
+
+      if (window.confirm(`Are you sure you want to delete ${game_title}?`)) {
+        const response = await fetchWithCSRF(`/api/game/delete/${id}/`, {
+          method: "DELETE"
+        });
+
+       
+
+        if (!response.ok) {
+        console.error("HTTP error status:", response.status);
+        
+       
+
+        
+      }
+
+
+
+      setCollection(prev => prev.filter(game => game.id !== id));
+
+      
+
+
+        }
+
+      } catch (error) {
+      console.error("Fetch error:", error);
+      }
+ 
+
+
+
+
+        
+      }
+    
     
    
     return (
@@ -24,7 +68,7 @@ function Games() {
 
 
 
-     <DataTable columns={columns} data={gameCollection} />
+     <DataTable columns={columns(deleteGame)} data={collection} />
     </div>
 
  
@@ -37,3 +81,4 @@ function Games() {
 
 
 export default Games;
+

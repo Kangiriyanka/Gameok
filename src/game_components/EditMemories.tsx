@@ -14,8 +14,9 @@ function EditMemories() {
   const [response, setResponse] = useState("")
   const location = useLocation();
   const { edit_memories} = location.state;
-  const [new_memories, setNewMemories] = useState(edit_memories)
-  const { game_id, title } = useParams();
+  const [newMemories, setNewMemories] = useState(edit_memories)
+  const { id, title } = useParams();
+  console.log("Edited memories:" + newMemories)
 
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ function EditMemories() {
 
     try {
 
-      const response = await fetchWithCSRF(`/api/collection/edit_memory/${game_id}`, {
+      const response = await fetchWithCSRF(`/api/collection/edit_game_memories/${id}/`, {
         method: 'POST',
         
         body: formData
@@ -44,7 +45,7 @@ function EditMemories() {
 
       const result = await response.json();
       setResponse(result.message);
-      navigate('/games');
+      navigate(`/dashboard/games/${id}/${title}`);
 
 
     } catch (error: any) {
@@ -59,7 +60,7 @@ function EditMemories() {
     e.preventDefault();
 
     const data: MemoryData = {
-      "memories": new_memories,
+      "memories": newMemories,
     }
 
     sendDataToFlask(data)
@@ -74,9 +75,8 @@ function EditMemories() {
     <div className= "">
        <h1 className="page-header">Edit Memories of {title} </h1> 
 
-      <form>
-      <Editor/>
-      <button type="submit" className="form-button">Edit Memories</button>
+      <form onSubmit= {submitMemories}>
+      <Editor memories = {edit_memories} handleSubmit ={submitMemories} handleChange={setNewMemories}/>
        </form>
    
       

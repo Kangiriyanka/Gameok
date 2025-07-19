@@ -60,11 +60,11 @@ export  const protectedRoutes = [
           
             
           {
-            path: ":game-id/:title",
+            path: ":id/:title",
             Component: GameMemory
           },
           {
-            path: "edit-memory/:game-id/:game-title",
+            path: "edit-memory/:id/:title",
             Component: EditMemories
           }
         ]

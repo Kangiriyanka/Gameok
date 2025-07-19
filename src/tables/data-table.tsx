@@ -40,7 +40,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+   const [sorting, setSorting] = React.useState<SortingState>([])
    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
@@ -55,6 +55,7 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     state: {
+      
       sorting,
       columnFilters
     },
@@ -122,6 +123,7 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
+    {/* Pagination Component from the Docs */}
       <div className= "w-[80%] mt-3">
       <DataTablePagination table={table}/>
       </div>

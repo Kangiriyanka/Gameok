@@ -69,7 +69,7 @@ def user_add_game():
    else:
             
          # Add the relationship between the game and the user
-        new_game_ownership= GameOwnership(game_id = current_game.id, user_id= current_user_id, memories= '')
+        new_game_ownership= GameOwnership(game_id = current_game.id, user_id= current_user_id, memories= "")
         db.session.add(new_game_ownership)
         db.session.commit()
             

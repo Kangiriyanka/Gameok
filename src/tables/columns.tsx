@@ -12,12 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { fetchWithCSRF } from "@/assets/scripts/csrf"
+
 
  
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+
 export type Game = {
     id: number;
     series: string;
@@ -27,9 +26,9 @@ export type Game = {
 
 }
  
-export const columns: ColumnDef<Game>[] = [
-
-   
+export function columns(deleteGame: (id:number, game_title: string) => Promise<void>): ColumnDef<Game>[]  {
+  
+  return [
   {
     accessorKey: "title",
     // header: () => <div className="text-base text-[var(--base-n64-clr)]">Title</div>,
@@ -79,40 +78,9 @@ export const columns: ColumnDef<Game>[] = [
     id: "actions",
     cell: ({ row }) => {
     const game = row.original
-     
-      const navigate = useNavigate()
+    const navigate = useNavigate()
 
-      async function deleteGame(id: number)  {
-
-        try { 
-
-      if (window.confirm("Are you sure you want to delete this game?")) {
-        const response = await fetchWithCSRF(`/api/game/delete/${id}/`, {
-          method: "DELETE"
-        });
-
-        if (!response.ok) {
-        console.error("HTTP error status:", response.status);
-        return;
-
-        
-      }
-
-      
-
-
-        }
-
-      } catch (error) {
-      console.error("Fetch error:", error);
-      }
- 
-
-
-
-
-        
-      }
+  
 
       return (
         <DropdownMenu >
@@ -129,7 +97,7 @@ export const columns: ColumnDef<Game>[] = [
             onClick= {() => navigate(`/dashboard/games/${game.id}/${game.title}`)}>Memories
             </DropdownMenuItem>
             <DropdownMenuItem 
-            onClick = {() => deleteGame(game.id)}
+            onClick = {() => deleteGame(game.id, game.title)}
             className="text-[#ff0000]"
             >
               
@@ -140,3 +108,4 @@ export const columns: ColumnDef<Game>[] = [
     },
   },
 ]
+}
