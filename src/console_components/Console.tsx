@@ -66,12 +66,12 @@ function Console({console_id, console_name, console_year}: ConsoleProps) {
         <div className="console-container">
            
           
-           <div className= "">
+           <div className= "w-[100%]">
 
            <button  className="" onClick= {() => toggleGames(console_id)}> 
          
-            <p >{console_name}</p>
-            <p className= "text-base opacity-50">{console_year}</p>
+            <p className="text-xl" >{console_name}</p>
+            <p className= "text-sm opacity-50">{console_year}</p>
         
             
             </button>

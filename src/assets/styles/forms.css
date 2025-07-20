@@ -80,6 +80,22 @@ label {
 }
 
 
+.cover-error-message {
+
+   
+    color: var(--secondary-text-clr);
+   
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: fit-content;
+    text-align: left;
+    border: 1px solidvar(--secondary-text-clr);
+    margin-top: 1.8rem;
+    border-radius: 0.5rem;
+
+    
+}
+
 @media(max-width: 800px) {
 
     .reg-form {

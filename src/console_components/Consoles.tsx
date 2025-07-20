@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router";
 import Console from "./Console.tsx"
 import '../assets/styles/Consoles.css';
 import EmptyCollection from "../general/EmptyCollection.tsx";
+import { motion } from "motion/react";
 
 
 type GameConsole = {
@@ -27,12 +28,17 @@ function Consoles() {
   {allConsoles && allConsoles.length > 0 ? (
     <div className="console-shelf">
       {allConsoles.map((console: GameConsole) => (
+
+        <motion.div   
+        whileHover = {{scale: 1.1}}>
+        
         <Console
           key={console.id}
           console_id={console.id}
           console_name={console.name}
           console_year={console.year}
         />
+        </motion.div>
       ))}
     </div>
   ) : (

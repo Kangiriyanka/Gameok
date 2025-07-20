@@ -1,29 +1,35 @@
 
 
-.console-selector {
+.add-game-container {
+    position: relative;
+    height: 100vh;
+}
+
+.console-selector-container {
+    width: 100%;
     position: relative;
     margin-top: 1rem;
     display: grid;
-    grid-auto-columns: 3;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 1rem;
     margin-bottom: 3rem;
+    height: 10rem;
+
 
 
     
 }
 
-.game-selector {
+.game-selector-container {
     position: relative;
     margin-top: 1rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 1rem;
-    height: 3rem;
+
     
 }
 
-.options {
-    width: 20rem;
-}
 
 
 .active-console {
@@ -37,18 +43,68 @@
 }
 
 
+#add-game-button {
+    border: 2px solid var(--base-n64-clr);
+    padding: 0.5rem;
+    font-size: 1.3rem;
+    border-radius: .5rem;
+    background-color: var(--n64-gray-clr);
+    transition: 250ms;
+    width: 50%;
+}
+
+#dismiss-button {
+    border: 2px solid var(--base-n64-clr);
+    padding: 0.5rem;
+    font-size: 1.3rem;
+    border-radius: .5rem;
+    width: 50%;
+    background-color: var(--n64-gray-clr);
+    transition: 250ms;
+
+ 
+}
+
+#add-game-button:hover{
+    background-color: var(--n64-a-clr);
+}
+
+ #dismiss-button:hover {
+    background-color: var(--n64-b-clr);
+}
+
+
+
+
+
 .cover-container {
-    margin-left: 1rem;
+
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     padding: 2rem;
+    backdrop-filter: blur(8px);
    
 }
 .cover-container img {
 
-  transform: scale(1.2);
+  margin: 0 auto;
   border-radius: 0.5rem;
+  border: 1px solid white;
 
-  border: 1px solid var(--base-n64-clr)
 
-   
-   
 }
+
+.cover-container > h1 {
+  font-weight: bold;
+
+}
+
+.cover-contents {
+
+    margin: 4rem 30%;
+}
+
