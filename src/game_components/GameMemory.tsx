@@ -3,12 +3,13 @@ import '../assets/styles/memories.css';
 import { useState, useEffect } from 'react'
 import { Link, useParams} from "react-router-dom";
 import {motion} from "motion/react"
+import ReactMarkdown from 'react-markdown'
 
 
 
 function GameMemory() {
 
-    const [memories, setMemories] = useState([])
+    const [memories, setMemories] = useState("")
     const { id, title } = useParams();
    
 
@@ -78,7 +79,7 @@ function GameMemory() {
             <article className="memory-article">
 
             {memories ? (
-              <div>{memories}</div>
+            <ReactMarkdown>{memories}</ReactMarkdown>
             ) : <p className="text-xl"> No memories added yet. </p>}
                           
               
