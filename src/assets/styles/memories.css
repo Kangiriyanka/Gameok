@@ -1,6 +1,7 @@
 .memory-article {
     position: relative;
-    top: 8rem;
+    top: 3rem;
+    width: 80%;
 }
 
 
@@ -8,39 +9,93 @@
     position: relative;
     top: 1rem;
     width: 70%;
+    border-bottom: 1px solid var(--n64-gray-clr);
 }
 .mdxeditor-toolbar._toolbarRoot_sects_162.toto{
     background-color: var(--n64-gray-clr);
     width: 100%;
 
-   
- 
+    button:hover{
+         background-color: var(--n64-b-clr);
+
+    }
+
+}
+
+
+
+
+
+
     
+
     
+
+
+
+
+.mdxeditor-toolbar {
+    background-color: var(--n64-gray-clr);
+    width: 100%;
+
+    path {
+        fill: var(--text-clr);
+    }
+
+
+
     
 }
 
-._toolbarToggleSingleGroup_sects_224:hover {
-    color: var(--hover-clr);
+
+
+._toolbarToggleItem_sects_208:hover {
+  background-color: var(--n64-b-clr);
 }
+
+._toolbarToggleItem_sects_208:disabled {
+  
+  
+  opacity: 0.3;
+}
+
 
 .prose {
   
     color: var(--n64-a-clr);
     border-radius: 0.1rem;
-    border-bottom: 2px solid var(--base-clr);
-
+    border: none;
+    margin: 0rem;
+    padding: 1rem;
     
 }
+
 
 .prose p,li, h1, h2,h3, h4, h5, h6{
     color: var(--text-clr);
 }
 
 
+
 #save-button{
     margin-left: auto;
     padding: 0.2rem;
     color: var(--text-clr);
+
+  
+ 
+
+}
+#save-button:hover{
+    background-color: var(--n64-b-clr);
+    border-radius: 0.5rem;
+
+
+    
+
+}
+
+._toolbarToggleItem_sects_208[data-state='on'], ._toolbarButton_sects_239[data-state='on'], ._toolbarToggleItem_sects_208:active, ._toolbarButton_sects_239:active {
+    background-color: var(--n64-b-clr) !important;
 
 }
