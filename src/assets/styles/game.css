@@ -1,0 +1,12 @@
+tr {
+    border-bottom: 1px solid var(--n64-gray-clr);
+}
+
+tr:hover {
+    background-color: var(--hover-clr);
+}
+
+input {
+  
+    border:1px solid var(--n64-gray-clr);
+}

@@ -140,7 +140,7 @@ function AddGame() {
      
     </form>
 
-       <ErrorBox response = {response} count= {count}/>
+        <ErrorBox key={count} handleDismiss={() => setResponse('')} isCover = {false} response = {response} count= {count}/>
 
     
     </div>

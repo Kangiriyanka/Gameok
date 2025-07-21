@@ -17,8 +17,11 @@ function UserAddGame() {
   
     const [response, setResponse] = useState('')
     const [count, setCount] = useState(0)
-    const [consoles, setConsoles] = useState(Object.keys(game_consoles))
-    const [isConsoleSelected, setIsConsoleSelected] = useState(false);
+const [consoles, setConsoles] = useState(
+  Object.keys(game_consoles).sort((a, b) => a.localeCompare(b))
+);    const [isConsoleSelected, setIsConsoleSelected] = useState(false);
+    const [consoleSearchValue, setConsoleSearchValue] = useState("")
+    const [gameSearchValue, setGameSearchValue] = useState("")
     const [isGameSelected, setIsGameSelected] = useState(false)
     const [filteredGames, setFilteredGames] = useState([])
     const [selectedConsole, setSelectedConsole] = useState('')
@@ -35,6 +38,37 @@ function UserAddGame() {
      
       setIsGameSelected(false)
       setSelectedGame("")
+    }
+
+    function narrowConsoles(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    setConsoleSearchValue(value)
+
+    if (!value) {
+      setConsoles(Object.keys(game_consoles));
+      return;
+  }
+ 
+      const results = consoles.filter(console =>
+        console.toLowerCase().includes(value.toLowerCase())
+      );
+      setConsoles(results);
+    }
+
+    function narrowGames(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    setGameSearchValue(value)
+
+    if (!value) {
+    setFilteredGames(game_consoles[selectedConsole].sort( (a: string,b:string ) => a.localeCompare(b)))
+
+      return;
+  }
+ 
+      const results = filteredGames.filter((game: string) =>
+        game.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredGames(results);
     }
    
     
@@ -93,7 +127,7 @@ function UserAddGame() {
         setIsConsoleSelected(true)
         setSelectedGame("")
         setIsGameSelected(false)
-        setFilteredGames(game_consoles[console_name])
+        setFilteredGames(game_consoles[console_name].sort( (a: string,b:string ) => a.localeCompare(b)))
         setCoverPhoto(null)
         }
         
@@ -126,8 +160,14 @@ function UserAddGame() {
         
          
         <div className="mt-5 relative flex flex-col top-8 left-12 w-[80%] h-[100%]" >
-   
+        <div className= "flex  items-center justify-between">
         <h2 > Select a console </h2>
+        <div className="flex items-center gap-2 border-1 rounded-lg p-2">
+        <input value={consoleSearchValue} onChange={(e) => narrowConsoles(e)} className= "outline-none w-50" type="text" placeholder= "Filter..."/> 
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--text-clr)"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+
+        </div>
+        </div>
 
         <div className= "console-selector-container">
               
@@ -151,7 +191,13 @@ function UserAddGame() {
       exit = {{opacity:0 }}
    
       transition={{ duration: 0.2 }}>
+  <div className= "flex gap-8 items-center justify-between">
   <h2 > Select a game</h2>
+<div className="flex items-center gap-2 border-1 rounded-lg p-2">
+  <input value={gameSearchValue} onChange={(e) => narrowGames(e)}  className="outline-none w-50" type="text" placeholder= "Filter..."/> 
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--text-clr)"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+</div>
+  </div>
   <div className= "game-selector-container">
     
               
@@ -218,9 +264,13 @@ function UserAddGame() {
   <button  onClick={() => sendDataToFlask()} id="add-game-button"> Add </button>
   </div>
 
- <ErrorBox isCover = {true} response = {response} count= {count}/>
+
 </div>
+
+ <ErrorBox key={count} handleDismiss={() => setResponse('')} isCover = {true} response = {response} count= {count}/>
+
 </motion.div>
+
 )}
            
         </div>

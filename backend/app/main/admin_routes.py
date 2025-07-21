@@ -34,15 +34,15 @@ def add_game():
 
     
     # Get the username
-   current_user= get_jwt_identity()
+  
    current_game = Game.query.filter_by(title=request.form["title"]).first()
    console= Console.query.filter_by(name=request.form["console"]).first()
-   user= User.query.filter_by(username=current_user).first() 
+   print(current_game)
  
 
   
     # If the game doesn't exist in the Games table , add it to the games table and establish relationships
-   if  not current_game:
+   if not current_game:
            
          # Handle the cover photo upload
             cover_photo = request.files['coverPhoto']
@@ -85,27 +85,14 @@ def add_game():
             db.session.add(new_game_console_combo)
             db.session.commit()
             
-            return {"msg": f"{a_title}  was added to your collection"}
+            return {"msg": f"{a_title}  was added to the game collection"}
         
     # If the game exists in the table and the user has the game then tell the user they already own the game.
-   elif  current_game : 
+   else : 
       
-      has_game = GameOwnership.query.filter_by(user_id=user.id, game_id=current_game.id).first()
-      if has_game: 
-        return {"msg", "This game already exists in your library"}, 422
+        return {"msg": "This exists in the database the library"}, 422
     
-      else:
-            
-          
-            # Add the relationship between the game and the user
-            new_game_ownership= GameOwnership(game_id = current_game.id, user_id= user.id, memories= some_memories)
-            db.session.add(new_game_ownership)
-            db.session.commit()
-            
-        
-
-            return {"msg": f"{a_title}  was added to your collection"}
-       
+     
 
         
  except Exception as e:

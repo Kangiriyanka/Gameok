@@ -12,7 +12,7 @@ export default function GameOption({ name, selected, onGameSelect }: GameOptionP
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9}}
       onClick = {() => onGameSelect(name)} 
-      className= {` p-2 border rounded-md shadow-sm ${selected == name ? "active-game" : ""}` }>
+      className= {`  p-2  h-25 border text-lg rounded-lg  ${selected == name ? "active-game" : ""}` }>
       {name}
     </motion.button>
   );

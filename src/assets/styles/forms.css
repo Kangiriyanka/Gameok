@@ -84,13 +84,14 @@ label {
 
    
     color: var(--secondary-text-clr);
-   
+    
+
     font-size: 1.5rem;
     font-weight: bold;
     height: fit-content;
-    text-align: left;
+    text-align: center;
     border: 1px solidvar(--secondary-text-clr);
-    margin-top: 1.8rem;
+    margin-top: 0 auto;
     border-radius: 0.5rem;
 
     
