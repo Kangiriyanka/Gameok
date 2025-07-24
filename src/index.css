@@ -5,10 +5,12 @@
 @custom-variant dark (&:is(.dark *));
 
 
+
 :root {
   font-family: 'Figtree', sans-serif;
   line-height: 1.5;
   font-weight: 400;
+ 
   color-scheme: light dark;
   color: hsla(0, 0%, 100%, 0.87);
 
@@ -80,7 +82,7 @@ h2 {
 /* 2 Columns, auto calculates the space it needs. */
 body {
 
-  min-height: 100dvh;
+  height: 100%;
   color: var(--text-clr);
   background: var(--n64-dark-gray-clr);
 
@@ -89,12 +91,13 @@ body {
 #layout {
 
   display: grid;
+  height: 100%;
   grid-template-columns: auto 1fr;
 
 }
 
 .main-container {
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 

@@ -70,3 +70,11 @@ export const buttonVariants = {
   }
 
 }
+
+export const consoleVariants = {
+  hover : {scale: 1.1},
+  initial : {scale: 0, rotate: 30},
+  animate: {scale: 1, rotate: 0 },
+  exit: {rotate: 20, scale: 0.5 , backgroundColor: "red"},
+
+}

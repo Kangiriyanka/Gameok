@@ -13,11 +13,17 @@ type GameProps = {
 
 }
 
-export default function GameCard({game_id,game_series, game_year, game_title, game_cover}: GameProps) {
+export default function GameCard({game_id, game_series, game_year, game_title, game_cover}: GameProps) {
 
-    const [response, setResponse] = useState("")
+ 
     const [isActive, setActive] = useState(true)
-    const {storedUserInfo} = useAuthContext()
+    const [coverPhoto, setCoverPhoto] =  useState<string | null>(null);
+
+
+     function fetchCover(game_title: string) {
+      setCoverPhoto(`/api/game/fetch_cover/${game_title}/`);
+  
+    }
 
 
 
@@ -51,7 +57,7 @@ export default function GameCard({game_id,game_series, game_year, game_title, ga
 
           <div className= " border-1 w-30  ">
         
-          <img src={game_cover} alt="cover" />
+          <img src={coverPhoto} alt="cover" />
           <Link  className="game_link" to={{pathname: `/game/${game_id}/${game_title}`}} 
         
           > {game_title}</Link>
@@ -61,11 +67,7 @@ export default function GameCard({game_id,game_series, game_year, game_title, ga
           
         
           
-          {storedUserInfo == "Kangiriyanka" ?
-          (<Link  className="game_link btn btn-dark" to={{pathname: `/game/edit/${game_id}/${game_series}/${game_title}/${game_year}`}} >
-                  Edit
-              
-          </Link>) : "" }
+      
           </div>
           </div>
 

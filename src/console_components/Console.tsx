@@ -2,6 +2,8 @@
 import {useState} from 'react'
 import GameCard from '../game_components/GameCard.tsx'
 import '../assets/styles/consoles.css';
+import { AnimatePresence, motion } from 'motion/react';
+import { consoleVariants } from '@/assets/scripts/animations.ts';
 
 
 
@@ -10,6 +12,8 @@ type ConsoleProps = {
     console_id: number;
     console_name: string;
     console_year: number;
+    isActive: boolean;
+    handleConsole: (arg0: number) => void;
 }
 
 type ConsoleGame = {
@@ -21,10 +25,17 @@ type ConsoleGame = {
 }
 
 
-function Console({console_id, console_name, console_year}: ConsoleProps) {
+function Console({isActive, handleConsole, console_id, console_name, console_year}: ConsoleProps) {
 
     const [consoleGames, setConsoleGames] = useState<ConsoleGame[]>([]);
     const [showGames, setShowGames] = useState(false)
+
+
+    function resetConsoles() {
+      setShowGames(false)
+      handleConsole(-1)
+
+    }
 
 
     async function getConsoleGames(console_id: ConsoleProps["console_id"]) {
@@ -56,6 +67,8 @@ function Console({console_id, console_name, console_year}: ConsoleProps) {
       function toggleGames(console_id: number) {
         setShowGames(prev => !prev)
         getConsoleGames(console_id)
+        handleConsole(console_id)
+
       }
  
     
@@ -63,18 +76,56 @@ function Console({console_id, console_name, console_year}: ConsoleProps) {
 
 
     return (
-        <div className="console-container">
+
+
+        <AnimatePresence>
+        <motion.div 
+        key = {console_id}
+        variants= {consoleVariants}
+        initial="initial"
+        animate="animate"
+        whileHover= {!isActive ? "hover": ""} 
+        exit= "exit"
+
+        className={`console-container${isActive ? " active" : ""}`}
+        >
            
           
-           <div className= "w-[100%]">
+           <div className="flex flex-col">
+            
+              <div className="console-information flex items-center gap-1">
+               <button  className=" w-[100%]console-button" onClick= {() => toggleGames(console_id)}> 
+                <p className=" console-name text-xl " >{console_name}</p>
+                <p className= "console-year text-sm opacity-50">{console_year}</p>
+              
+              </button>
 
-           <button  className="" onClick= {() => toggleGames(console_id)}> 
-         
-            <p className="text-xl" >{console_name}</p>
-            <p className= "text-sm opacity-50">{console_year}</p>
+                {isActive ? 
+                
+                        <motion.div
+                           
+                        
+                           whileHover = {{
+                            scale:1.1,
+                            x:2,
+                           }}>
+                          
+                    <button onClick = {resetConsoles }>
+
+                    <svg className= "fill-[var(--accent-clr)]"  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M360-240 120-480l240-240 56 56-144 144h488v-160h80v240H272l144 144-56 56Z"/></svg>
+                     </button>
+                    </motion.div>
+
+                : ""}
+            </div>
+       
+            
+            
         
             
-            </button>
+            
+
+           <div className= "game-collection"> 
            {consoleGames && showGames && consoleGames.map((consoleGame) =>
           
            <GameCard key={consoleGame.game_id} 
@@ -88,13 +139,15 @@ function Console({console_id, console_name, console_year}: ConsoleProps) {
                  />)}
            
             </div>
+            </div>
 
 
        
            
           
            
-        </div>
+        </motion.div>
+        </AnimatePresence>
 
 
     )

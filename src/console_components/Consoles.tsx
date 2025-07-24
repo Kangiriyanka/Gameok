@@ -1,8 +1,9 @@
 import { useLoaderData } from "react-router";
+import {useState} from "react"
 import Console from "./Console.tsx"
 import '../assets/styles/Consoles.css';
 import EmptyCollection from "../general/EmptyCollection.tsx";
-import { motion } from "motion/react";
+
 
 
 type GameConsole = {
@@ -13,39 +14,65 @@ type GameConsole = {
 
 
 function Consoles() {
+
+
   
-  const allConsoles = useLoaderData().consoles as GameConsole[]
-  console.log(allConsoles)
+  const loadedConsoles = useLoaderData().consoles as GameConsole[]
+  const [selectedID, setSelectedID] = useState(-1)
+  const [allConsoles, setAllConsoles] = useState(loadedConsoles)
+ 
+  function filterConsole(filter_id: number) {
+
+    if (filter_id == -1) { 
+      setAllConsoles(loadedConsoles)
+      setSelectedID(-1)
+    }
+    
+    else {
+    
+    setSelectedID(filter_id)
+    setAllConsoles(loadedConsoles.filter(console => console.id === filter_id));
+    }
+
+  
+
+  }
 
 
  
   return (
 
-    <div>
+  <div className= "h-[100%]">
   <h1 className="page-header">My Consoles</h1>
 
-  <div className="relative top-12 left-12">
+  
   {allConsoles && allConsoles.length > 0 ? (
-    <div className="console-shelf">
+    <div className={`console-shelf${selectedID !== -1 ? " active" : ""}`}>
+    
       {allConsoles.map((console: GameConsole) => (
 
-        <motion.div   
-        whileHover = {{scale: 1.1}}>
+
         
+    
         <Console
           key={console.id}
+          isActive = {console.id == selectedID}
+          handleConsole= {filterConsole}
           console_id={console.id}
           console_name={console.name}
           console_year={console.year}
         />
-        </motion.div>
+
+ 
+    
       ))}
+      
     </div>
   ) : (
     <EmptyCollection message="Consoles will appear once you add games to your collection." />
   )}
 </div>
-</div>
+
   )
   
 }

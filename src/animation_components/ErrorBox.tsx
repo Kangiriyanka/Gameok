@@ -26,6 +26,7 @@ export default function ErrorBox({ handleDismiss, isCover, response, count = 0 }
     const timer = setTimeout(() => {
       setVisible(false)
       handleDismiss();
+      
     }, 2000)
 
     setVisible(true)
