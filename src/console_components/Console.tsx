@@ -30,11 +30,13 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
     const [consoleGames, setConsoleGames] = useState<ConsoleGame[]>([]);
     const [showGames, setShowGames] = useState(false)
     const [currentID, setCurrentID] = useState(-1)
+    console.log(consoleGames)
 
 
     function resetConsoles() {
       setShowGames(false)
       handleConsole(-1)
+
 
     }
 
@@ -89,7 +91,6 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
 
        
         <motion.div 
-        
         key = {console_id}
         variants= {consoleVariants}
         onClick= {() => toggleGames(console_id)}

@@ -22,6 +22,7 @@ function Consoles() {
   const loadedConsoles = useLoaderData().consoles as GameConsole[]
   const [selectedID, setSelectedID] = useState(-1)
   const [allConsoles, setAllConsoles] = useState(loadedConsoles)
+  const [count, setCount] = useState(0)
 
 
 
@@ -33,6 +34,7 @@ function Consoles() {
     if (filter_id == -1) { 
       setAllConsoles(loadedConsoles)
       setSelectedID(-1)
+      setCount(prev => prev +1)
     }
     
     else {
@@ -56,7 +58,8 @@ function Consoles() {
   {allConsoles && allConsoles.length > 0 ? (
    
     <motion.div 
-
+    
+    key= {count}
     className={`console-shelf${selectedID !== -1 ? " active" : ""}`}
     variants={containerVariants}
     initial="initial"

@@ -89,10 +89,8 @@ export const containerVariants = {
     x: 0,
     scale: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
 
-
-    
     },
   },
 
@@ -116,7 +114,6 @@ export const consoleVariants = {
   },
   animate: {
     opacity: 1,
-    x: 0,
     y: 0,
     scale: 1,
 
