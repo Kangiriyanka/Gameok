@@ -8,6 +8,7 @@
   width: 80%;
   top: 3rem;
   left: 3rem;
+  overflow: hidden;
   
 
 
@@ -96,11 +97,6 @@
 /* Games inside the Console Container */
 
 
-.game-collection {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
 
 
 

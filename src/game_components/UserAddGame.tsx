@@ -17,7 +17,7 @@ function UserAddGame() {
   
     const [response, setResponse] = useState('')
     const [count, setCount] = useState(0)
-const [consoles, setConsoles] = useState(
+    const [consoles, setConsoles] = useState(
   Object.keys(game_consoles).sort((a, b) => a.localeCompare(b))
 );    const [isConsoleSelected, setIsConsoleSelected] = useState(false);
     const [consoleSearchValue, setConsoleSearchValue] = useState("")
@@ -38,34 +38,46 @@ const [consoles, setConsoles] = useState(
      
       setIsGameSelected(false)
       setSelectedGame("")
+      setResponse('')
     }
 
+
+    // Search bar to filter the consoles
     function narrowConsoles(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    setConsoleSearchValue(value)
+            const allConsoles = Object.keys(game_consoles)
+            const value = e.target.value;
+            setConsoleSearchValue(value)
 
-    if (!value) {
-      setConsoles(Object.keys(game_consoles));
-      return;
-  }
- 
-      const results = consoles.filter(console =>
-        console.toLowerCase().includes(value.toLowerCase())
-      );
-      setConsoles(results);
+            if (!value) {
+              setConsoles(Object.keys(game_consoles));
+              return;
+          }
+        
+            const results = allConsoles.filter((console: string) =>
+            console.replace(/\s+/g, "").toLowerCase().includes(value.replace(/\s+/g, "").toLowerCase())
+          );
+
+          console.log(results)
+              setConsoles(results);
     }
 
+
+
+    // Search bar to filter the games 
     function narrowGames(e: React.ChangeEvent<HTMLInputElement>) {
+ 
     const value = e.target.value;
     setGameSearchValue(value)
+  
 
     if (!value) {
     setFilteredGames(game_consoles[selectedConsole].sort( (a: string,b:string ) => a.localeCompare(b)))
 
       return;
   }
- 
-      const results = filteredGames.filter((game: string) =>
+
+
+      const results = game_consoles[selectedConsole].filter((game: string) =>
         game.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredGames(results);
@@ -171,12 +183,15 @@ const [consoles, setConsoles] = useState(
 
         <div className= "console-selector-container">
               
-         {consoles && consoles.map((console: string) => (
-          <ConsoleOption onConsoleSelect= {filterConsoleGames} name={console} selected ={selectedConsole}/>
+         {consoles && consoles.length > 0 ? ( 
+          consoles.map((console: string) => <ConsoleOption onConsoleSelect= {filterConsoleGames} name={console} selected ={selectedConsole}/> 
+        )) :
+         (<p className =" p-2 border text-lg rounded-lg w-[100%] text-center col-span-2 mx-0 h-fit opacity-50"> No consoles found (^_^*)</p>)
+        }
 
           
   
-))}
+
 </div>
 
 <AnimatePresence mode="wait"> 
@@ -201,12 +216,11 @@ const [consoles, setConsoles] = useState(
   <div className= "game-selector-container">
     
               
-         {filteredGames && filteredGames.map((console: string) => (
-          <GameOption onGameSelect= {selectGame} name={console} selected={selectedGame}/>
+         {filteredGames && filteredGames.length > 0 ? (filteredGames.map( (console: string) => (
+          <GameOption onGameSelect= {selectGame} name={console} selected={selectedGame}/>))) :  (<p className =" p-2 border text-lg rounded-lg  text-center  col-span-2 h-fit opacity-50"> No games found (^_^*)</p>)
+         }
 
           
-  
-))}
       </div>
       </motion.div>
       

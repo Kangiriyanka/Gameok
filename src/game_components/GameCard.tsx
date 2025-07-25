@@ -1,29 +1,35 @@
 
 import { Link } from "react-router-dom";
-import { useState } from 'react'
-import { useAuthContext } from "../context/AuthContext";
+import { useState, useEffect } from 'react'
+
 import { fetchWithCSRF } from "../assets/scripts/csrf";
+import { motion } from "motion/react";
 
 type GameProps = {
-    game_id: number;
-    game_series: string;
-    game_year: string;
-    game_title: string;
-    game_cover: string;
+    id: number;
+    series: string;
+    year: string;
+    title: string;
+    cover: string;
+    console_name: string;
 
 }
 
-export default function GameCard({game_id, game_series, game_year, game_title, game_cover}: GameProps) {
+
+
+export default function GameCard({id, series, year, title, console_name}: GameProps) {
 
  
     const [isActive, setActive] = useState(true)
-    const [coverPhoto, setCoverPhoto] =  useState<string | null>(null);
+    const sizeMap = new Map()
+    sizeMap.set("Nintendo 64", "small")
+   
+    
 
 
-     function fetchCover(game_title: string) {
-      setCoverPhoto(`/api/game/fetch_cover/${game_title}/`);
-  
-    }
+ 
+
+    
 
 
 
@@ -32,7 +38,7 @@ export default function GameCard({game_id, game_series, game_year, game_title, g
       setActive(false);
 
       try {
-        const response = await fetchWithCSRF(`/api/game/delete_game/${game_id}`, {
+        const response = await fetchWithCSRF(`/api/game/delete_game/${id}`, {
           method: 'DELETE',
         
         });
@@ -42,11 +48,11 @@ export default function GameCard({game_id, game_series, game_year, game_title, g
         }
 
         const data = await response.json();
-        setResponse(data);
+    
 
       } catch (error: any) {
         console.error(error);
-        setResponse("Error: " + error.message);
+     
       }
     }
 }
@@ -55,21 +61,24 @@ export default function GameCard({game_id, game_series, game_year, game_title, g
       <div> 
       { isActive ? ( 
 
-          <div className= " border-1 w-30  ">
+          <motion.div className= {`relative ${sizeMap.get(console_name) || "default"}-game-card border-1 w-30`}
+           
+      
+          >
         
-          <img src={coverPhoto} alt="cover" />
-          <Link  className="game_link" to={{pathname: `/game/${game_id}/${game_title}`}} 
+          <img src={`/api/game/fetch_cover/${title}/`} alt="Game cover" />
+          <Link to={{pathname: `/game/${id}/${title}`}} 
         
-          > {game_title}</Link>
-          <p> {game_year}</p>
+          > {title}</Link>
+          <p> {year}</p>
           <div>
-          <button className=" delete_button btn btn-dark" onClick={deleteGame}> Delete</button>
+          <button className="" onClick={deleteGame}> Delete</button>
           
         
           
       
           </div>
-          </div>
+          </motion.div>
 
         
        ) : "" }

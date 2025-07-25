@@ -17,11 +17,11 @@ type ConsoleProps = {
 }
 
 type ConsoleGame = {
-    game_id: number;
-    game_series: string;
-    game_year: string;
-    game_title: string;
-    game_cover_photo: string;
+    id: number;
+    series: string;
+    year: string;
+    title: string;
+    cover_photo: string;
 }
 
 
@@ -37,8 +37,10 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
 
     }
 
+    
 
-    async function getConsoleGames(console_id: ConsoleProps["console_id"]) {
+
+    async function getConsoleGames(console_id: number) {
        
       try {
 
@@ -53,9 +55,16 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
         }
        
         const result = await response.json();
-        console.log(result)
-        setConsoleGames(result.console_games);
-        
+     
+        const newGames = result.console_games
+        console.log(consoleGames)
+        setConsoleGames([...newGames]); 
+        console.log(consoleGames)
+        setShowGames(prev => !prev)
+        handleConsole(console_id)
+   
+       
+      
           
   
         } catch(error)  {
@@ -65,9 +74,10 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
       }
 
       function toggleGames(console_id: number) {
-        setShowGames(prev => !prev)
+      
+
         getConsoleGames(console_id)
-        handleConsole(console_id)
+     
 
       }
  
@@ -110,7 +120,7 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
                             x:2,
                            }}>
                           
-                    <button onClick = {resetConsoles }>
+                    <button onClick = {resetConsoles}>
 
                     <svg className= "fill-[var(--accent-clr)]"  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M360-240 120-480l240-240 56 56-144 144h488v-160h80v240H272l144 144-56 56Z"/></svg>
                      </button>
@@ -126,14 +136,16 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
             
 
            <div className= "game-collection"> 
-           {consoleGames && showGames && consoleGames.map((consoleGame) =>
+           {consoleGames && showGames && consoleGames.map((consoleGame) => 
           
-           <GameCard key={consoleGame.game_id} 
-                 game_id= {consoleGame.game_id}  
-                 game_series= {consoleGame.game_series} 
-                 game_year = {consoleGame.game_year} 
-                 game_title={consoleGame.game_title} 
-                 game_cover= {consoleGame.game_cover_photo} 
+           <GameCard 
+                 key={consoleGame.id} 
+                 id= {consoleGame.id}  
+                 series= {consoleGame.series} 
+                 year = {consoleGame.year} 
+                 title={consoleGame.title} 
+                 cover= {consoleGame.cover_photo} 
+                 console_name = {console_name}
               
                  
                  />)}

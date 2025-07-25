@@ -86,6 +86,7 @@ body {
   color: var(--text-clr);
   background: var(--n64-dark-gray-clr);
 
+
 }
 
 #layout {
@@ -99,6 +100,7 @@ body {
 .main-container {
   height: 100%;
   width: 100%;
+
 }
 
 .page-header {

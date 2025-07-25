@@ -10,3 +10,43 @@ input {
     outline: none;
     border:1px solid var(--n64-gray-clr);
 }
+
+
+.default-game-card  {
+
+    width: 15rem;
+    height: 18rem;
+
+
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+.game-collection {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  gap: 1rem;
+}
+
+
+
+.small-game-card  {
+
+    width: 15rem;
+    height: 10rem;
+
+
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
