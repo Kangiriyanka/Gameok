@@ -91,14 +91,16 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
     return (
 
 
-        <AnimatePresence>
+      
         <motion.div 
         key = {console_id}
         variants= {consoleVariants}
-        initial="initial"
-        animate="animate"
+        initial="initial"            // <- add this
+        animate="animate"            // <- add this
+        exit="exit" 
+        onClick= {() => toggleGames(console_id)}
         whileHover= {!isActive ? "hover": ""} 
-        exit= "exit"
+      
 
         className={`console-container${isActive ? " active" : ""}`}
         >
@@ -107,7 +109,7 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
            <div className="overflow-auto">
             
               <div className="console-information flex  mb-2 items-end gap-1">
-               <button  className=" w-[100%] console-button" onClick= {() => toggleGames(console_id)}> 
+               <button  className=" w-[100%] console-button" > 
                 <p className=" console-name text-xl " >{console_name}</p>
                 <p className= "console-year text-sm opacity-50">{console_year}</p>
               
@@ -166,7 +168,7 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
           
            
         </motion.div>
-        </AnimatePresence>
+      
 
 
     )

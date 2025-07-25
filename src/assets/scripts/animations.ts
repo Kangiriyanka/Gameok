@@ -72,9 +72,25 @@ export const buttonVariants = {
 }
 
 export const consoleVariants = {
-  hover : {scale: 1.1},
-  initial : {scale: 0, rotate: 30},
-  animate: {scale: 1, rotate: 0 },
-  exit: {rotate: 20, scale: 0.5 , backgroundColor: "red"},
-
+  hover: { scale: 1.1 },
+  initial: { scale: 0, rotate: 20 }, 
+  animate: { scale: 1, rotate: 0, transition: {duration: 0.5}}, 
+  exit: { rotate: 20, scale: 0.5, backgroundColor: "red" }
 }
+
+
+
+
+export const containerVariants = {
+  initial: {
+    opacity: 0,
+    
+
+  },
+  animate: {
+    opacity: 1,
+    transition: { staggerChildren: 0.3,  // This creates the stagger effect
+      delayChildren: 0.2  }
+  }
+};
+

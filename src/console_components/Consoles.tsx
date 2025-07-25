@@ -3,6 +3,8 @@ import {useState} from "react"
 import Console from "./Console.tsx"
 import '../assets/styles/Consoles.css';
 import EmptyCollection from "../general/EmptyCollection.tsx";
+import { motion } from "motion/react";
+import { containerVariants } from "@/assets/scripts/animations.ts";
 
 
 
@@ -47,13 +49,25 @@ function Consoles() {
 
   
   {allConsoles && allConsoles.length > 0 ? (
-    <div className={`console-shelf${selectedID !== -1 ? " active" : ""}`}>
+    <motion.div 
+    key = "console-shelf"
+    className={`console-shelf${selectedID !== -1 ? " active" : ""}`}
+    variants={containerVariants}
+    initial="initial"
+    animate="animate"
+    exit ="exit"
+
+    
+    
+    >
     
       {allConsoles.map((console: GameConsole) => (
 
 
         
-    
+
+
+          
         <Console
           key={console.id}
           isActive = {console.id == selectedID}
@@ -67,7 +81,7 @@ function Consoles() {
     
       ))}
       
-    </div>
+    </motion.div>
   ) : (
     <EmptyCollection message="Consoles will appear once you add games to your collection." />
   )}
