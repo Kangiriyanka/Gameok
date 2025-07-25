@@ -65,7 +65,7 @@
 
     
   }
-
+ 
 
 
    .console-button {
@@ -75,14 +75,23 @@
     gap: 0.5rem;
 
       .console-year {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
       }
 
       .console-year:before {
         content: "";
-        height: 100%;
-        border: 2px solid var(--n64-gray-clr);
-        margin: 0px 0.2rem 0px 0px;
+        position: relative;
+        display: inline-block;
+      
+        border: 1px solid var(--n64-gray-clr);
+        margin: 0px 0.3rem 0px 0.1rem;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+      
+        background-color: var(--n64-c-clr);
+    
+     
       }
     
     

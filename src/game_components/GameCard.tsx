@@ -61,7 +61,7 @@ export default function GameCard({id, series, year, title, console_name}: GamePr
       <div> 
       { isActive ? ( 
 
-          <motion.div className= {`relative ${sizeMap.get(console_name) || "default"}-game-card border-1 w-30`}
+          <motion.div className= {`relative ${sizeMap.get(console_name) || "default"}-game-card border-2 border-[var(--n64-gray-clr)] card  `}
            
       
           >

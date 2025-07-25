@@ -75,6 +75,9 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
 
       function toggleGames(console_id: number) {
       
+        if (isActive) {
+          return
+        }
 
         getConsoleGames(console_id)
      
@@ -101,14 +104,15 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
         >
            
           
-           <div className="flex flex-col">
+           <div className="overflow-auto">
             
-              <div className="console-information flex items-center gap-1">
-               <button  className=" w-[100%]console-button" onClick= {() => toggleGames(console_id)}> 
+              <div className="console-information flex  mb-2 items-end gap-1">
+               <button  className=" w-[100%] console-button" onClick= {() => toggleGames(console_id)}> 
                 <p className=" console-name text-xl " >{console_name}</p>
                 <p className= "console-year text-sm opacity-50">{console_year}</p>
               
               </button>
+              
 
                 {isActive ? 
                 
@@ -117,17 +121,20 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
                         
                            whileHover = {{
                             scale:1.1,
-                            x:2,
+                            x:-2 ,
                            }}>
                           
                     <button onClick = {resetConsoles}>
 
-                    <svg className= "fill-[var(--accent-clr)]"  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M360-240 120-480l240-240 56 56-144 144h488v-160h80v240H272l144 144-56 56Z"/></svg>
+                    <svg className= "mr-5 w-8 h-8 fill-[var(--accent-clr)]" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M360-240 120-480l240-240 56 56-144 144h488v-160h80v240H272l144 144-56 56Z"/></svg>
                      </button>
                     </motion.div>
 
                 : ""}
             </div>
+
+
+            {isActive ? <hr className ="p-2 border-[var(--n64-gray-clr)]" /> : ""}
        
             
             
