@@ -3,7 +3,7 @@ import {useState} from 'react'
 import GameCard from '../game_components/GameCard.tsx'
 import '../assets/styles/consoles.css';
 import { AnimatePresence, motion } from 'motion/react';
-import { consoleVariants } from '@/assets/scripts/animations.ts';
+import { consoleVariants, containerVariants, gameContainerVariants } from '@/assets/scripts/animations.ts';
 
 
 
@@ -29,6 +29,7 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
 
     const [consoleGames, setConsoleGames] = useState<ConsoleGame[]>([]);
     const [showGames, setShowGames] = useState(false)
+    const [currentID, setCurrentID] = useState(-1)
 
 
     function resetConsoles() {
@@ -37,9 +38,7 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
 
     }
 
-    
-
-
+  
     async function getConsoleGames(console_id: number) {
        
       try {
@@ -57,10 +56,9 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
         const result = await response.json();
      
         const newGames = result.console_games
-        console.log(consoleGames)
-        setConsoleGames([...newGames]); 
-        console.log(consoleGames)
+        setConsoleGames(newGames); 
         setShowGames(prev => !prev)
+        setCurrentID(console_id)
         handleConsole(console_id)
    
        
@@ -74,15 +72,13 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
       }
 
       function toggleGames(console_id: number) {
-      
-        if (isActive) {
-          return
-        }
-
-        getConsoleGames(console_id)
-     
-
-      }
+  if (isActive) {
+ 
+    return
+  }
+  
+  getConsoleGames(console_id)
+}
  
     
 
@@ -91,15 +87,13 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
     return (
 
 
-      
+       
         <motion.div 
+        
         key = {console_id}
         variants= {consoleVariants}
-        initial="initial"            // <- add this
-        animate="animate"            // <- add this
-        exit="exit" 
         onClick= {() => toggleGames(console_id)}
-        whileHover= {!isActive ? "hover": ""} 
+      
       
 
         className={`console-container${isActive ? " active" : ""}`}
@@ -144,7 +138,16 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
             
             
 
-           <div className= "game-collection"> 
+           <motion.div 
+           key = {currentID}
+           className= "game-collection"
+           variants = {gameContainerVariants}
+           initial = "initial"
+           animate = "animate"
+           exit ="exit"
+        
+           
+           > 
            {consoleGames && showGames && consoleGames.map((consoleGame) => 
           
            <GameCard 
@@ -159,7 +162,7 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
                  
                  />)}
            
-            </div>
+            </motion.div>
             </div>
 
 
@@ -168,6 +171,7 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
           
            
         </motion.div>
+     
       
 
 

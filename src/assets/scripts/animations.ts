@@ -1,3 +1,5 @@
+import type {useSpring} from "motion/react"
+
 export const gameTransitionVariants = {
   initial: {
     opacity: 0,
@@ -71,26 +73,119 @@ export const buttonVariants = {
 
 }
 
-export const consoleVariants = {
-  hover: { scale: 1.1 },
-  initial: { scale: 0, rotate: 20 }, 
-  animate: { scale: 1, rotate: 0, transition: {duration: 0.5}}, 
-  exit: { rotate: 20, scale: 0.5, backgroundColor: "red" }
-}
 
-
-
+// Helicopter Parent
 
 export const containerVariants = {
+
+
   initial: {
     opacity: 0,
-    
-
+    scale: 0.9
+  
   },
   animate: {
     opacity: 1,
-    transition: { staggerChildren: 0.3,  // This creates the stagger effect
-      delayChildren: 0.2  }
+    x: 0,
+    scale: 1,
+    transition: {
+      staggerChildren: 0.1,
+
+
+    
+    },
+  },
+
+   exit: {
+    opacity: 0,
+    rotate: 0,
+    scale: 10,
+  
   }
+
 };
 
+
+// Naughty Child
+export const consoleVariants = {
+
+  initial: {
+    opacity: 0,
+    y: -20,
+    scale: 0.9,
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    scale: 1,
+
+
+ 
+  },
+
+  exit: {
+    opacity: 0,
+    rotate: 0,
+    scale: 10,
+
+  }
+
+};
+
+
+
+
+export const gameContainerVariants = {
+
+  initial: {
+    opacity: 0,
+    scale: 0.9
+    
+  
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      staggerChildren: 0.1,
+
+
+    
+    },
+  },
+
+   exit: {
+    opacity: 0,
+    rotate: 0,
+    scale: 10,
+  
+  }
+
+
+}
+export const gameVariants = {
+
+    initial: {
+    opacity: 0,
+    scale: 0.8
+    
+  
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+
+    
+ 
+  },
+
+   exit: {
+    opacity: 0,
+    rotate: 0,
+    scale: 10,
+  
+  }
+
+
+}

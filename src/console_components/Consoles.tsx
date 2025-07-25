@@ -1,9 +1,9 @@
 import { useLoaderData } from "react-router";
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import Console from "./Console.tsx"
 import '../assets/styles/Consoles.css';
 import EmptyCollection from "../general/EmptyCollection.tsx";
-import { motion } from "motion/react";
+import { AnimatePresence, motion, useAnimate } from "motion/react";
 import { containerVariants } from "@/assets/scripts/animations.ts";
 
 
@@ -22,6 +22,11 @@ function Consoles() {
   const loadedConsoles = useLoaderData().consoles as GameConsole[]
   const [selectedID, setSelectedID] = useState(-1)
   const [allConsoles, setAllConsoles] = useState(loadedConsoles)
+
+
+
+
+
  
   function filterConsole(filter_id: number) {
 
@@ -49,25 +54,26 @@ function Consoles() {
 
   
   {allConsoles && allConsoles.length > 0 ? (
+   
     <motion.div 
-    key = "console-shelf"
+
     className={`console-shelf${selectedID !== -1 ? " active" : ""}`}
     variants={containerVariants}
     initial="initial"
     animate="animate"
-    exit ="exit"
+   
+ 
 
-    
-    
+
     >
-    
+      
       {allConsoles.map((console: GameConsole) => (
 
 
         
 
 
-          
+
         <Console
           key={console.id}
           isActive = {console.id == selectedID}
@@ -76,15 +82,21 @@ function Consoles() {
           console_name={console.name}
           console_year={console.year}
         />
+    
 
  
     
       ))}
+  
+      
       
     </motion.div>
+
   ) : (
     <EmptyCollection message="Consoles will appear once you add games to your collection." />
-  )}
+  )
+  }
+
 </div>
 
   )

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 import { fetchWithCSRF } from "../assets/scripts/csrf";
 import { motion } from "motion/react";
+import { consoleVariants, gameVariants } from "@/assets/scripts/animations";
 
 type GameProps = {
     id: number;
@@ -58,11 +59,17 @@ export default function GameCard({id, series, year, title, console_name}: GamePr
 }
     return (
     
-      <div> 
+      <motion.div
+        variants= {gameVariants}
+    
+     
+      >
       { isActive ? ( 
 
-          <motion.div className= {`relative ${sizeMap.get(console_name) || "default"}-game-card border-2 border-[var(--n64-gray-clr)] card  `}
-           
+          <motion.div 
+          className= {`relative ${sizeMap.get(console_name) || "default"}-game-card border-2 border-[var(--n64-gray-clr)] card  `}
+          
+         
       
           >
         
@@ -82,7 +89,7 @@ export default function GameCard({id, series, year, title, console_name}: GamePr
 
         
        ) : "" }
-      </div>
+      </motion.div>
       
 
     )
