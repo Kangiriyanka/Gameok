@@ -54,7 +54,7 @@
     font-size: 1.3rem;
     border-radius: .5rem;
     background-color: var(--n64-gray-clr);
-    transition: 250ms;
+  
     width: 50%;
 }
 
@@ -65,7 +65,7 @@
     border-radius: .5rem;
     width: 50%;
     background-color: var(--n64-gray-clr);
-    transition: 250ms;
+  
 
  
 }
@@ -93,6 +93,7 @@
     height: 110%;
     padding: 2rem;
     backdrop-filter: blur(7px);
+ 
     
 
    

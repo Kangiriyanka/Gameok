@@ -256,7 +256,7 @@ function UserAddGame() {
       initial={{ opacity: 0, y:-10}}
       animate={{ opacity: 1, y: 0}}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.1, ease: "easeIn" }}
+      transition={{ duration: 0.3,  ease: [0.68, -0.55, 0.27, 1.55] }}
     >
    <h1>Adding {selectedGame}... </h1>
 <div className= "cover-contents">
@@ -274,8 +274,16 @@ function UserAddGame() {
   )}
 </AnimatePresence>
   <div className= "flex gap-8 mt-8 w-[100%] justify-around  ">
-  <button onClick= {() => dismiss()} id ="dismiss-button"> Dismiss </button>
-  <button  onClick={() => sendDataToFlask()} id="add-game-button"> Add </button>
+  <motion.button 
+       whileHover={{ scale: 1.10}}
+     whileTap={{ scale: 0.95 }}
+     
+  onClick= {() => dismiss()} id ="dismiss-button"> Dismiss </motion.button>
+  <motion.button  
+       whileHover={{ scale: 1.10}}
+     whileTap={{ scale: 0.95 }}
+     transition = {{duration: 0.2}}
+  onClick={() => sendDataToFlask()} id="add-game-button"> Add </motion.button>
   </div>
 
 

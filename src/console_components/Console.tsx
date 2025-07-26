@@ -91,9 +91,19 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
 
        
         <motion.div 
+        layout
         key = {console_id}
         variants= {consoleVariants}
         onClick= {() => toggleGames(console_id)}
+     
+
+
+       whileHover={!isActive ? { scale: 1.10}: ""}
+     whileTap={!isActive ? { scale: 0.95 }: ""}
+transition={{
+  duration: 0.2,
+
+}}
       
       
 

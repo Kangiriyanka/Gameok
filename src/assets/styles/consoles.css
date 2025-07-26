@@ -19,6 +19,7 @@
   height: 80%;
   display: flex;
 
+
 }
 
 
@@ -40,6 +41,8 @@
     margin: 1rem;
 
    
+
+   
    
 
 }
@@ -57,6 +60,7 @@
 
   border: none;
   justify-content: flex-start;
+
 
   .console-name {
     font-size: 1.9rem;

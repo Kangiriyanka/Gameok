@@ -61,6 +61,7 @@ export default function GameCard({id, series, year, title, console_name}: GamePr
     
       <motion.div
         variants= {gameVariants}
+        whileTap={{ scale: 0.95 }}
     
      
       >
@@ -72,19 +73,21 @@ export default function GameCard({id, series, year, title, console_name}: GamePr
          
       
           >
-        
+          <Link  to={`/dashboard/games/${id}/${title}`}>
+
           <img src={`/api/game/fetch_cover/${title}/`} alt="Game cover" />
-          <Link to={{pathname: `/game/${id}/${title}`}} 
+
+          <div className="card-content">
+                <h3> {title} </h3>
+                <p> {year}</p>
+               
+
         
-          > {title}</Link>
-          <p> {year}</p>
-          <div>
-          <button className="" onClick={deleteGame}> Delete</button>
           
-        
           
       
           </div>
+          </Link>
           </motion.div>
 
         

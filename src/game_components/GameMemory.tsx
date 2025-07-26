@@ -79,8 +79,11 @@ function GameMemory() {
             <article className="memory-article">
 
             {memories ? (
-            <ReactMarkdown>{memories}</ReactMarkdown>
-            ) : <p className="text-xl"> No memories added yet. </p>}
+            <ReactMarkdown>
+              
+              {memories}
+              </ReactMarkdown>
+            ) : <p className="text-xl">  </p>}
                           
               
 
