@@ -4,6 +4,7 @@ import { pageTransition } from "../assets/scripts/animations.ts";
 
 
 
+
 type PageWrapperProps = {
 
   children: React.ReactNode;
@@ -17,7 +18,6 @@ export default function AnimationWrapper({ children }: PageWrapperProps) {
   
     <motion.div
     
-
       variants={pageTransition}
       initial="initial"
       animate="animate"

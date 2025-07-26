@@ -1,10 +1,8 @@
-
 export const pageTransition = {
-  initial: { opacity: 0, rotate: 20 },
-  animate: { opacity: 1 , rotate: 0},
-  exit: {  x: -10, skew: 20, opacity: 0 }
+  initial: { opacity: 0, x: -100 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 100, rotate: 20 } 
 };
-
 export const errorTransitionVariants = {
 
    initial: {

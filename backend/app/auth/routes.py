@@ -156,10 +156,12 @@ def logout():
 
 @bp.after_request
 def refresh_expiring_jwts(response):
-
     
+   
+  
   
     try:
+
       
         # Create a new access token when it's close to expire
         # The bigger the number of minutes, the faster it will recreate access tokens 
@@ -168,19 +170,12 @@ def refresh_expiring_jwts(response):
         target_timestamp = datetime.timestamp(now + timedelta(minutes= MINUTES))
      
         if target_timestamp > exp_timestamp:
-           
+            
             print(" Your token is close to expiring")
             my_access_token = create_access_token(identity=get_jwt_identity())
             # Extract JSON data from the request body using get_json() to a data type you can manipulate with Python such as dict.
-            data = response.get_json()
+            set_access_cookies(response, my_access_token)
             
-            # Prevent any modifications on requests that are not JSON Object. 
-            # If a route returned a simple string like "Hello World", then we wouldn't be able to add the new access token to it.
-            if type(data) is dict:
-                data["access_token"] = my_access_token 
-                # Reminder: json.dumps takes a Python Object and returns the JSON Object of it 
-                # We modify the data attribute of the Response object
-                response.data = json.dumps(data)
          
         return response
     

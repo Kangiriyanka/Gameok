@@ -26,6 +26,7 @@
 --n64-b-clr: hsl(161, 100%, 28%);
 --n64-b-light-clr: hsl(161, 93%, 43%);
 --n64-c-clr: hsl(44, 95%, 58%);
+--n64-c-dark-clr:  hsla(44, 95%, 58%, 0.816);
 --n64-c-light-clr: hsla(44, 95%, 62%, 0.91);
 --n64-start-clr: hsl(358, 74%, 50%);
 --n64-start-light-clr: hsla(0, 88%, 60%, 0.966);

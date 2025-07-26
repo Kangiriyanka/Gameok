@@ -11,6 +11,7 @@ import {gamesLoader} from '../loaders/gamesLoader.ts';
 import { collectionLoader } from '../loaders/collectionLoader.ts';
 import GameLayout from '../game_components/GameLayout.tsx';
 import  ErrorBoundary  from '../general/ErrorBoundary.tsx';
+import { statsLoader } from '@/loaders/statsLoader.ts';
 
 
 export  const protectedRoutes = [
@@ -24,7 +25,8 @@ export  const protectedRoutes = [
     children: [
       {
         index: true,  
-        Component: Home
+        Component: Home,
+        loader: statsLoader
       },
       {
         path: "consoles",
