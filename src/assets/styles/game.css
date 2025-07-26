@@ -33,11 +33,13 @@ input {
         transition: transform 150ms  cubic-bezier(0.65, 0, 0.35, 1);
      
     }
+}
 
-    .card-content {
+
+.card-content {
         position: absolute;
         width: 100%;
-        height: 20%;
+        height: fit-content;
       
      
  
@@ -58,7 +60,6 @@ input {
      
         z-index: 10;
     }
-}
 
 .default-game-card:hover {
     border-color: var(--n64-c-clr);
@@ -95,19 +96,52 @@ input {
 }
 
 
+/* Small Cards */
+
 
 .small-game-card  {
 
     width: 15rem;
     height: 10rem;
     border-radius: .5rem;
+    overflow: hidden;
 
 
-    img {
+
+
+     img {
         position: absolute;
         width: 100%;
         height: 100%;
+        transition: transform 150ms  cubic-bezier(0.65, 0, 0.35, 1);
+     
     }
+
+  
+}
+
+
+
+
+.small-game-card:hover {
+    border-color: var(--n64-c-clr);
+    transition: 250ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.small-game-card:hover .card-content {
+
+    transform: translateY(0%);
+    transition: transform 150ms 
+
+}
+
+.small-game-card:hover img {
+    transform: scale(1.05);
+    transform-origin: center;
+    opacity: 0.7;
+    transition: transform 250ms cubic-bezier(0.65, 0, 0.35, 1);
+ 
+
 }
 
 

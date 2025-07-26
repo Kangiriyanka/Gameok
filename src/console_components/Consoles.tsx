@@ -1,10 +1,11 @@
 import { useLoaderData } from "react-router";
-import {useEffect, useState} from "react"
+import { useEffect, useState} from "react"
 import Console from "./Console.tsx"
 import '../assets/styles/Consoles.css';
 import EmptyCollection from "../general/EmptyCollection.tsx";
-import { AnimatePresence, motion, useAnimate } from "motion/react";
+import { motion,  } from "motion/react";
 import { containerVariants } from "@/assets/scripts/animations.ts";
+import { useConsoleContext } from "@/context/ConsoleContext.tsx";
 
 
 
@@ -20,9 +21,17 @@ function Consoles() {
 
   
   const loadedConsoles = useLoaderData().consoles as GameConsole[]
-  const [selectedID, setSelectedID] = useState(-1)
-  const [allConsoles, setAllConsoles] = useState(loadedConsoles)
+  const {selectedID, setSelectedID, allConsoles, setAllConsoles} = useConsoleContext()
   const [count, setCount] = useState(0)
+
+
+   useEffect(() => {
+     if (allConsoles.length === 0) {
+    setAllConsoles(loadedConsoles);
+  }
+
+  }, []);
+
 
 
 

@@ -1,5 +1,5 @@
 
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import GameCard from '../game_components/GameCard.tsx'
 import '../assets/styles/consoles.css';
 import { AnimatePresence, motion } from 'motion/react';
@@ -30,7 +30,15 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
     const [consoleGames, setConsoleGames] = useState<ConsoleGame[]>([]);
     const [showGames, setShowGames] = useState(false)
     const [currentID, setCurrentID] = useState(-1)
-    console.log(consoleGames)
+
+ useEffect(() => {
+  if (isActive && consoleGames.length === 0) {
+    getConsoleGames(console_id);
+  }
+}, []);
+
+
+    
 
 
     function resetConsoles() {
@@ -59,7 +67,7 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
      
         const newGames = result.console_games
         setConsoleGames(newGames); 
-        setShowGames(prev => !prev)
+        setShowGames(true);
         setCurrentID(console_id)
         handleConsole(console_id)
    

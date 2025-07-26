@@ -1,44 +1,44 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
-type ConsoleGame = {
+export type GameConsole = {
   id: number;
-  series: string;
-  year: string;
-  title: string;
-  cover_photo: string;
+  name: string;
+  year: number;
 };
 
-type ConsoleContextType = {
+type ConsoleTools = {
   selectedID: number;
   setSelectedID: (id: number) => void;
-  consoleGamesMap: Record<number, ConsoleGame[]>;
-  setConsoleGamesMap: React.Dispatch<React.SetStateAction<Record<number, ConsoleGame[]>>>;
-  showGamesMap: Record<number, boolean>;
-  setShowGamesMap: React.Dispatch<React.SetStateAction<Record<number, boolean>>>;
+  allConsoles: GameConsole[];
+  setAllConsoles: (consoles: GameConsole[]) => void;
 };
 
-const ConsoleContext = createContext<ConsoleContextType | undefined>(undefined);
+const ConsoleContext = createContext<ConsoleTools | undefined>(undefined);
 
-export function useConsoleContext() {
-  const context = useContext(ConsoleContext);
-  if (!context) {
-    throw new Error('useConsoleContext must be used within a ConsoleProvider');
-  }
-  return context;
-}
+type Props = {children: React.ReactNode}
 
-
-
-export const ConsoleProvider = ({ children }: { children: React.ReactNode }) => {
+export function ConsoleProvider({ children }: Props) {
   const [selectedID, setSelectedID] = useState(-1);
-  const [consoleGamesMap, setConsoleGamesMap] = useState<Record<number, ConsoleGame[]>>({});
-  const [showGamesMap, setShowGamesMap] = useState<Record<number, boolean>>({});
+  const [allConsoles, setAllConsoles] = useState<GameConsole[]>([]);
 
   return (
     <ConsoleContext.Provider
-      value={{ selectedID, setSelectedID, consoleGamesMap, setConsoleGamesMap, showGamesMap, setShowGamesMap }}
+      value={{
+        selectedID,
+        setSelectedID,
+        allConsoles,
+        setAllConsoles,
+      }}
     >
       {children}
     </ConsoleContext.Provider>
   );
-};
+}
+
+export function useConsoleContext() {
+  const context = useContext(ConsoleContext);
+  if (!context) {
+    throw new Error("useConsoleContext must be used within a ConsoleProvider");
+  }
+  return context;
+}
