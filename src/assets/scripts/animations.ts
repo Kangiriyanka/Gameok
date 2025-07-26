@@ -1,29 +1,9 @@
-import type {useSpring} from "motion/react"
 
-export const gameTransitionVariants = {
-  initial: {
-    opacity: 0,
-    scaleX: 0,
-  },
-  animate: {
-    opacity: 1,
-    scaleX: 1,
-    transition: {
-      duration: 2.3,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
-  },
-  exit: {
-    opacity: 0,
-    scaleX: 2,
-    rotate: 30,
-    transition: {
-      duration: 3,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
-  },
+export const pageTransition = {
+  initial: { opacity: 0, rotate: 20 },
+  animate: { opacity: 1 , rotate: 0},
+  exit: {  x: -10, skew: 20, opacity: 0 }
 };
-
 
 export const errorTransitionVariants = {
 

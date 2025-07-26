@@ -6,6 +6,7 @@ import { router } from './routes/routes';
 import { ConsoleProvider } from './context/ConsoleContext';
 
 
+
 function App() {
  
 
@@ -13,6 +14,7 @@ function App() {
     <>
       <AuthProvider>
         <ConsoleProvider>
+      
         <RouterProvider router={router} />
         </ConsoleProvider>
         

@@ -163,7 +163,7 @@ transition={{
            variants = {gameContainerVariants}
            initial = "initial"
            animate = "animate"
-           exit ="exit"
+    
         
            
            > 
