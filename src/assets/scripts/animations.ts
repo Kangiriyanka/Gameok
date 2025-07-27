@@ -1,35 +1,27 @@
 export const pageTransition = {
-  initial: { opacity: 0, x: -100 },
-  animate: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: 100, rotate: 20 } 
-};
-export const errorTransitionVariants = {
-
-   initial: {
+  initial: {
     opacity: 0,
-    scaleX: 0,
+    filter: "blur(8px)",
   },
   animate: {
     opacity: 1,
-    scaleX: 1,
+    filter: "blur(0px)",
     transition: {
-      duration: 2.3,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      duration: 0.25,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
-    scaleX: 2,
-    rotate: 180,
+    filter: "blur(8px)",
     transition: {
-      duration: 10,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      duration: 0.3,
+      ease: "easeInOut",
     },
   },
-  
+};
 
 
-}
 
 export const buttonVariants = {
   initial: {

@@ -5,7 +5,6 @@ import { columns,  } from "../tables/columns"
 import { DataTable } from "../tables/data-table"
 import { useState } from "react";
 import { fetchWithCSRF } from "../assets/scripts/csrf";
-import { filter } from "@mdxeditor/editor";
 import { pageTransition } from "@/assets/scripts/animations";
 import { motion } from "motion/react";
 
@@ -61,13 +60,7 @@ function Games() {
    
     return (
    
-        <motion.div 
-
-          key = {location.pathname}
-            variants= {pageTransition}
-            initial="initial"
-            animate= "animate"
-            exit="exit"
+        <div
         
         className=" main-container">
          <div className="page-header">
@@ -79,7 +72,7 @@ function Games() {
 
 
      <DataTable columns={columns(deleteGame)} data={collection} />
-    </motion.div>
+    </div>
 
  
 

@@ -24,7 +24,7 @@ export  const protectedRoutes = [
 
     children: [
       {
-        index: true,  
+        path: "home",  
         Component: Home,
         loader: statsLoader
       },
@@ -40,8 +40,6 @@ export  const protectedRoutes = [
       },
 
    
-
-    
      
       {
         path: "games",

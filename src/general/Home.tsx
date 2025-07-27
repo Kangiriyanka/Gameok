@@ -1,28 +1,20 @@
 
 import { useAuthContext } from "../context/AuthContext";
-import { useLoaderData, useLocation } from "react-router";
-import { AnimatePresence, motion } from "motion/react";
-import { pageTransition } from "@/assets/scripts/animations";
+import { useLoaderData } from "react-router";
+
 
 export default function Home() {
   const { storedUserInfo } = useAuthContext();
   const stats = useLoaderData();
-  const location = useLocation()
+
 
   return (
 
    
-    
-    <motion.div 
-    key = {location.pathname}
-    variants= {pageTransition}
-    initial="initial"
-    animate= "animate"
-    exit="exit"
-    className="flex flex-col"
+   <div className="flex">
     
     
-    >
+    
       <div className="page-header">
         <h1>{storedUserInfo}'s Memories</h1>
 
@@ -42,7 +34,7 @@ export default function Home() {
 
         </div>
       </div>
-    </motion.div>
+   </div>
 
    
    
