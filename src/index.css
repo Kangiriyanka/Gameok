@@ -34,7 +34,8 @@
 --secondary-text-clr: hsla(316, 57%, 94%, 0.82);
 --accent-clr: hsla(51, 92%, 53%, 0.785);
 --box-shadow: hsla(131, 86%, 45%, 0.16) 0px 1px 4px;
-
+--double-shadow: 0 5px 5px rgba(0,0,0,0.1),   0 10px 5px rgba(0,0,0,0.1);
+--card-shadow: 0 10px 5px rgba(0,0,0,0.1),   0 15px 5px rgba(0,0,0,0.1);
 
 
 /* From the lord of packages */

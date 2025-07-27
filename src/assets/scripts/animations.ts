@@ -1,24 +1,17 @@
 export const pageTransition = {
   initial: {
     opacity: 0,
-    filter: "blur(8px)",
+
   },
   animate: {
     opacity: 1,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.25,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    filter: "blur(8px)",
+
     transition: {
       duration: 0.3,
       ease: "easeInOut",
     },
   },
+
 };
 
 

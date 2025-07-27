@@ -2,19 +2,14 @@
 
 
 import Sidebar from "./Sidebar.tsx"
-import { useAuthContext } from '../context/AuthContext.tsx';
-import { Navigate, Outlet  } from "react-router-dom";
+import { Outlet  } from "react-router-dom";
 import AnimationWrapper from "@/animation_components/AnimationWrapper.tsx";
 import { AnimatePresence } from "motion/react";
 
 
-export default function Root() {
+export default function RootLayout() {
   
 
-    const {storedUserInfo} = useAuthContext()
-
-
-    if (!storedUserInfo) return <Navigate to="/" replace />;
 
  
     return (

@@ -60,6 +60,7 @@ def add_user():
     
     if request.method == "POST":
 
+
         try: 
             # Data is a dictionary with keys username, email, and password
             data = request.get_json()
@@ -76,6 +77,9 @@ def add_user():
             if (not data["password"]):
                 return {"msg": "Please enter a password"}, 422
             
+            if (not data["confirmPassword"]):
+                return {"msg": "Please confirm password"}, 422
+            
       
             # Check if the email or username exists in the database 
             if email:
@@ -84,6 +88,9 @@ def add_user():
                 
             elif username:
                 return {"msg": "Oops, this username has already been taken."}, 422
+            
+            elif data["password"] is not data["confirmPassword"]:
+                return {"msg": "Passwords don't match."}, 422
 
             # Create a new user 
             else:

@@ -15,7 +15,8 @@ export const publicRoutes = [
   
        
         {index: true, 
-        Component: Login},
+        Component: Login
+      },
       
   
       {

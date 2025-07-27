@@ -14,8 +14,8 @@ export async function consolesLoader() {
   });
 
   if (response.status === 401) {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+  
+ 
     throw new Response("Failed to fetch consoles", { status: response.status });
   }
 

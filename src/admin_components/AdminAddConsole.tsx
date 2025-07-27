@@ -3,6 +3,7 @@ import {useState} from 'react'
 import "./AddConsole.css"
 import ErrorBox from "../animation_components/ErrorBox";
 import { fetchWithCSRF } from "../assets/scripts/csrf";
+import { motion } from "motion/react";
 
 // Parsed in the backend as an integer, but kept as a string here.
 type ConsoleData = {
@@ -80,14 +81,14 @@ function AddConsole() {
            
         </div>      
     
-    <form onSubmit={submitConsole} className="reg-form">
+    <form onSubmit={submitConsole} className="reg-form admin-form">
   
       <label>
-        Title:
+        <span className="label-text">Title</span> 
         <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
       </label>
       <label>
-        Year:
+             <span className="label-text">Year</span> 
         <input
           type="number"
           value={year}
@@ -96,15 +97,18 @@ function AddConsole() {
           onChange={(e) => setYear(e.target.value)}/>
       </label>
       <label>
-        Firm:
+            <span className="label-text">Firm</span> 
         <input type="text" value={firm} onChange={(e) => setFirm(e.target.value)}/>
       </label>
       
-      <button type="submit" className="form-button">Add Console</button>
+      <motion.button  whileHover={{ scale: 1.05}}
+     whileTap={{ scale: 0.95 }}
+     transition= {{duration: 0.1}} type="submit" className="form-button" >Add Console</motion.button>
       
     </form>
 
-    <ErrorBox response = {response} count= {count}/>
+    <ErrorBox  key={count} handleDismiss={() => setResponse('')} isCover={false} response= {response} count={count}/>
+    
     
   
 

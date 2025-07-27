@@ -1,4 +1,4 @@
-import Root from '../general/Root.tsx';
+
 import Consoles from '../console_components/Consoles.tsx';
 import Home from '../general/Home.tsx';
 import EditPassword from '../user_components/EditPassword.tsx';
@@ -12,61 +12,61 @@ import { collectionLoader } from '../loaders/collectionLoader.ts';
 import GameLayout from '../game_components/GameLayout.tsx';
 import  ErrorBoundary  from '../general/ErrorBoundary.tsx';
 import { statsLoader } from '@/loaders/statsLoader.ts';
-
+import ProtectedRoute from '@/general/ProtectedRoute.tsx';
+import RootLayout from '../general/RootLayout.tsx';
 
 export  const protectedRoutes = [
-    
   {
     path: "/dashboard",
-    Component: Root,
-    ErrorBoundary: ErrorBoundary,
- 
-
+    Component: ProtectedRoute,
     children: [
       {
-        path: "home",  
-        Component: Home,
-        loader: statsLoader
-      },
-      {
-        path: "consoles",
-        Component: Consoles,
-        loader: consolesLoader,
-        ErrorBoundary : ErrorBoundary,
-      },
-      {
-        path: "edit-password",
-        Component: EditPassword
-      },
-
-   
-     
-      {
-        path: "games",
-        Component: GameLayout,
-       
+        
+        Component: RootLayout,
         children: [
-
-           {path: "my-games",
-            Component: Games,
-            loader: collectionLoader,
-           },
-
-          
-              { path: "add-games",
-             Component: UserAddGame, 
-             loader: gamesLoader,
-            },
-          
-            
           {
-            path: ":id/:title",
-            Component: GameMemory
+            path: "home",  
+            Component: Home,
+            loader: statsLoader,
+            ErrorBoundary: ErrorBoundary,
           },
           {
-            path: "edit-memory/:id/:title",
-            Component: EditMemories
-          }
+            path: "consoles",
+            Component: Consoles,
+            loader: consolesLoader,
+            ErrorBoundary : ErrorBoundary,
+          },
+          {
+            path: "edit-password",
+            Component: EditPassword
+          },
+          {
+            path: "games",
+            Component: GameLayout,
+            children: [
+              {
+                path: "my-games",
+                Component: Games,
+                loader: collectionLoader,
+                ErrorBoundary : ErrorBoundary,
+              },
+              {
+                path: "add-games",
+                Component: UserAddGame, 
+                loader: gamesLoader,
+                ErrorBoundary : ErrorBoundary,
+              },
+              {
+                path: ":id/:title",
+                Component: GameMemory
+                
+              },
+              {
+                path: "edit-memory/:id/:title",
+                Component: EditMemories
+              }
+            ]
+          },
         ]
       },
     ]

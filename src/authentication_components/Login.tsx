@@ -45,7 +45,7 @@ export default function Login() {
       setResponse(result.msg);
       setCount(prev => prev +1)
       setUserInfo(result.username);
-      navigate("/dashboard")
+      
      
       
      
@@ -71,16 +71,16 @@ export default function Login() {
 
     
     return (
-      <div className="">
-           <div className="p-3" style={{textAlign: "center"}}>
-           <h1> Gameok Login </h1>
+      <div>
+           <div className="authentication-box" >
+           <h1 className="mt-3"> Login </h1>
            
-        </div> 
-          <form className="reg-form centered"  style={{margin: "0 auto"}}onSubmit={loginUser}>
+          </div> 
+          <form className="reg-form "  style={{margin: "0 auto"}} onSubmit={loginUser}>
         
           
-            <label>
-              Username
+            <label >
+                     <span className="label-text">Username</span> 
             <input
                
                   onChange={handleChange} 
@@ -90,7 +90,7 @@ export default function Login() {
                   placeholder="Your username" 
                   value={loginForm.username} />
             </label>
-            <label> Password
+            <label>         <span className="label-text">Password</span>
             <input 
                   onChange={handleChange} 
                   type="password"
@@ -99,7 +99,11 @@ export default function Login() {
                   value={loginForm.password} />
             </label>
 
-          <button type="submit" className="form-button" >Login</button>
+            
+
+          <motion.button  whileHover={{ scale: 1.05}}
+     whileTap={{ scale: 0.95 }}
+     transition= {{duration: 0.1}} type="submit" className="form-button" >Login</motion.button>
           
           <div style= {{margin: "0 auto", display: "inline-flex"}}> 
           
@@ -107,21 +111,8 @@ export default function Login() {
           Not a member? Sign up  <Link className=" ml-1 underline  text-[var(--accent-clr)]"to="/register">
           <motion.div
        
-whileHover={{
-  scale: 1.05,
-  y: -2,
-  rotate: 1,
-  transition: { 
-    ease: [0.2, 0.5, 0.9, 0.7],
-    duration: 0.2
-  },
-}}
-whileTap={{
-  scale: 0.98,
-  rotate: -1,
-  transition: { duration: 0.1 }
-}}>
-            here</motion.div>
+>
+            here.</motion.div>
           </Link> 
           
 
@@ -135,7 +126,7 @@ whileTap={{
         </form>
 
           <div className="flex justify-center ">
-          <ErrorBox response= {response} count={count}/>
+          <ErrorBox  key={count} handleDismiss={() => setResponse('')} isCover={false} response= {response} count={count}/>
           </div>
         
        

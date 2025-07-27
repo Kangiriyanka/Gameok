@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import Sidebar from "./Sidebar.tsx"
+import AnimationWrapper from "@/animation_components/AnimationWrapper.tsx";
 
 
 export default function AdminRoute() {
@@ -17,7 +18,9 @@ export default function AdminRoute() {
     <div id= "layout">
     <Sidebar/>
     <main>
+    <AnimationWrapper>
     <Outlet/>
+    </AnimationWrapper>
     </main>
     </div>
         

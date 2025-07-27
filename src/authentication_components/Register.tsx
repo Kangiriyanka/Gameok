@@ -2,6 +2,8 @@ import React from "react";
 import {useState} from 'react'
 import '../assets/styles/forms.css';
 import ErrorBox from "../animation_components/ErrorBox";
+import { motion } from "motion/react";
+import { Link } from "react-router";
 
 type UserData = {
     username: string;
@@ -16,6 +18,7 @@ export default function Register() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [count, setCount] = useState(0)
   
 
@@ -61,6 +64,7 @@ export default function Register() {
       "username": username,
       "email": email,
       "password": password,
+      "confirmPassword": confirmPassword
       
     }
 
@@ -71,36 +75,67 @@ export default function Register() {
   // onChange propery  of those inputs will modify the state our username, email and password variables.
 
   return (
-    <div className="">
-
-      <div className="page-header" style= {{textAlign: "center"}}>
-           <h1> Gameok Register </h1>
+      <div>
+             <div className="authentication-box" >
+           <h1 className="mt-3"> Register </h1>
            
-        </div> 
+          </div> 
     <form onSubmit={submitUser} style= {{margin: "0 auto"}} className="reg-form">
     
       <label>
-        Username:
-        <input type="text" value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
+                <span className="label-text">Username</span>
+        <input type="text" 
+          placeholder="Your username" 
+        value={username} 
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
       </label>
       <label>
-        Email:
-        <input type="email" value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}/>
+        <span className="label-text">Email</span>
+        <input 
+        type="email" 
+        value={email} 
+         placeholder="Your email address" 
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}/>
       </label>
       <label>
-        Password:
+        <span className="label-text">Password</span>
         <input
           type="password"
           value={password}
+          placeholder="Your password" 
           onChange={(e) => setPassword(e.target.value)}/>
       </label>
+
+        <label>
+         <span className="label-text"> Confirmation</span>
+        <input
+          type="password"
+          value={confirmPassword}
+          placeholder= "Confirm password"
+          onChange={(e) => setConfirmPassword(e.target.value)}/>
+      </label>
       
-      <button type="submit" className="form-button">Register </button>
+       <motion.button  whileHover={{ scale: 1.05}}
+     whileTap={{ scale: 0.95 }}
+     transition= {{duration: 0.1}} type="submit" className="form-button">Register </motion.button>
      
+
+       <div style= {{margin: "0 auto", display: "inline-flex"}}> 
+          
+          
+          Already a  member? Login   <Link className=" ml-1 underline  text-[var(--accent-clr)]"to="/">
+          <motion.div
+       
+>
+            here.</motion.div>
+          </Link> 
+          
+
+          </div>
     </form>
 
      <div className="flex justify-center ">
-    <ErrorBox response={response} count={count}/>
+    <ErrorBox  key={count} handleDismiss={() => setResponse('')} isCover={false} response= {response} count={count}/>
     </div>
 
     

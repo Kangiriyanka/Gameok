@@ -3,6 +3,7 @@ import {useState} from 'react'
 import ConsoleDropdown from "../game_components/ConsoleDropdown.tsx"
 import { fetchWithCSRF } from '../assets/scripts/csrf.ts';
 import ErrorBox from '../animation_components/ErrorBox.tsx';
+import { motion } from 'motion/react';
 
 type GameData = {
   title: string;
@@ -106,14 +107,14 @@ function AddGame() {
            <h1> Add Games</h1>
       </div>
  
-    <form onSubmit={submitGame} className="reg-form">
+    <form onSubmit={submitGame} className="reg-form admin-form">
   
       <label>
-        Title:
+        <span className="label-text">Title</span> 
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
       </label>
       <label>
-        Year:
+         <span className="label-text">Year</span> 
         <input
           type="number"
           value={year}
@@ -122,21 +123,23 @@ function AddGame() {
           onChange={(e) => setYear(e.target.value)}/>
       </label>
       <label>
-        Console:
+          <span className="label-text">Console</span> 
          <ConsoleDropdown onConsoleSelect={handleConsoleSelect}/>
       </label>
       <label>
-        Series:
+          <span className="label-text">Series</span> 
         <input type="text" value={series} onChange={(e) => setSeries(e.target.value)}/>
       </label>
     
 
       
       <label>
-  Cover Photo:
+   <span className="label-text">Upload Cover</span> 
   <input type="file" accept="image/*" onChange={handleFileUpload} />
 </label>
-      <button type="submit" className="form-button">Add Game</button>
+               <motion.button  whileHover={{ scale: 1.05}}
+     whileTap={{ scale: 0.95 }}
+     transition= {{duration: 0.1}} type="submit" className="form-button" >Add Game</motion.button>
      
     </form>
 

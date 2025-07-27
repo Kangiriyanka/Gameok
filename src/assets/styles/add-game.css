@@ -55,6 +55,7 @@
     border-radius: .5rem;
     background-color: var(--n64-gray-clr);
     border: 3px solid var(--n64-gray-clr);
+    box-shadow: var(--double-shadow);
   
     width: 50%;
 }
@@ -67,6 +68,7 @@
     width: 50%;
     background-color: var(--n64-gray-clr);
     border: 3px solid var(--n64-gray-clr);
+    box-shadow: var(--double-shadow);
   
 
  
@@ -94,7 +96,7 @@
     width: 100%;
     height: 110%;
     padding: 2rem;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
  
     
  
@@ -106,7 +108,9 @@
 
   margin: 0 auto;
   border-radius: 0.5rem;
-  border: 1px solid white;
+  border: 1px solid var(--n64-gray-clr);
+  opacity: 0.9;
+box-shadow: var(--double-shadow);
 
 
 }

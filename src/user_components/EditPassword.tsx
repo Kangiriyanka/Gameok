@@ -3,6 +3,7 @@ import {useState} from 'react'
 import '../assets/styles/forms.css';
 import { fetchWithCSRF } from '../assets/scripts/csrf';
 import ErrorBox from '../animation_components/ErrorBox';
+import { motion } from 'motion/react';
 
 
 type PasswordData = {
@@ -76,36 +77,42 @@ async function sendDataToFlask(data: PasswordData) {
   return (
     <div>
         <div className="page-header">
-           <h1> Edit Password</h1>
+           <h1> Change Password</h1>
            
         </div>      
-    <form onSubmit={submitUser} className="reg-form">
+    <form onSubmit={submitUser} className="reg-form edit-password">
      
       <label>
-        Current Password
+       <span className="label-text"> Current Password</span>
         <input
           type="password"
+          placeholder= "Your current password"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}/>
       </label>
 
       <label>
-        New Password
+        <span className="label-text"> New Password</span>
         <input
           type="password"
+             placeholder= "Your new password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}/>
       </label>
 
       <label>
-        Confirm  Password
+         <span className="label-text"> Confirm  Password</span>
         <input
           type="password"
           value={confirmPassword}
+          placeholder= "Confirm password"
           onChange={(e) => setConfirmPassword(e.target.value)}/>
       </label>
       
-      <button type="submit" className="form-button " >Edit</button>
+     
+         <motion.button  whileHover={{ scale: 1.05}}
+     whileTap={{ scale: 0.95 }}
+     transition= {{duration: 0.1}} type="submit" className="form-button " >Edit</motion.button>
       
     </form>
 

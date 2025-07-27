@@ -84,6 +84,7 @@ def refresh_expiring_jwts(response):
             my_access_token = create_access_token(identity=get_jwt_identity())
             # Extract JSON data from the request body using get_json() to a data type you can manipulate with Python such as dict.
             set_access_cookies(response, my_access_token)
+            print("Ok, it's been refreshed")
             
          
         return response
