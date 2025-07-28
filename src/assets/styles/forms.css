@@ -20,7 +20,7 @@
 }
 
 .admin-form {
-    width: 60%;
+    width: 40rem;
     
 }
 
@@ -99,7 +99,7 @@ label {
 .label-text {
     width: 40%;
     font-weight: 500;
-    line-height: 1;
+   
    
     
 }
@@ -159,6 +159,10 @@ label {
     }
 
     .reg-form input{
+        width: 90%;
+    }
+
+    .admin-form {
         width: 90%;
     }
 

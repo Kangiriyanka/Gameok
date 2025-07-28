@@ -25,5 +25,5 @@ export default function ErrorBoundary() {
 
 
   
-  return <h1 className= "p-3">Unexpected error occurred  :(. <br/>Your session has probably expired. </h1>;
+  return <h1 className= "p-3">Unexpected error occurred  :(. <br/>Your session could have  expired. </h1>;
 }

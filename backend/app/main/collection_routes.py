@@ -1,4 +1,5 @@
 
+from collections import defaultdict
 from app.main import bp
 from app.models import *
 from flask import request, jsonify
@@ -17,12 +18,57 @@ def get_games():
     games = Game.query.join(GameOwnership).filter(GameOwnership.user_id == user_id).order_by((Game.title)).all()
     
     games_json = [game.to_json() for game in games]
+    
    
 
     
     #Returns a response object with the application/json mimetype
     return jsonify(games=games_json)
 
+
+@bp.route('/api/collection/get_games_years', methods = ["GET"])
+@jwt_required()
+def get_games_years():
+
+    brackets = {
+        "1972-1990": range(1972,1991),
+        "1991-2000": range(1991,2001),
+        "2001-2010": range(2001,2011),
+        "2011-2020": range(2011,2021),
+        "2020-Present": range(2021,2100),
+    }
+
+    year_brackets = {label: 0 for label in brackets }
+    series_data = defaultdict(int)
+    
+   
+    user= get_jwt_identity()
+    user_id= User.query.filter_by(username=user).first().id
+
+    games = Game.query.join(GameOwnership).filter(GameOwnership.user_id == user_id).order_by((Game.title)).all()
+
+    for game in games:
+        
+        series_data[game.series] += 1
+
+     
+        year = game.year
+        for label,year_range in brackets.items():
+            if year in year_range:
+                year_brackets[label] += 1
+                break
+  
+
+
+
+    series_data = dict(sorted(series_data.items(), key= lambda x:x[1], reverse=True))
+    year_data = [{"years": label, "games": count} for label,count in year_brackets.items()]
+    series_data = [{"series": series, "games": count} for series,count in series_data.items()][:10]
+    
+    
+   
+    #Returns a response object with the application/json mimetype
+    return jsonify(year_data= year_data, series_data= series_data , total= sum(year_brackets.values()))
 
 
 # Game Ownership routes
@@ -72,8 +118,8 @@ def get_console_games(console_id):
     console_games= Game.query.join(GameConsole).filter(GameConsole.console_id == console_id).join(GameOwnership).filter(GameOwnership.user_id ==user_id).all()
     console_games_json = [game.to_json() for game in console_games]
   
-    print(console_games_json)
-    #Key
+   
+    # Key
     return jsonify(console_games = console_games_json)
    
 

@@ -1,19 +1,22 @@
 export const pageTransition = {
   initial: {
     opacity: 0,
-
   },
   animate: {
     opacity: 1,
-
     transition: {
       duration: 0.3,
       ease: "easeInOut",
     },
   },
-
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
 };
-
 
 
 export const buttonVariants = {
@@ -59,8 +62,8 @@ export const containerVariants = {
 
    exit: {
     opacity: 0,
-    rotate: 0,
-    scale: 10,
+ 
+   
   
   }
 

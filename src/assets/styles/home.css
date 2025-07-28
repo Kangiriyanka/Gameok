@@ -1,0 +1,56 @@
+.home-container {
+    h2 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+
+
+}
+
+
+
+.recharts-container {
+    margin-bottom: 1rem;
+    gap: 1rem;
+    display: flex;
+    
+}
+
+.stats-container {
+ 
+   
+    
+    
+}
+
+.stats {
+
+    padding: 1.5rem;
+}
+
+.toggle-button {
+
+    border-radius: 0.5rem;
+    border: 1px solid var(--n64-gray-clr);
+    padding: 1rem;
+    width: 10rem;
+    font-size: 1.2rem;
+    box-shadow: var(--double-shadow);
+    
+}
+
+.btn-container {
+    display: flex;
+    gap: 1rem;
+}
+
+
+hr {
+  width: 90%;
+  border: none;
+  height: 5px;
+  background-color: var(--n64-base-clr);
+}
+
+

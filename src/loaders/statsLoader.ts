@@ -1,6 +1,6 @@
 export async function statsLoader(): Promise<number[]> {
   const [games_response, consoles_response] = await Promise.all([
-    fetch("/api/collection/get_owned_games", { method: "GET", credentials: "include" }),
+    fetch("/api/collection/get_games_years", { method: "GET", credentials: "include" }),
     fetch("/api/console/get_owned_consoles", { method: "GET", credentials: "include" }),
   ]);
 
@@ -18,6 +18,10 @@ export async function statsLoader(): Promise<number[]> {
 
   const games_result = await games_response.json();
   const consoles_result = await consoles_response.json();
+  console.log(games_result.year_data)
+  console.log(games_result.series_data)
 
-  return [games_result.games.length, consoles_result.consoles.length];
+
+
+  return [games_result.total, consoles_result.consoles.length, games_result.year_data, games_result.series_data];
 }
