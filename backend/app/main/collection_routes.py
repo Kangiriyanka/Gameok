@@ -1,10 +1,14 @@
 
 from collections import defaultdict
+import os
+import uuid
 from app.main import bp
 from app.models import *
-from flask import request, jsonify
+from app.main.helpers import allowed_file
+from flask import current_app
+from flask import request, jsonify, send_from_directory, url_for
 from flask_jwt_extended import get_jwt_identity,  jwt_required
-             
+from werkzeug.utils import secure_filename             
 
 # Get all games owned by the user
 @bp.route('/api/collection/get_owned_games', methods = ["GET"])
@@ -124,4 +128,30 @@ def get_console_games(console_id):
    
 
 
+# You can't just pass the filepath 
+@bp.route("/api/collection/upload_picture/", methods=["POST", "GET"])
+@jwt_required()
+def approve_upload():
+      
+      image= request.files.get("image")
+     
+      if image.filename == '':
+          return {"msg": "No selected file"}, 422
+      
+      if image and allowed_file(image.filename):
+      
+        filename = secure_filename(image.filename)
+        filename = f"{str(uuid.uuid4())}-{filename}"
+        filepath = os.path.abspath(os.path.join(current_app.config["USER_UPLOAD_FOLDER"],filename))
+        image.save(filepath)
+        url = url_for('main.uploaded_file', filename=filename)
+        return {"url": url}
+
+      
+      return {"msg": "Failed to upload picture"}, 422
+
+
+@bp.route('/api/collection/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(current_app.config["USER_UPLOAD_FOLDER"], filename)
 

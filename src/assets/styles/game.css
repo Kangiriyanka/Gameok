@@ -90,6 +90,8 @@ input {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   overflow-x: scroll;
+  border-bottom: 3px solid var(--n64-dark-gray-clr);
+
   
   
 
@@ -147,3 +149,9 @@ input {
 }
 
 
+
+/* Table Stuff */
+
+button[role="combobox"] {
+  border-color: var(--n64-gray-clr);
+}

@@ -78,7 +78,7 @@ export function DataTable<TData, TValue>({
       {/* End Filter Component */}
 
       
-    <div className="border-3  border-[var(--base-clr)] rounded-lg border- w-[80%]">
+    <div className="border-1 border-[var(--base-clr)] rounded-lg  w-[80%]">
       <Table>
         <TableHeader >
           {table.getHeaderGroups().map((headerGroup) => (

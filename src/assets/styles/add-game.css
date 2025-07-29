@@ -53,8 +53,8 @@
     padding: 0.5rem;
     font-size: 1.3rem;
     border-radius: .5rem;
-    background-color: var(--n64-gray-clr);
-    border: 3px solid var(--n64-gray-clr);
+    background-color: var(--n64-dark-gray-clr);
+    border: 2px solid var(--n64-gray-clr);
     box-shadow: var(--double-shadow);
   
     width: 50%;
@@ -66,8 +66,8 @@
     font-size: 1.3rem;
     border-radius: .5rem;
     width: 50%;
-    background-color: var(--n64-gray-clr);
-    border: 3px solid var(--n64-gray-clr);
+    background-color: var(--n64-dark-gray-clr);
+    border: 2px solid var(--n64-gray-clr);
     box-shadow: var(--double-shadow);
   
 

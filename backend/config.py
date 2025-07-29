@@ -23,6 +23,7 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES  = timedelta(hours= 1)
     JWT_TOKEN_LOCATION = ["cookies"]
     UPLOAD_FOLDER = os.path.join(basedir, 'covers')
+    USER_UPLOAD_FOLDER = os.path.join(basedir, 'memories')
     
 
 

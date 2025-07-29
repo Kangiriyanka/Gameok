@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Link, useParams} from "react-router-dom";
 import {motion} from "motion/react"
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 
 
@@ -79,7 +80,7 @@ function GameMemory() {
             <article className="memory-article">
 
             {memories ? (
-            <ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
               
               {memories}
             </ReactMarkdown>

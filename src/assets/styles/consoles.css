@@ -28,10 +28,11 @@
 
 
 
+
 .console-container {
 
     position: relative;
-    border: 2px solid var(--n64-gray-clr);
+    border: 1px solid var(--n64-gray-clr);
     padding: 1rem;
     display: flex;
     justify-content: center;
@@ -39,6 +40,8 @@
     border-radius: 0.5rem;
     font-size: 1.1rem;
     margin: 1rem;
+   
+
 
    
 
@@ -48,6 +51,9 @@
 }
 
 
+.console-information {
+  border-bottom: 2px dotted var(--n64-gray-clr);
+}
 
 .console-container.active {
 
@@ -58,6 +64,8 @@
   margin: 0;
   padding: 0rem;
 
+ 
+
   border: none;
   justify-content: flex-start;
 
@@ -65,6 +73,8 @@
   .console-name {
     font-size: 1.9rem;
     text-align: left;
+
+    
 
     
   }

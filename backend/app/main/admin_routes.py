@@ -200,3 +200,5 @@ def game_edit(a_game_id):
                 
                 return "Please add a cover photo in either .jpg or .jpeg format"
     
+
+

@@ -1,10 +1,9 @@
 
 import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 
-import { fetchWithCSRF } from "../assets/scripts/csrf";
 import { motion } from "motion/react";
-import { consoleVariants, gameVariants } from "@/assets/scripts/animations";
+import { gameVariants } from "@/assets/scripts/animations";
 
 type GameProps = {
     id: number;
@@ -23,40 +22,11 @@ export default function GameCard({id, series, year, title, console_name}: GamePr
  
     const [isActive, setActive] = useState(true)
     const sizeMap = new Map()
+    // Uploading images of different sizes.
     sizeMap.set("Nintendo 64", "small")
    
-    
 
 
- 
-
-    
-
-
-
-  async function deleteGame() {
-    if (window.confirm("Are you sure you want to delete this game?")) {
-      setActive(false);
-
-      try {
-        const response = await fetchWithCSRF(`/api/game/delete_game/${id}`, {
-          method: 'DELETE',
-        
-        });
-        // Axios handles the response automatically, but with fetch we need to check if the response is ok.
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-    
-
-      } catch (error: any) {
-        console.error(error);
-     
-      }
-    }
-}
     return (
     
       <motion.div

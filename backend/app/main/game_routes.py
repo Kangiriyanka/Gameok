@@ -98,7 +98,7 @@ def delete_game(a_game_id):
     
 
 
-
+#  Send a file from within a directory using send_file().
 @bp.route('/api/game/fetch_cover/<a_game_title>/', methods= ["GET"])
 def fetch_image(a_game_title):
     

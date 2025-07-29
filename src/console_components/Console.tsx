@@ -99,7 +99,8 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
 
        
         <motion.div 
-        layout
+      
+        layout transition={{ duration: 0.25 }}
         key = {console_id}
         variants= {consoleVariants}
         onClick= {() => toggleGames(console_id)}
@@ -108,20 +109,16 @@ function Console({isActive, handleConsole, console_id, console_name, console_yea
 
        whileHover={!isActive ? { scale: 1.10}: ""}
      whileTap={!isActive ? { scale: 0.95 }: ""}
-transition={{
-  duration: 0.2,
 
-}}
       
-      
-
-        className={`console-container${isActive ? " active" : ""}`}
+          style={{ boxShadow: 'var(--double-shadow)' }}
+        className={` console-container${isActive ? " active" : ""}`}
         >
            
           
            <div className="overflow-auto">
             
-              <div className="console-information flex  mb-2 items-end gap-1">
+              <div className={`${isActive ? `console-information`: ""} flex  mb-2 items-end gap-1`}>
                <button  className=" w-[100%] console-button" > 
                 <p className=" console-name text-xl " >{console_name}</p>
                 <p className= "console-year text-sm opacity-50">{console_year}</p>
@@ -130,7 +127,7 @@ transition={{
               
 
                 {isActive ? 
-                
+                    
                         <motion.div
                            
                         
@@ -139,6 +136,7 @@ transition={{
                             x:-2 ,
                            }}>
                           
+                  
                     <button onClick = {resetConsoles}>
 
                     <svg className= "mr-5 w-8 h-8 fill-[var(--accent-clr)]" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M360-240 120-480l240-240 56 56-144 144h488v-160h80v240H272l144 144-56 56Z"/></svg>
