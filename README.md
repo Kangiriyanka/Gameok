@@ -4,7 +4,7 @@
 
 In the root of your project folder, enter the following commands in your terminal.
 
-```
+```bash
 npm install 
 npm run create-venv   
 npm run create-env
@@ -20,7 +20,7 @@ You must manually fill in your own SECRET_KEY, ADMIN INFORMATION, and optionally
 Note: Installing the actual database server (e.g., sqlite, PostgreSQL) is outside the scope of this guide.
 
 
-```
+```bash
 SECRET_KEY= #fill
 ADMIN=#fill
 EMAIL=#fill
@@ -30,8 +30,6 @@ DATABASE_TRACKING=False
 FLASK_APP=gameok.py
 FLASK_ENV=development
 FLASK_DEBUG=1
-
-
 ```
 
 
@@ -50,10 +48,10 @@ cd backend && source .venv/bin/activate \
 ## 3. Run the application
 
 Once everything is set up, run in two separate terminals:
-```
+```bash
 npm run dev
 ```
-```
+```bash
 npm run backend
 ```
 
@@ -62,7 +60,7 @@ and you'll be all set.
 # Usage Guide 
 
 
-The main usage of the application is covered on my website: https://joefarah/projects/gameok/
+The main usage and explanations of this application is covered on my website: https://joefarah.com/projects/gameok/
 
 
 
