@@ -89,7 +89,7 @@ def add_user():
             elif username:
                 return {"msg": "Oops, this username has already been taken."}, 422
             
-            elif data["password"] is not data["confirmPassword"]:
+            elif data["password"] != data["confirmPassword"]:
                 return {"msg": "Passwords don't match."}, 422
 
             # Create a new user 
@@ -126,7 +126,6 @@ def edit_password():
     current_user = get_jwt_identity()
     user= User.query.filter_by(username=current_user).first() 
     current_user_password= user.password
-    print(current_user_password)
     # gets a dict of data 
    
     

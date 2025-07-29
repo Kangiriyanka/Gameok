@@ -36,6 +36,7 @@ export default function SeriesBarChart({data, width, height, x_key, y_key}: Grap
            height={height} 
            data={data}  
            
+           
   
          
            
@@ -48,7 +49,7 @@ export default function SeriesBarChart({data, width, height, x_key, y_key}: Grap
 
     <CartesianGrid stroke="var(--n64-gray-clr)"strokeDasharray="1 1 " />
   <XAxis interval={2} dataKey={x_key}  padding= {{left: 20, right: 20}} />
-  <YAxis dataKey={y_key}  />
+  <YAxis allowDecimals={false} dataKey={y_key}  />
   <Tooltip 
 
 

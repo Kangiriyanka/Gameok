@@ -12,10 +12,12 @@ import { AnimatePresence, motion } from "motion/react";
 import { containerVariants, pageTransition } from "@/assets/scripts/animations";
 import SeriesPieChart from "@/graph_components/SeriesPieChart";
 import ConsolesPieChart from "@/graph_components/ConsolesPieChart";
+import EmptyCollection from "./EmptyCollection";
 
 export default function Home() {
   const { storedUserInfo } = useAuthContext();
   const stats = useLoaderData();
+  console.log(stats)
 
   const [toggleYear, setToggleYear] = useState(true)
   const [toggleSeries, setToggleSeries] = useState(false)
@@ -94,6 +96,8 @@ export default function Home() {
         <div className="graph-options flex-col  w-[100%]   ">
       
         <h2 className=""> Graph Options </h2>
+
+      
         
         <div className="btn-container">
         <motion.button 
@@ -127,7 +131,7 @@ export default function Home() {
         </div>
    
 
-    
+          {stats[1] && stats[1].length > 0 ? (
           <AnimatePresence mode="wait">
             
           {toggleYear &&
@@ -166,6 +170,7 @@ export default function Home() {
           
           } 
           </AnimatePresence>
+          ) : <EmptyCollection message="Graph data will appear once you"  />}
         </div>
 
 

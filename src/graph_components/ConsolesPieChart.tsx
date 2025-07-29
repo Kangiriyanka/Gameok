@@ -115,7 +115,7 @@ export default function ConsolesPieChart({data, width, height, name_key, data_ke
 
         
         <div className= "shadow-[var(--double-shadow)] rounded-lg border border-[var(--n64-gray-clr)] w-fit relative " >
-           <PieChart width={width} height={height}  data={data} margin={{
+           <PieChart  width={width} height={height}  data={data} margin={{
             top: 30,
             right: 5,
             left: 0,
@@ -123,6 +123,7 @@ export default function ConsolesPieChart({data, width, height, name_key, data_ke
           }}>
 
             <Pie 
+            
               activeShape={renderActiveShape}
               stroke= "var(--n64-gray-clr)"
               strokeWidth= {1}

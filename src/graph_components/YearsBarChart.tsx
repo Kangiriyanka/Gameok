@@ -24,17 +24,19 @@ type GraphProps = {
 
 export default function YearsBarChart({data, width, height, x_key, y_key}: GraphProps) {
  
-
+ 
 
     return (
 
         
         <div className= "shadow-[var(--double-shadow)] rounded-lg border border-[var(--n64-gray-clr)] w-fit  relative  " >
+         
+        
            <BarChart 
            width={width} 
            height={height} 
            data={data}  
-           
+          
   
          
            
@@ -47,7 +49,7 @@ export default function YearsBarChart({data, width, height, x_key, y_key}: Graph
 
     <CartesianGrid stroke="var(--n64-gray-clr)"strokeDasharray="1 1 " />
   <XAxis dataKey={x_key} />
-  <YAxis dataKey={y_key}  />
+  <YAxis dataKey={y_key}   allowDecimals={false}  />
   <Tooltip 
 
 

@@ -105,7 +105,9 @@ function Consoles() {
     </motion.div>
 
   ) : (
-    <EmptyCollection message="Consoles will appear once you add games to your collection." />
+     <div className="relative left-12">
+    <EmptyCollection message="Consoles will appear once you " />
+    </div>
   )
   }
 

@@ -10,7 +10,6 @@ import { MDXEditor, thematicBreakPlugin, toolbarPlugin,headingsPlugin,UndoRedo, 
 
 
 } from '@mdxeditor/editor'
-import { Heading } from 'lucide-react'
 import type { FormEvent 　} from 'react'
 import React, { useEffect } from 'react'
 import type {MDXEditorMethods} from '@mdxeditor/editor'
@@ -68,12 +67,6 @@ export default function Editor({memories, handleSubmit, handleChange} : EditorPr
                     </button>
                 
                     
-                    
-                   
-                    
-                    
-            
-                  
                     
                     </>
                 )
