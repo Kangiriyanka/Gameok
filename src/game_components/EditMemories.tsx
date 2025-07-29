@@ -17,7 +17,7 @@ function EditMemories() {
   const { edit_memories} = location.state;
   const [newMemories, setNewMemories] = useState(edit_memories)
   const { id, title } = useParams();
-  console.log("Edited memories:" + newMemories)
+ 
 
   const navigate = useNavigate();
 
@@ -93,7 +93,7 @@ function EditMemories() {
 
       </div>
       <form onSubmit= {submitMemories}>
-      <Editor memories = {edit_memories} handleSubmit ={submitMemories} handleChange={setNewMemories}/>
+      <Editor title ={title ?? "" } memories = {edit_memories} handleSubmit ={submitMemories} handleChange={setNewMemories}/>
        </form>
    
       

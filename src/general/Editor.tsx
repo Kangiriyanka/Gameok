@@ -22,12 +22,13 @@ import { fetchWithCSRF } from '@/assets/scripts/csrf'
 
 
 type EditorProps = {
+    title: string
     memories: string
     handleSubmit: (e: FormEvent<HTMLFormElement>) => void
     handleChange: ((markdown: string) => void)
 }
 
-export default function Editor({memories, handleSubmit, handleChange} : EditorProps) {
+export default function Editor({title, memories, handleSubmit, handleChange} : EditorProps) {
 
         const ref = React.useRef<MDXEditorMethods>(null)
 
@@ -42,6 +43,7 @@ export default function Editor({memories, handleSubmit, handleChange} : EditorPr
 
  
         const formData = new FormData()
+        formData.append('title', title)
         formData.append('image', image)
         // send the file to your server and return
         // the URL of the uploaded image in the response

@@ -128,30 +128,40 @@ def get_console_games(console_id):
    
 
 
-# You can't just pass the filepath 
+# Upload image to folder -> Get image data -> create a url for it.
+
 @bp.route("/api/collection/upload_picture/", methods=["POST", "GET"])
 @jwt_required()
 def approve_upload():
       
       image= request.files.get("image")
-     
+      title = request.form['title']
+   
+      
+      
       if image.filename == '':
           return {"msg": "No selected file"}, 422
       
       if image and allowed_file(image.filename):
-      
+        game_dir_path = os.path.abspath(os.path.join(current_app.config["USER_UPLOAD_FOLDER"], title))
+        if not os.path.exists(game_dir_path):
+             print(f"Making a game directory {title}")
+             game_dir = os.mkdir(os.path.join(current_app.config["USER_UPLOAD_FOLDER"], title))
+          
         filename = secure_filename(image.filename)
         filename = f"{str(uuid.uuid4())}-{filename}"
-        filepath = os.path.abspath(os.path.join(current_app.config["USER_UPLOAD_FOLDER"],filename))
+        filepath = os.path.abspath(os.path.join(game_dir_path,filename))
         image.save(filepath)
-        url = url_for('main.uploaded_file', filename=filename)
+        url = url_for('main.uploaded_file', title= title, filename=filename )
+        
         return {"url": url}
 
       
       return {"msg": "Failed to upload picture"}, 422
 
 
-@bp.route('/api/collection/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(current_app.config["USER_UPLOAD_FOLDER"], filename)
+@bp.route('/api/collection/uploads/<title>/<filename>')
+def uploaded_file(title, filename):
+    game_dir_path = os.path.abspath(os.path.join(current_app.config["USER_UPLOAD_FOLDER"], title))
+    return send_from_directory(game_dir_path, filename)
 
