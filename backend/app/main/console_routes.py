@@ -2,11 +2,14 @@
 from app.main import bp
 from app import db
 from app.models import *
+
 from flask import request,jsonify
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
                                jwt_required,set_access_cookies
 
 from datetime import datetime,timezone,timedelta
+from sqlalchemy import func
+
 import json
 
 
@@ -31,16 +34,32 @@ def get_my_consoles():
         .join(GameConsole, Console.id == GameConsole.console_id) \
         .join(Game, Game.id == GameConsole.game_id) \
         .join(GameOwnership, GameOwnership.game_id == Game.id).filter(GameOwnership.user_id == user_id)   \
-        .all() 
-
+        .all()   \
+      
     
+    # SELECT console.name, COUNT(console.name)
+    # FROM (joined console)
+    # GROUP by console.name 
+    # N64 - 1 N64 -1 N64 -1 N64 -1 --> GROUP BY --> N64: 3 
+    counts_data = Console.query \
+        .join(GameConsole, Console.id == GameConsole.console_id) \
+        .join(Game, Game.id == GameConsole.game_id) \
+        .join(GameOwnership, GameOwnership.game_id == Game.id).filter(GameOwnership.user_id == user_id)   \
+        .with_entities(Console.name, func.count(Console.name)).group_by(Console.name).all()
+  
+    counts_data= dict(counts_data)
+
 
     consoles_json = [console.to_json() for console in consoles]
+    counts_data = dict(sorted(counts_data.items(), key= lambda x:x[1], reverse=True))
+    counts_data = [{"console": label, "games": count} for label,count in counts_data.items()][:10]
+
+
     
 
    
     
-    return jsonify(consoles=consoles_json)
+    return jsonify(consoles=consoles_json, graph_data = counts_data)
          
  
     

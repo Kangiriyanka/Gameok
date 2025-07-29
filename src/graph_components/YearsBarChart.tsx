@@ -62,7 +62,7 @@ export default function YearsBarChart({data, width, height, x_key, y_key}: Graph
 
 
 
-  <Bar dataKey="games"  barSize = {40} fill="var(--n64-a-clr)"  stroke='var(--n64-gray-clr)' activeBar={{ stroke: 'var(--text-clr)', strokeWidth: 1}}>
+  <Bar dataKey={y_key}  barSize = {40} fill="var(--n64-a-clr)"  stroke='var(--n64-gray-clr)' activeBar={{ stroke: 'var(--text-clr)', strokeWidth: 1}}>
 
 
       {data.map((_, index) => (

@@ -11,6 +11,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { containerVariants, pageTransition } from "@/assets/scripts/animations";
 import SeriesPieChart from "@/graph_components/SeriesPieChart";
+import ConsolesPieChart from "@/graph_components/ConsolesPieChart";
 
 export default function Home() {
   const { storedUserInfo } = useAuthContext();
@@ -18,6 +19,7 @@ export default function Home() {
 
   const [toggleYear, setToggleYear] = useState(true)
   const [toggleSeries, setToggleSeries] = useState(false)
+  const [toggleConsoles, setToggleConsoles] = useState(false)
   
   const WIDTH = 720
   const HEIGHT= 400
@@ -27,11 +29,19 @@ export default function Home() {
     if (type === "year") {
        setToggleSeries(false)
        setToggleYear(true)
+       setToggleConsoles(false)
     }
 
      if (type === "series") {
        setToggleSeries(true)
        setToggleYear(false)
+       setToggleConsoles(false)
+    }
+
+    if (type === "consoles") {
+       setToggleSeries(false)
+       setToggleYear(false)
+       setToggleConsoles(true)
     }
 
     
@@ -59,7 +69,7 @@ export default function Home() {
          className=" shadow-[var(--double-shadow)]  rounded-[0.5rem] border-1 border-[var(--n64-gray-clr)]  stats ">
           <div className="flex  gap-1 ">
             <span className="text-xl text-[var(--n64-b-clr)]  font-medium ">Consoles: </span>
-            <span className="text-xl ">{stats[1]}</span>
+            <span className="text-xl ">{stats[1].length}</span>
           </div>
         </motion.button>
         </Link>
@@ -102,7 +112,17 @@ export default function Home() {
          className=" toggle-button "> Series Data
 
          </motion.button>
+
+            <motion.button 
+          whileHover={{ scale: 1.10}}
+         whileTap={{ scale: 0.95 }}
+         onClick ={() => toggleData("consoles")} 
+         className=" toggle-button "> Consoles Data
+
+         </motion.button>
          </div>
+
+         
 
         </div>
    
@@ -128,6 +148,18 @@ export default function Home() {
                       <div className="recharts-container   ">
                 <SeriesBarChart width={WIDTH} height= {HEIGHT} data = {stats[3]} x_key="series" y_key= "games" />
                 <SeriesPieChart width={WIDTH} height= {HEIGHT} data = {stats[3]} name_key="series" data_key="games"/>
+
+                </div>
+                </motion.div>
+          
+          } 
+
+              {toggleConsoles &&
+                <motion.div key="consoles-charts" variants={containerVariants} initial="initial" animate="animate" exit="exit">
+                    <h2> Collection of Top 10 Consoles </h2>
+                      <div className="recharts-container   ">
+                <SeriesBarChart width={WIDTH} height= {HEIGHT} data = {stats[1]} x_key="console" y_key= "games" />
+                <ConsolesPieChart width={WIDTH} height= {HEIGHT} data = {stats[1]} name_key="console" data_key="games"/>
 
                 </div>
                 </motion.div>

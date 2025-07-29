@@ -26,9 +26,9 @@ def get_games():
     return jsonify(games=games_json)
 
 
-@bp.route('/api/collection/get_games_years', methods = ["GET"])
+@bp.route('/api/collection/get_graph_data', methods = ["GET"])
 @jwt_required()
-def get_games_years():
+def get_graph_data():
 
     brackets = {
         "1972-1990": range(1972,1991),
