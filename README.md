@@ -42,7 +42,7 @@ Once you've properly set up your secret key and admin information, you can creat
 cd backend && source .venv/bin/activate \
 && flask cli create-db \
 && flask cli create-admin \
-&& flask cli add-consoles \
+&& flask cli add-consoles 
 ```
 
 ## 3. Run the application
