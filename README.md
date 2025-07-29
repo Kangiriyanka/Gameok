@@ -1,3 +1,71 @@
+# Setup Guide
+
+## 1. Setup the environments
+
+In the root of your project folder, enter the following commands in your terminal.
+
+```
+npm install 
+npm run create-venv   
+npm run create-env
+```
+
+1. create-venv creates a virtual environment and installs all backend dependencies.
+2. create-env  generates a template .env file with fields to fill in.
+
+
+### .env 
+You must manually fill in your own SECRET_KEY, ADMIN INFORMATION, and optionally the DATABASE_URL.
+
+Note: Installing the actual database server (e.g., sqlite, PostgreSQL) is outside the scope of this guide.
+
+
+```
+SECRET_KEY= #fill
+ADMIN=#fill
+EMAIL=#fill
+PASSWORD= #fill
+DATABASE_URL=sqlite:///gamelibrary.db
+DATABASE_TRACKING=False
+FLASK_APP=gameok.py
+FLASK_ENV=development
+FLASK_DEBUG=1
+
+
+```
+
+
+## 2. Setup the database
+
+Once you've properly set up your secret key and admin information, you can create the database and add an admin to the Users table. The admin is in charge of adding games and consoles. Don't forget to change your interpreter to the one from the virtual enviroment created in step 1.
+ 
+```bash
+
+cd backend && source .venv/bin/activate \
+&& flask cli create-db \
+&& flask cli create-admin \
+&& flask cli add-consoles \
+```
+
+## 3. Run the application
+
+Once everything is set up, run in two separate terminals:
+```
+npm run dev
+```
+```
+npm run backend
+```
+
+and you'll be all set.
+
+# Usage Guide 
+
+
+The main usage of the application is covered on my website: https://joefarah/projects/gameok/
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

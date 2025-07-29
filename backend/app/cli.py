@@ -13,7 +13,7 @@ bp = Blueprint("cli", __name__)
 @bp.cli.command('create-db')
 def init_database():
     db.create_all()
-    return "Successfully created all the tables"
+    click.echo("Succesfully created the database")
  
 
 # Create the admin using app.config to fetch the previously set environment variables
@@ -26,7 +26,7 @@ def create_admin():
     admin= User(username = admin_username, email= admin_email, password= admin_password)
     db.session.add(admin)
     db.session.commit()
-    return f"Successfully created admin {admin_username} "
+    click.echo(f"Succesfully added admin {admin_username}")
     
 
 # Drop all tables using the MetaData Object
@@ -59,7 +59,7 @@ def add_consoles():
         c = Console(name= console["name"], year= console["year"], firm= console["firm"])
         db.session.add(c)
     db.session.commit()
-    return f"Successfully added popular consoles"
+    click.echo(f"Succesfully added popular consoles. You can add more in the Add Consoles page")
 
 
 
@@ -68,7 +68,7 @@ def drop_all_tables():
     try:
       
         db.metadata.drop_all(db.engine)
-        return "Successfully deleted all tables"
+        click.echo("Successfully deleted all tables")
     except Exception as e:
      
         return str(e)
@@ -81,7 +81,7 @@ def drop_table(table_name):
     try:
         table = db.Model.metadata.tables[table_name]
         table.drop(db.engine)
-        return f"Successfully deleted table {table_name}."
+        return click.echo(f"Successfully deleted table {table_name}.")
     except Exception as e:
      
         return str(e)
