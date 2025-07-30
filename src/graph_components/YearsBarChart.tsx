@@ -40,26 +40,47 @@ export default function YearsBarChart({data, width, height, x_key, y_key}: Graph
   
          
            
+            
            margin={{
-            top: 20,
+            top: 40,
             right: 20,
-            left: -30,
-            bottom: 5,
+            left: 10,
+            bottom: 30,
           }}>
 
-    <CartesianGrid stroke="var(--n64-gray-clr)"strokeDasharray="1 1 " />
-  <XAxis 
+    <CartesianGrid stroke="var(--n64-gray-clr)" strokeDasharray="1 1 " />
+  <XAxis    dataKey={x_key}
+  interval={0}
+  tick= {{fontSize: "14", dy:1}}
+  label={{
+    value: "year brackets",
+    position: 'bottom',
+                
+style: { fill: '#aaacb0ff', fontSize: 14}  }}/>
+  <YAxis    
+        tick={{
+    dx: -1, 
   
-  dataKey={x_key} />
-  <YAxis dataKey={y_key}   allowDecimals={false}>
-      <Label value= {x_key}/>
-  </YAxis>
+    fontSize: 14,
+  
+  }}
+    label={{
+    value: "# of games",
+    position: 'top',
+    offset: 20, 
+    padding: 10,
+    dx: 5,
+
+
+                 
+    style:  {  fill: '#aaacb0ff', fontSize: 14} 
+  }} allowDecimals={false} dataKey={y_key}  />
   <Tooltip 
 
 
 
   labelStyle= {{color:"rgba(0,0,0,0.9)"}}
-  contentStyle= {{background: "hsla(220, 3%, 81%, 0.88)", border: "none", borderRadius: "0.5rem", }}
+  contentStyle= {{background: "hsla(220, 43%, 99%, 0.88)", border: "none", borderRadius: "0.5rem", }}
   cursor={{ stroke: 'var(--n64-dark-gray-clr)' ,fill: "rgba(0,0,0,0.15"}}
   
   />

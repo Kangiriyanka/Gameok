@@ -41,22 +41,45 @@ export default function SeriesBarChart({data, width, height, x_key, y_key}: Grap
          
            
            margin={{
-            top: 30,
+            top: 40,
             right: 20,
-            left: -30,
-            bottom: 5,
+            left: 10,
+            bottom: 30,
           }}>
 
     <CartesianGrid stroke="var(--n64-gray-clr)"strokeDasharray="1 1 " />
-  <XAxis  dataKey={x_key} interval={0}>
-        <Label  viewBox= {{height: 100}} value={x_key} position='bottom'  />
-  </XAxis>
-  <YAxis  label= "Count" allowDecimals={false} dataKey={y_key}  />
+<XAxis
+  dataKey={x_key}
+  interval={0}
+  tick= {{fontSize: "14", dy:1}}
+  label={{
+    value: x_key,
+    position: 'bottom',
+                
+     style:  { fill: '#aaacb0ff', fontSize: 14} 
+  }}
+/>
+  <YAxis    
+        tick={{
+    dx: -1, 
+  
+    fontSize: 14,
+  
+  }}
+    label={{
+    value: "# of games",
+    position: 'top',
+    offset: 20, 
+    padding: 10,
+
+                 
+    style:  { fill: '#aaacb0ff', fontSize: 14} 
+  }} allowDecimals={false} dataKey={y_key}  />
   <Tooltip 
 
 
-  labelStyle= {{color:"rgba(0,0,0,0.9)"}}
-  contentStyle= {{background: "hsla(220, 3%, 81%, 0.88)", border: "none", borderRadius: "0.5rem", }}
+  labelStyle= {{color:"rgba(0,0,0,0.9)", fontWeight: "500"}}
+  contentStyle= {{background: "hsla(220, 43%, 99%, 0.88)", border: "none", borderRadius: "0.5rem", }}
   cursor={{ stroke: 'var(--n64-dark-gray-clr)' ,fill: "rgba(0,0,0,0.15"}}
   
   />

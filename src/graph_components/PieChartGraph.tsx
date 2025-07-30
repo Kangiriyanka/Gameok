@@ -125,7 +125,7 @@ export default function PieChartGraph({data, width, height, name_key, data_key}:
             top: 0,
             right: 5,
             left: 0,
-            bottom: 5,
+            bottom: 0,
           }}>
 
             <Pie 

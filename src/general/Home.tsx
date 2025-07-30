@@ -1,10 +1,10 @@
 
 // import GameGraph from "@/graph_components/GameGraph";
 import YearsBarChart from "@/graph_components/YearsBarChart";
-import PieChart from "@/graph_components/PieChart";
+
 import { useAuthContext } from "../context/AuthContext";
 import { Link, useLoaderData } from "react-router";
-import PieChartGraph from "@/graph_components/PieChart";
+import PieChartGraph from "@/graph_components/PieChartGraph";
 import "../assets/styles/home.css"
 import SeriesBarChart from "@/graph_components/SeriesBarChart";
 import { useState } from "react";
@@ -102,7 +102,7 @@ export default function Home() {
         <div className="btn-container">
         <motion.button 
         onClick ={() => toggleData("year")} 
-        className=" toggle-button "
+        className={`toggle-button ${toggleYear ? "active-button" : ""}`}
         whileHover={{ scale: 1.10}}
         whileTap={{ scale: 0.95 }}
         > Year Data
@@ -113,7 +113,8 @@ export default function Home() {
           whileHover={{ scale: 1.10}}
          whileTap={{ scale: 0.95 }}
          onClick ={() => toggleData("series")} 
-         className=" toggle-button "> Series Data
+         className={`toggle-button ${toggleSeries? "active-button" : ""}`}
+         > Series Data
 
          </motion.button>
 
@@ -121,7 +122,7 @@ export default function Home() {
           whileHover={{ scale: 1.10}}
          whileTap={{ scale: 0.95 }}
          onClick ={() => toggleData("consoles")} 
-         className=" toggle-button "> Consoles Data
+         className={`toggle-button ${toggleConsoles ? "active-button" : ""}`}> Consoles Data
 
          </motion.button>
          </div>
