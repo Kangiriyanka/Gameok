@@ -71,6 +71,7 @@ export default function SeriesBarChart({data, width, height, x_key, y_key}: Grap
     position: 'top',
     offset: 20, 
     padding: 10,
+    dx: 5,
 
                  
     style:  { fill: '#aaacb0ff', fontSize: 14} 

@@ -39,7 +39,7 @@ def get_graph_data():
         "1991-2000": range(1991,2001),
         "2001-2010": range(2001,2011),
         "2011-2020": range(2011,2021),
-        "2020-Present": range(2021,2100),
+        "2021-Present": range(2021,2100),
     }
 
     year_brackets = {label: 0 for label in brackets }
