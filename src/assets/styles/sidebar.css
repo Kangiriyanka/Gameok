@@ -221,7 +221,7 @@
       height: 60px;
       width: 100%;
       border-right: none;
-      border-top: 1px solid var(--line-clr);
+      border-top: 1px solid var(--n64-gray-clr);
       position: fixed;
       top: unset;
       bottom: 0;
@@ -264,7 +264,7 @@
       height: 60px;
       width: 100%;
       background-color: var(--hover-clr);
-      border-top: 1px solid var(--line-clr);
+      border-top: 2px solid  var(--n64-gray-clr);
       display: flex;
       justify-content: center;
     

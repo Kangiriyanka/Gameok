@@ -48,10 +48,11 @@ export default function SeriesBarChart({data, width, height, x_key, y_key}: Grap
           }}>
 
     <CartesianGrid stroke="var(--n64-gray-clr)"strokeDasharray="1 1 " />
-  <XAxis interval={2} dataKey={x_key}  padding= {{left: 20, right: 20}} />
-  <YAxis allowDecimals={false} dataKey={y_key}  />
+  <XAxis  dataKey={x_key} interval={0}>
+        <Label  viewBox= {{height: 100}} value={x_key} position='bottom'  />
+  </XAxis>
+  <YAxis  label= "Count" allowDecimals={false} dataKey={y_key}  />
   <Tooltip 
-
 
 
   labelStyle= {{color:"rgba(0,0,0,0.9)"}}
@@ -59,7 +60,7 @@ export default function SeriesBarChart({data, width, height, x_key, y_key}: Grap
   cursor={{ stroke: 'var(--n64-dark-gray-clr)' ,fill: "rgba(0,0,0,0.15"}}
   
   />
-  <Legend wrapperStyle={{padding: 5}}/>
+
 
 
 

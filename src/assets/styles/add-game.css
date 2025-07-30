@@ -14,9 +14,9 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 1rem;
     margin-bottom: 3rem;
-    height: 10rem;
+   
     padding: 1rem;
-    
+    overflow: auto;
 
 
 
@@ -30,6 +30,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 1rem;
     padding: 1rem;
+    overflow: auto;
 
     
 }
@@ -61,7 +62,7 @@
 }
 
 #dismiss-button {
-    border: 2px solid var(--base-n64-clr);
+    border: 2px solid var(--n64-start-clr);
     padding: 0.5rem;
     font-size: 1.3rem;
     border-radius: .5rem;
@@ -79,7 +80,7 @@
 }
 
  #dismiss-button:hover {
-    background-color: var(--n64-b-clr);
+    background-color: var(--n64-start-clr);
 }
 
 
@@ -129,3 +130,17 @@ box-shadow: var(--double-shadow);
     border: none;
 }
 
+
+
+.success-box {
+    position: fixed;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 1px solid var(--n64-b-light-clr);
+    color: var(--n64-b-clr);
+    border-radius: .5rem;
+    padding: 1rem;
+    left: 45%;
+ 
+    top: 5rem;
+}

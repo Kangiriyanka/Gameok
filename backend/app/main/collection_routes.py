@@ -67,7 +67,7 @@ def get_graph_data():
 
     series_data = dict(sorted(series_data.items(), key= lambda x:x[1], reverse=True))
     year_data = [{"years": label, "games": count} for label,count in year_brackets.items()]
-    series_data = [{"series": series, "games": count} for series,count in series_data.items()][:10]
+    series_data = [{"series": series, "games": count} for series,count in series_data.items()][:5]
     
     
    

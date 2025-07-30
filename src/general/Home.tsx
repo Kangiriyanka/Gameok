@@ -136,7 +136,7 @@ export default function Home() {
             
           {toggleYear &&
           <motion.div key="year-charts" variants={containerVariants} initial="initial" animate="animate" exit="exit">
-                    <h2> Collection of games per year bracket </h2>
+                    <h2> Game count per year bracket </h2>
                  <div className="recharts-container   ">
                   
           <YearsBarChart width={WIDTH} height= {HEIGHT} data = {stats[2]} x_key="years" y_key= "games" />
@@ -148,7 +148,7 @@ export default function Home() {
 
             {toggleSeries &&
                 <motion.div key="series-charts" variants={containerVariants} initial="initial" animate="animate" exit="exit">
-                    <h2> Collection of Top 10 Series </h2>
+                    <h2> Top 5 Series </h2>
                       <div className="recharts-container   ">
                 <SeriesBarChart width={WIDTH} height= {HEIGHT} data = {stats[3]} x_key="series" y_key= "games" />
                 <SeriesPieChart width={WIDTH} height= {HEIGHT} data = {stats[3]} name_key="series" data_key="games"/>
@@ -160,7 +160,7 @@ export default function Home() {
 
               {toggleConsoles &&
                 <motion.div key="consoles-charts" variants={containerVariants} initial="initial" animate="animate" exit="exit">
-                    <h2> Collection of Top 10 Consoles </h2>
+                    <h2> Top 5 Consoles </h2>
                       <div className="recharts-container   ">
                 <SeriesBarChart width={WIDTH} height= {HEIGHT} data = {stats[1]} x_key="console" y_key= "games" />
                 <ConsolesPieChart width={WIDTH} height= {HEIGHT} data = {stats[1]} name_key="console" data_key="games"/>

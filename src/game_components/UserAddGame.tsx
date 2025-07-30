@@ -4,9 +4,11 @@ import { useLoaderData } from 'react-router';
 import '../assets/styles/add-game.css';
 import { fetchWithCSRF } from '../assets/scripts/csrf.ts';
 import ErrorBox from '../animation_components/ErrorBox.tsx';
+import SuccessBox from '../animation_components/SuccessBox.tsx'
 import ConsoleOption from './ConsoleOption.tsx';
 import GameOption from './GameOption.tsx';
 import { AnimatePresence, motion } from 'motion/react';
+
 
 
 
@@ -27,6 +29,7 @@ function UserAddGame() {
     const [selectedConsole, setSelectedConsole] = useState('')
     const [selectedGame, setSelectedGame] = useState('')
     const [coverPhoto, setCoverPhoto] =  useState<string | null>(null);
+    const [showSuccessBox, setShowSuccessBox] = useState(false)
    
 
     function fetchCover(game_title: string) {
@@ -39,6 +42,13 @@ function UserAddGame() {
       setIsGameSelected(false)
       setSelectedGame("")
       setResponse('')
+    }
+
+    function successDismiss() {
+      setIsGameSelected(false)
+      setSelectedGame("")
+      setShowSuccessBox(false)
+
     }
 
 
@@ -57,7 +67,7 @@ function UserAddGame() {
             console.replace(/\s+/g, "").toLowerCase().includes(value.replace(/\s+/g, "").toLowerCase())
           );
 
-          console.log(results)
+        
               setConsoles(results);
     }
 
@@ -105,13 +115,21 @@ function UserAddGame() {
           }
 
           const result = await response.json();
- 
+          console.log(result)
           setResponse(result.msg);
+
+          if (response.status == 200) {
+    
+            dismiss()
+            setShowSuccessBox(true)
+           
+          }
+
           setCount(prev => prev +1)
           
         } catch (error: unknown){
           if (error instanceof Error) {
-              
+              setShowSuccessBox(false)
               console.error(error.message);
               setResponse(error.message)
         } 
@@ -167,6 +185,7 @@ function UserAddGame() {
         <div className= "add-game-container">
            <div className="page-header">
            <h1> Add Games</h1>
+           {showSuccessBox ? <SuccessBox handleDismiss={successDismiss} key={count}  response = {`Game added!`} count= {count}/> : ""}
            
         </div>  
         
@@ -206,9 +225,9 @@ function UserAddGame() {
       exit = {{opacity:0 }}
    
       transition={{ duration: 0.2 }}>
-  <div className= "flex gap-8 items-center justify-between">
+  <div className= "relative flex gap-8 items-center justify-between">
   <h2 > Select a game</h2>
-<div className="flex items-center gap-2 border-1 rounded-lg p-2 border border-[var(--n64-gray-clr)] ">
+  <div className="flex items-center gap-2 border-1 rounded-lg p-2 border border-[var(--n64-gray-clr)] ">
   <input value={gameSearchValue} onChange={(e) => narrowGames(e)}  className="search-input w-50" type="text" placeholder= "Filter..."/> 
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--text-clr)"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
 </div>
@@ -247,10 +266,11 @@ function UserAddGame() {
 
 
         
-
+<AnimatePresence mode="wait">
            {isConsoleSelected && isGameSelected && (
-<motion.div className="cover-container"
 
+
+<motion.div className="cover-container"
 
       key={selectedGame}
       initial={{ opacity: 0, y:-10}}
@@ -263,14 +283,15 @@ function UserAddGame() {
 
  <AnimatePresence mode="wait">
   {coverPhoto && (
-    <div>
+    <motion.div>
       <img 
+
         src={coverPhoto} 
         alt="Game cover" 
       />
 
    
-    </div>
+    </motion.div>
   )}
 </AnimatePresence>
   <div className= "flex gap-8 mt-8 w-[100%] justify-around  ">
@@ -278,12 +299,12 @@ function UserAddGame() {
        whileHover={{ scale: 1.10}}
      whileTap={{ scale: 0.95 }}
      
-  onClick= {() => dismiss()} id ="dismiss-button"> Dismiss </motion.button>
+  onClick= {() => dismiss()} id ="dismiss-button"> Cancel </motion.button>
   <motion.button  
        whileHover={{ scale: 1.10}}
      whileTap={{ scale: 0.95 }}
      transition = {{duration: 0.2}}
-  onClick={() => sendDataToFlask()} id="add-game-button"> Add </motion.button>
+     onClick={() => sendDataToFlask()} id="add-game-button"> Add </motion.button>
   </div>
 
 
@@ -293,7 +314,9 @@ function UserAddGame() {
 
 </motion.div>
 
+
 )}
+</AnimatePresence>
            
         </div>
 
@@ -303,3 +326,4 @@ function UserAddGame() {
 
 
 export default UserAddGame;
+

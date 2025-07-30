@@ -130,10 +130,15 @@ def edit_password():
    
     
     if data["currentPassword"] != current_user_password:
-
         return {"msg": "The current password you entered is incorrect."}, 422
+    
+    elif data["currentPassword"] == data["newPassword"]:
+        return {"msg": "The new password must different from the current one."}, 422
+    
     elif data["newPassword"] != data["confirmPassword"]:
-        return {"msg": "The new password doesn't match. "}, 422
+        return {"msg": "The new password doesn't match."}, 422
+    
+
     else:
         user.password = data["newPassword"]
         db.session.commit()

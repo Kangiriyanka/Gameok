@@ -52,7 +52,7 @@ def get_my_consoles():
 
     consoles_json = [console.to_json() for console in consoles]
     counts_data = dict(sorted(counts_data.items(), key= lambda x:x[1], reverse=True))
-    counts_data = [{"console": label, "games": count} for label,count in counts_data.items()][:10]
+    counts_data = [{"console": label, "games": count} for label,count in counts_data.items()][:5]
 
 
     

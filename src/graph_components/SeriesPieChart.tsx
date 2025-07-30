@@ -97,7 +97,7 @@ const renderActiveShape = ({
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fontWeight={"bold"} fill="var(--text-clr)">{`Games: ${value}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {` ${((percent ?? 1) * 100).toFixed(0)}%`}
+        {` ${((percent ?? 1) * 100).toFixed(2)}%`}
       </text>
     </g>
   );

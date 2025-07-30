@@ -1,22 +1,25 @@
-import { AnimatePresence, easeInOut, motion } from "motion/react";
+import { AnimatePresence,  motion } from "motion/react";
 import {useState, useEffect} from "react"
 
-type ErrorBoxProps = {
+type SuccessBoxProps = {
+
   handleDismiss: () => void;
-  isCover: boolean;
   response: string;
   count?: number; 
 };
 const errorTransitionVariants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition : {duration: 0.2 , easeInOut}
+  initial: { opacity: 0, y: -5},
+  animate: { opacity: 1, scale: 1.2, y: 0, transition: {delay: 0.3,  type: "spring", bounce: 0.40 }},
+  exit: { opacity: 0, rotate: 0, y: 0},
+  transition: {delay: 0.3}
+ 
+
+
 };
 
 
 
-export default function ErrorBox({ handleDismiss, isCover, response, count = 0 }: ErrorBoxProps) {
+export default function SuccessBox({ response, count = 0 , handleDismiss}: SuccessBoxProps) {
 
   const [visible, setVisible] = useState(true)
 
@@ -25,9 +28,13 @@ export default function ErrorBox({ handleDismiss, isCover, response, count = 0 }
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(false)
-      handleDismiss();
+       setTimeout(() => {
+      handleDismiss()
+    }, 300) // Match exit duration
+  }, 2000)
+     
       
-    }, 2000)
+
 
     setVisible(true)
     return () => clearTimeout(timer)
@@ -45,12 +52,14 @@ export default function ErrorBox({ handleDismiss, isCover, response, count = 0 }
       initial="initial"
       animate="animate"
       exit="exit"
-      className={isCover ? "cover-error-message" : "error-message"}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="success-box"
+    
+      
     >
       <p>{response}</p>
     </motion.div>
     }
+
     </AnimatePresence>
 
   

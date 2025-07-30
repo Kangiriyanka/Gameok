@@ -3,7 +3,7 @@ import {useState} from 'react'
 import '../assets/styles/forms.css';
 import ErrorBox from "../animation_components/ErrorBox";
 import { motion } from "motion/react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 type UserData = {
     username: string;
@@ -20,6 +20,7 @@ export default function Register() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("");
   const [count, setCount] = useState(0)
+  const navigate = useNavigate()
   
 
   // Post to the add_user route in the database, the JSON.stringify turns the Javascript data to JSON.
@@ -41,8 +42,9 @@ export default function Register() {
       }
       
       const result = await response.json();
-      console.log(result)
+   
       setResponse(result.msg);
+      if (response.status == 200) navigate("/")
       setCount(prev => prev +1)
 
   }  catch (error: unknown){

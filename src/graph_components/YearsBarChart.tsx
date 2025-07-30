@@ -48,8 +48,12 @@ export default function YearsBarChart({data, width, height, x_key, y_key}: Graph
           }}>
 
     <CartesianGrid stroke="var(--n64-gray-clr)"strokeDasharray="1 1 " />
-  <XAxis dataKey={x_key} />
-  <YAxis dataKey={y_key}   allowDecimals={false}  />
+  <XAxis 
+  
+  dataKey={x_key} />
+  <YAxis dataKey={y_key}   allowDecimals={false}>
+      <Label value= {x_key}/>
+  </YAxis>
   <Tooltip 
 
 
@@ -59,7 +63,7 @@ export default function YearsBarChart({data, width, height, x_key, y_key}: Graph
   cursor={{ stroke: 'var(--n64-dark-gray-clr)' ,fill: "rgba(0,0,0,0.15"}}
   
   />
-  <Legend wrapperStyle={{padding: 5}}/>
+
 
 
 
