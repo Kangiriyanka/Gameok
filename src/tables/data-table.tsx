@@ -124,7 +124,7 @@ export function DataTable<TData, TValue>({
       </Table>
     </div>
     {/* Pagination Component from the Docs */}
-      <div className= "w-[80%] mt-3">
+      <div className= "w-[80%] m-10 mt-1 relative py-3 px-8">
       <DataTablePagination table={table}/>
       </div>
     </div>

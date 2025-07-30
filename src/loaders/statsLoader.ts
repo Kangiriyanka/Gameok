@@ -19,9 +19,10 @@ export async function statsLoader(): Promise<number[]> {
 
   const games_result = await games_response.json();
   const consoles_result = await consoles_response.json();
+  console.log(consoles_result)
 
 
 
 
-  return [games_result.total, consoles_result.graph_data, games_result.year_data, games_result.series_data];
+  return [games_result.total, consoles_result.graph_data, games_result.year_data, games_result.series_data, consoles_result.consoles.length];
 }

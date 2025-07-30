@@ -71,7 +71,7 @@ export default function Home() {
          className=" shadow-[var(--double-shadow)]  rounded-[0.5rem] border-1 border-[var(--n64-gray-clr)]  stats ">
           <div className="flex  gap-1 ">
             <span className="text-xl text-[var(--n64-b-clr)]  font-medium ">Consoles: </span>
-            <span className="text-xl ">{stats[1].length}</span>
+            <span className="text-xl ">{stats[4]}</span>
           </div>
         </motion.button>
         </Link>

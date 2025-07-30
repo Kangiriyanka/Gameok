@@ -25,6 +25,7 @@ export  const protectedRoutes = [
         
         Component: RootLayout,
         loader: adminLoader,
+        ErrorBoundary: ErrorBoundary,
         children: [
           {
             path: "home",  

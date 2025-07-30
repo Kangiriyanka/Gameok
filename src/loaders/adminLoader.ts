@@ -13,6 +13,12 @@ export async function adminLoader() {
     throw new Response("Failed to fetch consoles", { status: response.status });
   }
 
+  if (response.status === 401) {
+    throw new Response("Unauthorized connection", { status: 401 });
+  }
+
+  
+
   const result = await response.json();
   return result.msg
 }
