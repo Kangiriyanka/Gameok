@@ -16,7 +16,7 @@ export async function consolesLoader() {
   if (response.status === 401) {
   
  
-    throw new Response("Failed to fetch consoles", { status: response.status });
+    throw new Response("Unauthorized  to fetch consoles", { status: response.status });
   }
 
   else if (!response.ok) {

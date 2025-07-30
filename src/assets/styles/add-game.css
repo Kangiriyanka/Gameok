@@ -141,6 +141,7 @@ box-shadow: var(--double-shadow);
     border-radius: .5rem;
     padding: 1rem;
     left: 45%;
+    z-index:10;
  
     top: 5rem;
 }

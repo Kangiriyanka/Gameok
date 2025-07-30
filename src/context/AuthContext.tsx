@@ -3,7 +3,7 @@ import React from "react";
 import userInfo from '../assets/scripts/userInfo.ts';
 
 // Your authentication context is a container that holds all the values you want for authentication 
-// If you're not logged in, the token will be null.
+
 type AuthTools = {
    
     storedUserInfo: string | null;
