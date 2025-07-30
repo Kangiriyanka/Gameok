@@ -184,7 +184,7 @@ function UserAddGame() {
         <div className= "console-selector-container">
               
          {consoles && consoles.length > 0 ? ( 
-          consoles.map((console: string) => <ConsoleOption onConsoleSelect= {filterConsoleGames} name={console} selected ={selectedConsole}/> 
+          consoles.map((console: string) => <ConsoleOption key={console} onConsoleSelect= {filterConsoleGames} name={console} selected ={selectedConsole}/> 
         )) :
          (<p className =" p-2 border text-lg rounded-lg w-[100%] text-center col-span-2 mx-0 h-fit opacity-50"> No consoles found (^_^*)</p>)
         }

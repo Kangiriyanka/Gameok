@@ -4,13 +4,16 @@ import AdminAddConsole from '../admin_components/AdminAddConsole.tsx';
 import AdminRoute from '../general/AdminRoute.tsx';
 import { allConsolesLoader } from '../loaders/allConsolesLoader.ts';
 import ErrorBoundary from '@/general/ErrorBoundary.tsx';
-
+import { adminLoader } from '@/loaders/adminloader.ts';
 
 export const adminRoutes = [
   
   {
     path: "/admin",
     Component: AdminRoute,
+    loader: adminLoader,
+
+  
     children: [
       {
         path: "add-consoles",

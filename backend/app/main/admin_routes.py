@@ -12,8 +12,23 @@ from app.main.helpers import admin_only
 from werkzeug.utils import secure_filename
 
 
+
+@bp.route('/api/admin/isAdmin/', methods= ["GET"])
+@jwt_required()
+def is_admin():
+
+      current_user= get_jwt_identity()
+      id= User.query.filter_by(username=current_user).first().id
+      print(f"The id is {id}")
+      if id == 1 :
+        return {"msg": True}
+      return {"msg": False}
+     
+
+
 @bp.route('/api/admin/add_game', methods= ["POST"])
 @jwt_required()
+@admin_only
 def add_game():
  try:
  
@@ -37,7 +52,7 @@ def add_game():
   
    current_game = Game.query.filter_by(title=request.form["title"]).first()
    console= Console.query.filter_by(name=request.form["console"]).first()
-   print(current_game)
+   
  
 
   

@@ -17,7 +17,7 @@ import EmptyCollection from "./EmptyCollection";
 export default function Home() {
   const { storedUserInfo } = useAuthContext();
   const stats = useLoaderData();
-  console.log(stats)
+
 
   const [toggleYear, setToggleYear] = useState(true)
   const [toggleSeries, setToggleSeries] = useState(false)

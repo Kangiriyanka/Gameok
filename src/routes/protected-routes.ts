@@ -14,6 +14,7 @@ import  ErrorBoundary  from '../general/ErrorBoundary.tsx';
 import { statsLoader } from '@/loaders/statsLoader.ts';
 import ProtectedRoute from '@/general/ProtectedRoute.tsx';
 import RootLayout from '../general/RootLayout.tsx';
+import { adminLoader } from '@/loaders/adminloader.ts';
 
 export  const protectedRoutes = [
   {
@@ -23,6 +24,7 @@ export  const protectedRoutes = [
       {
         
         Component: RootLayout,
+        loader: adminLoader,
         children: [
           {
             path: "home",  

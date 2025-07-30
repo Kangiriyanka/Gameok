@@ -5,7 +5,11 @@ import "../assets/styles/sidebar.css"
 import { fetchWithCSRF } from "../assets/scripts/csrf";
 
 
-export default function Sidebar() {
+type SidebarProps = {
+  isAdmin: string
+}
+
+export default function Sidebar( {isAdmin}: SidebarProps) {
     const {setUserInfo, storedUserInfo} = useAuthContext()
     const sidebarRef = useRef<HTMLElement>(null)
     const toggleBtnRef = useRef<HTMLButtonElement>(null);
@@ -119,7 +123,7 @@ export default function Sidebar() {
             <ul className= "sub-menu">
                 <div>
                <Link to="/dashboard/consoles/">My Consoles</Link>
-                {storedUserInfo == "Kangiriyanka" ? <li> <Link to= "/admin/add-consoles">Add Console (Admin)</Link></li>: ""}
+                {isAdmin ? <li> <Link to= "/admin/add-consoles">Add Console (Admin)</Link></li>: ""}
                 </div>
             </ul>
            
@@ -135,7 +139,7 @@ export default function Sidebar() {
                 <div>
                 <li><Link to="/dashboard/games/my-games">My Games</Link></li>
                 <li><Link to="/dashboard/games/add-games/">Add Games</Link></li>
-                {storedUserInfo == "Kangiriyanka" ? <li> <Link to= "/admin/add-games">Add Games (Admin)</Link></li>: ""}
+                {isAdmin ? <li> <Link to= "/admin/add-games">Add Games (Admin)</Link></li>: ""}
                 </div>
             </ul>
            

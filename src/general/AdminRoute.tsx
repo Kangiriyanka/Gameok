@@ -1,22 +1,23 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
+import { Navigate, Outlet, useLoaderData } from "react-router-dom";
 import Sidebar from "./Sidebar.tsx"
 import AnimationWrapper from "@/animation_components/AnimationWrapper.tsx";
+
 
 
 export default function AdminRoute() {
 
 
-    const {storedUserInfo} = useAuthContext();
+    const isAdmin = useLoaderData()
+ 
 
   
-    if (storedUserInfo !== "Kangiriyanka") {
+    if (!isAdmin) {
         return <Navigate to="/" replace />;
     }
 
     return (
     <div id= "layout">
-    <Sidebar/>
+    <Sidebar isAdmin ={isAdmin}/>
     <main>
     <AnimationWrapper>
     <Outlet/>
