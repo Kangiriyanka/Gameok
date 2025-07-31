@@ -30,6 +30,7 @@ def is_admin():
 @jwt_required()
 @admin_only
 def add_game():
+
  try:
  
    for key, value in request.form.items():
@@ -43,21 +44,32 @@ def add_game():
    a_title = request.form['title']
    a_year = int(request.form['year'])
    a_series = request.form['series']
+
   
-   
    posted_game = Game(title=a_title, year=a_year, series=a_series)
 
     
-    # Get the username
   
    current_game = Game.query.filter_by(title=request.form["title"]).first()
+
+ 
    console= Console.query.filter_by(name=request.form["console"]).first()
+   
+   
+   # Check to see if there's already the game associated to that console
+   # Kingdom Hearts III can either be on Switch or PS5
+   
+   if (current_game and console):
+     exists_on_another_console = GameConsole.query.filter_by(game_id = current_game.id, console_id = console.id).first()
+
    
  
 
   
     # If the game doesn't exist in the Games table , add it to the games table and establish relationships
-   if not current_game:
+    # If it does exist, but is on a different console, add it anyways.
+
+   if not current_game or not exists_on_another_console:
            
          # Handle the cover photo upload
             cover_photo = request.files['coverPhoto']
