@@ -51,7 +51,7 @@ class Game(db.Model):
     __tablename__ = "games"
     id = db.Column(db.Integer, primary_key=True)
     title= db.Column(db.String(100))
-    year = db.Column(db.Integer )
+    year = db.Column(db.Integer)
     series= db.Column(db.String(100))
     cover_photo = db.Column(db.String(100))  
     users = relationship("User", secondary="game_ownership", back_populates="games")
@@ -78,7 +78,7 @@ class GameOwnership(db.Model):
     __tablename__ = "game_ownership"
     game_id = db.Column(db.Integer, db.ForeignKey("games.id"), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
-    memories = db.Column(db.String(100))
+    memories = db.Column(db.Text)
 
 # Relationship table for Consoles and Games
 # Primary Keys: game_id and console_id 
