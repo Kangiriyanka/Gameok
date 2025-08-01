@@ -47,35 +47,35 @@ def add_game():
 
   
    posted_game = Game(title=a_title, year=a_year, series=a_series)
+   current_game = Game.query.filter_by(title=request.form["title"].strip()).first()
+   console= Console.query.filter_by(name=request.form["console"]).first()
 
+   
+   
+   # If a game exists, see if you're trying to add it to a console it already exists on
+   allowCrossConsole = False
+
+   if (current_game):
+     existent_console = GameConsole.query.filter_by(game_id = current_game.id, console_id = console.id).first()
+     if (existent_console):
+        return {"msg": "This game already exists on this console"}, 422
+     allowCrossConsole = True
+     
+   
     
   
-   current_game = Game.query.filter_by(title=request.form["title"]).first()
-
- 
-   console= Console.query.filter_by(name=request.form["console"]).first()
    
-   
-   # Check to see if there's already the game associated to that console
-   # Kingdom Hearts III can either be on Switch or PS5
-   
-   if (current_game and console):
-     exists_on_another_console = GameConsole.query.filter_by(game_id = current_game.id, console_id = console.id).first()
+   if allowCrossConsole:
+        
+                new_game_console_combo = GameConsole(game_id = current_game.id, console_id= console.id)
+                db.session.add(new_game_console_combo)
+                db.session.commit()
+                return {"msg": f"{a_title}  was added to the game collection on {console.name}"}
 
-   
- 
-
-  
-    # If the game doesn't exist in the Games table , add it to the games table and establish relationships
-    # If it does exist, but is on a different console, add it anyways.
-
-   if not current_game or not exists_on_another_console:
+   if not current_game:
            
          # Handle the cover photo upload
             cover_photo = request.files['coverPhoto']
-          
-
-            
             # Check if the cover photo exists and if it's either in a jpg or jpeg format.
             if cover_photo and allowed_file(cover_photo.filename):
                
@@ -99,25 +99,23 @@ def add_game():
                 return {"msg": "Please add a cover photo in either .jpg or .jpeg format"}, 422
 
             db.session.add(posted_game)
+            print(f"After adding to session: {posted_game.id}") 
             db.session.commit()
             
             # Refresh the posted_game object after it is committed to the database, which will update its id attribute with the new ID
             db.session.refresh(posted_game)
        
-          
-            
-            # Add the relationship between the game and the console
-            
+        
             new_game_console_combo = GameConsole(game_id = posted_game.id, console_id= console.id)
             db.session.add(new_game_console_combo)
             db.session.commit()
-            
             return {"msg": f"{a_title}  was added to the game collection"}
+            
+       
         
-    # If the game exists in the table and the user has the game then tell the user they already own the game.
    else : 
       
-        return {"msg": "This exists in the database the library"}, 422
+        return {"msg": "This game already exists in the database"}, 422
     
      
 
