@@ -57,8 +57,7 @@ export default function Home() {
    <div className="home-container">
     
     
-    
-      <div className="page-header">
+
         <h1>{storedUserInfo}'s Collection</h1>
 
         <h2> Consoles and Games </h2>
@@ -184,10 +183,6 @@ export default function Home() {
 
    
 
-        
-        </div>
-
-  
 
    
    

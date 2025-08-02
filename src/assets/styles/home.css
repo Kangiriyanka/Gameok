@@ -55,3 +55,29 @@ hr {
 }
 
 
+.home-container {
+
+  position: relative;
+  top: 2rem;
+  left: 3rem;
+  width: 100%;
+
+}
+
+
+
+
+@media(max-width: 800px) {
+
+  
+
+   .home-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+   
+   }
+   
+}
+
+

@@ -191,7 +191,7 @@ function UserAddGame() {
         
          
         <div className="mt-5 relative flex flex-col top-8 left-12 w-[80%]" >
-        <div className= "flex  items-center justify-between">
+        <div className= "search flex items-center justify-between">
         <h2 > Select a console </h2>
         <div className="flex items-center gap-2 border-1  border-2 border-[var(--n64-gray-clr)]  rounded-lg p-2">
         <input value={consoleSearchValue} onChange={(e) => narrowConsoles(e)} className= "search-input  w-50"  type="text" placeholder= "Filter..."/> 
@@ -225,7 +225,7 @@ function UserAddGame() {
       exit = {{opacity:0 }}
    
       transition={{ duration: 0.2 }}>
-  <div className= "relative flex gap-8 items-center justify-between">
+  <div className= "search relative flex gap-8 items-center justify-between">
   <h2 > Select a game</h2>
   <div className="flex items-center gap-2 border-1 rounded-lg p-2 border border-[var(--n64-gray-clr)] ">
   <input value={gameSearchValue} onChange={(e) => narrowGames(e)}  className="search-input w-50" type="text" placeholder= "Filter..."/> 

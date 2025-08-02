@@ -127,12 +127,16 @@ def get_console_games(console_id):
     return jsonify(console_games = console_games_json)
    
 
-
+# MDXEditor file upload 
 # Upload image to folder -> Get image data -> create a url for it.
-
 @bp.route("/api/collection/upload_picture/", methods=["POST", "GET"])
 @jwt_required()
 def approve_upload():
+      """
+      Create the URL of the uploaded picture in the MDX Editor
+      
+
+      """
       
       image= request.files.get("image")
       title = request.form['title']

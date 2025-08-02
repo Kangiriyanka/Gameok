@@ -1,3 +1,4 @@
+/* Table CSS */
 tr {
     border-bottom: 1px solid var(--n64-gray-clr);
 }
@@ -10,6 +11,8 @@ input {
     outline: none;
     border:1px solid var(--n64-gray-clr);
 }
+
+
 
 
 .card {
@@ -154,4 +157,22 @@ input {
 
 button[role="combobox"] {
   border-color: var(--n64-gray-clr);
+}
+
+
+
+@media(max-width: 800px) {
+
+    tr {
+        font-size: 1rem;
+    }
+
+
+
+  
+
+  
+
+
+
 }

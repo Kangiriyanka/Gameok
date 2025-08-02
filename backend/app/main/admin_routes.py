@@ -82,10 +82,15 @@ def add_game():
                 # Generate a unique filename for the cover photo
                 filename = secure_filename(cover_photo.filename)
                 filename = f"{str(uuid.uuid4())}-{filename}"
-                filepath = os.path.abspath(os.path.join(current_app.config["UPLOAD_FOLDER"],filename))
-                
-                
 
+                # Create a directory for the game cover
+                game_dir_path = os.path.abspath(os.path.join(current_app.config["UPLOAD_FOLDER"], a_title))
+             
+                if not os.path.exists(game_dir_path):
+                    os.mkdir(os.path.join(current_app.config["UPLOAD_FOLDER"], a_title))
+
+                filepath = os.path.abspath(os.path.join(game_dir_path, filename))
+                
                 # Save the cover photo to the specified path
                 cover_photo.seek(0)
                 cover_photo.save(filepath)
