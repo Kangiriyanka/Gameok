@@ -103,9 +103,8 @@ def delete_game(a_game_id):
 def fetch_image(a_game_title):
     
      filename = Game.query.filter_by(title=a_game_title).first().cover_photo
-     print(f"Serving filename: {filename}")
-     print(f"From folder: {current_app.config['UPLOAD_FOLDER']}")
-     return send_from_directory(current_app.config["UPLOAD_FOLDER"], filename)
+     game_dir_path = os.path.abspath(os.path.join(current_app.config["UPLOAD_FOLDER"], a_game_title))
+     return send_from_directory(game_dir_path, filename)
      
      
      

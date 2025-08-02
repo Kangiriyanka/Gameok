@@ -73,7 +73,7 @@ export default function Login() {
     return (
       <div>
            <div className="authentication-box" >
-           <h1 className="mt-3"> Login </h1>
+           <h1 className="mt-3"> Gameok Login </h1>
            
           </div> 
           <form className="reg-form "  style={{margin: "0 auto"}} onSubmit={loginUser}>

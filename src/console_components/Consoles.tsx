@@ -34,9 +34,6 @@ function Consoles() {
 
 
 
-
-
-
  
   function filterConsole(filter_id: number) {
 
@@ -56,7 +53,6 @@ function Consoles() {
 
   }
 
-
  
   return (
 
@@ -73,19 +69,10 @@ function Consoles() {
     variants={containerVariants}
     initial="initial"
     animate="animate"
-   
- 
-
 
     >
       
       {allConsoles.map((console: GameConsole) => (
-
-
-        
-
-
-
         <Console
           key={console.id}
           isActive = {console.id == selectedID}

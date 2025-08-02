@@ -97,6 +97,7 @@ body {
   height: 100%;
   grid-template-columns: auto 1fr;
 
+
 }
 
 .main-container {
@@ -114,15 +115,33 @@ body {
 
 }
 
+
 @media(max-width: 800px) {
 
-    .page-header {
-       inset: 2rem 0 0 0;
-       text-align: center;
+  
 
+    .page-header {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
     }
 
+    .main-container {
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+   
 }
+
+
+
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

@@ -44,7 +44,7 @@ export default function Register() {
       const result = await response.json();
    
       setResponse(result.msg);
-      if (response.status == 200) navigate("/")
+      // if (response.status == 200) navigate("/")
       setCount(prev => prev +1)
 
   }  catch (error: unknown){

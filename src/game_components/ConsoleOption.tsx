@@ -13,7 +13,7 @@ export default function ConsoleOption({ name, selected, onConsoleSelect }: Conso
      whileTap={{ scale: 0.95 }}
      transition = {{duration: 0.2}}
     onClick = {() => onConsoleSelect(name)} 
-    className={` h-20 p-2 border text-lg rounded-lg shadow-[var(--double-shadow)] border border-[var(--n64-gray-clr)]   ${selected == name ? "active-console" : ""}`}>
+    className={` console-option h-20 p-2 border text-lg rounded-lg shadow-[var(--double-shadow)] border border-[var(--n64-gray-clr)]   ${selected == name ? "active-console" : ""}`}>
       {name}
     </motion.button>
   );
