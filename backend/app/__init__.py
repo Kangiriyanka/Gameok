@@ -7,6 +7,7 @@ from functools import wraps
 import json
 import uuid
 from datetime import datetime, timedelta, timezone
+from flask_migrate import Migrate
 
 
 
@@ -23,6 +24,7 @@ from werkzeug.utils import secure_filename
 MINUTES= 30
 
 db = SQLAlchemy()
+migrate = Migrate()
 cors = CORS()
 jwt = JWTManager()
 
@@ -33,6 +35,7 @@ def create_app(config_class = Config):
     app.config.from_object(config_class)
    
     db.init_app(app)
+    migrate.init_app(app,db, render_as_batch=True)
     cors.init_app(app)
     jwt.init_app(app)
 
