@@ -18,7 +18,8 @@ const handleGameSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
   onGameSelect(event.target.value);
 }
 
-const gameSelects = games.map((game: GameTitle) =>
+const gameSelects = games.map
+  ((game: GameTitle) =>
   <option key={game} value = {game}>{game}</option>)
   
 
