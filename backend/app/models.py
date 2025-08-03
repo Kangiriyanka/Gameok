@@ -68,6 +68,9 @@ class Game(db.Model):
             "cover_photo": self.cover_photo
         }
     
+    def __repr__(self) -> str:
+        return f"Game(id={self.id}, title={self.title}), year={self.year}"
+    
 
 
 # Relationship table for Users and Games.

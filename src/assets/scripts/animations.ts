@@ -57,7 +57,7 @@ export const containerVariants = {
     x: 0,
     scale: 1,
     transition: {
-      staggerChildren: 0.1,
+      
     
       
 

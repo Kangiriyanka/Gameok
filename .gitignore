@@ -39,3 +39,4 @@ __pycache__/
 /backend/instance/
 /backend/covers/
 /backend/memories/
+/backend/csv_uploads/

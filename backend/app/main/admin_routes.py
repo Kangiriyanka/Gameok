@@ -1,4 +1,6 @@
 
+import io
+import shutil
 import uuid
 import os 
 from app.main import bp
@@ -9,7 +11,7 @@ from app.main.helpers import allowed_file
 from flask import request,jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.main.helpers import admin_only
-from werkzeug.utils import secure_filename
+import csv
 
 
 
@@ -30,7 +32,7 @@ def is_admin():
 @jwt_required()
 @admin_only
 def add_game():
-
+ 
  try:
  
    for key, value in request.form.items():
@@ -143,7 +145,6 @@ def add_console():
     
     #Check if any of the fields is empty
     for value  in data.values():
-        print(value)
         if value == "":
             return {"msg":"One of the fields is not filled, please check"}, 422
     
@@ -156,9 +157,7 @@ def add_console():
            
             return {"msg":"This console already exists"}, 422
         
-    # elif data["title"] == "":
-    #     print(data["title"])
-    #     return "Please enter a title"
+
 
     else:
 
@@ -232,3 +231,95 @@ def game_edit(a_game_id):
     
 
 
+
+
+@bp.route("/api/admin/add_games_from_csv/", methods=["POST", "GET"])
+@jwt_required()
+@admin_only
+def add_games_from_csv():
+      """
+      Bulk upload games from a csv file. All games to be added must have a cover photo in jpg and non-empty fields.
+      
+      Step 1:
+      1. Uploaded CSV is decoded from bytes to a string with utf-8
+      2. Transform the str into a file to be read (stream)
+      3. Pass the stream to the DictReader
+
+      Step 2:
+      1. Scan each row to see if a field is empty.
+      2. Check if the game already exists in the database.
+      3. Check if the console exists in the database
+      3. Check if the cover photo in the row matches a file that exists in the csv_uploads folder
+      """
+      
+      csvfile = request.files['csvFile']
+      games_to_add = []
+    
+
+      if csvfile:
+            # Read the Bytes and convert to String
+            contents = csvfile.read().decode('utf-8')
+            stream = io.StringIO(contents)
+            reader = csv.DictReader(stream)
+
+            for row in reader:
+
+                if not row["title"] or not row["console"] or not row["year"]  or not row["series"] or not row["cover_photo"]:
+                     return {"msg": "One of the rows in your csv has an empty field."}, 422
+               
+                game_exists = Game.query.filter_by(title=row["title"].strip()).first()
+                console = Console.query.filter_by(name=row["console"]).first()
+                if game_exists:
+                    return {"msg": f"{row["title"]} already exists in the database."}, 422
+                
+                if not console:
+                    return {"msg": f"{row["console"]} does not exist in the database."}, 422
+                     
+                
+                jpg_cover_location = os.path.abspath(os.path.join(current_app.config["CSV_UPLOAD_FOLDER"], row["cover_photo"] + ".jpg"))
+          
+
+                if not os.path.exists(jpg_cover_location):
+                    
+                     return {"msg": f"Cover photo for {row["title"]} is invalid"}, 422
+                
+             
+                new_game = Game(title=row["title"], year=row["year"], series=row["series"], cover_photo=row["cover_photo"] +".jpg")
+                games_to_add.append((new_game,jpg_cover_location,console))
+             
+                
+            # All games are checked
+            # With Shutils, you need the full file path (with the filename you want to copy
+            # Source: a/mario.jpeg  Destination: b/ (NOT ENOUGH) -> b/mario.jpeg
+            for game_entry in games_to_add:
+                 
+                 #  Cover photo path
+                 destination_dir = os.path.abspath(os.path.join(current_app.config["UPLOAD_FOLDER"], game_entry[0].title))
+                 if not os.path.exists(destination_dir):
+                    os.mkdir(os.path.join(current_app.config["UPLOAD_FOLDER"], game_entry[0].title))
+
+                 filename = os.path.basename(game_entry[1])  
+                 destination_file = os.path.join(destination_dir, filename)
+
+               
+                 source = game_entry[1]
+                 shutil.copyfile(source, destination_file)
+              
+        
+                 db.session.add(game_entry[0])
+                 db.session.commit()
+                 db.session.refresh(game_entry[0])
+                 new_game_console_combo = GameConsole(game_id = game_entry[0].id, console_id= game_entry[2].id)
+                 db.session.add(new_game_console_combo)
+            
+
+            db.session.commit()
+            return  {"msg": "The games have been successfully added."}, 200
+
+      else:
+           
+
+          return  {"msg": "The file does not exist"}, 422
+
+      
+      
