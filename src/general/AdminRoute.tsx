@@ -17,12 +17,12 @@ export default function AdminRoute() {
 
     return (
     <div id= "layout">
-    <Sidebar isAdmin ={isAdmin}/>
-    <main>
-    <AnimationWrapper>
-    <Outlet/>
-    </AnimationWrapper>
-    </main>
+      <Sidebar isAdmin ={isAdmin}/>
+        <main>
+            <AnimationWrapper>
+                <Outlet/>
+            </AnimationWrapper>
+        </main>
     </div>
         
     );

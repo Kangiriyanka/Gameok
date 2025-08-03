@@ -1,16 +1,15 @@
 .reg-form{
     position: relative;
     color: var(--secondary-text-clr);
-    top: 3rem;
-    left: 2rem;
     display: flex;
     padding: 2rem;
+    top: 2rem;
     flex-direction: column;
     justify-content: center;
     gap: 2.5rem;
     border-radius: .5rem;
     border: 1px solid var(--n64-gray-clr);
-    width: 50%;
+    width: 40%;
     background-color: var(--n64-dark-gray-clr);
     box-shadow: var(--double-shadow);
    
@@ -19,16 +18,11 @@
    
 }
 
-.admin-form {
-    width: 40rem;
+.admin-form, .edit-password {
+    width: 80%;
     
 }
 
-.edit-password {
-    top: 3rem;
-    left: 3rem;
-    width: 60%;
-}
 
 
 
@@ -97,7 +91,7 @@ label {
 }
 
 .label-text {
-    width: 40%;
+    width: 20%;
     font-weight: 500;
    
    
@@ -150,16 +144,28 @@ label {
 
 @media(max-width: 800px) {
 
+    .authentication-box h1 {
+        font-size: 2rem;
+    }
+
     .reg-form {
-        margin: 0 auto;
-        width: 70%;
-        height: 60%;
-        left: 0.5rem;
+     
+        padding: 2rem;
+        width: 100%;
+    
         
     }
 
+    .admin-form {
+        width: 100%;
+    }
+
     .reg-form input{
-        width: 90%;
+
+        font-size: 1rem;
+
+    
+       
     }
 
     .admin-form {
@@ -184,12 +190,30 @@ label {
 }
 
 
+    .form-link {
+        font-size: 0.9rem;
+    }
+
+    .form-button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+
 
 
 
     .form-button {
         margin: 0 auto;
     }
+
+    .label-text {
+        width: 0%;
+        font-weight: 500;
+        
+   
+    
+}
 
 
 }

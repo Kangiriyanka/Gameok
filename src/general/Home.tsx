@@ -56,19 +56,18 @@ export default function Home() {
    
    <div className="home-container">
     
-    
 
         <h1>{storedUserInfo}'s Collection</h1>
 
-        <h2> Consoles and Games </h2>
+        <h2 className="mt-3"> Consoles and Games </h2>
         <div className=" flex gap-4 stats-container   ">
         
         <Link to="/dashboard/consoles" >
          <motion.button  
          whileHover={{ scale: 1.10}}
          whileTap={{ scale: 0.95 }}
-         className=" shadow-[var(--double-shadow)]  rounded-[0.5rem] border-1 border-[var(--n64-gray-clr)]  stats ">
-          <div className="flex  gap-1 ">
+         className=" shadow-[var(--double-shadow)]  rounded-[0.5rem] border-1 border-[var(--n64-gray-clr)] stats-btn ">
+          <div className="flex gap-1 ">
             <span className="text-xl text-[var(--n64-b-clr)]  font-medium ">Consoles: </span>
             <span className="text-xl ">{stats[4]}</span>
           </div>
@@ -81,9 +80,9 @@ export default function Home() {
                whileHover={{ scale: 1.10}}
          whileTap={{ scale: 0.95 }}
         
-        className=" shadow-[var(--double-shadow)] rounded-[0.5rem] border-1 border-[var(--n64-gray-clr)]  stats ">
+        className=" shadow-[var(--double-shadow)] rounded-[0.5rem] border-1 border-[var(--n64-gray-clr)]  stats-btn ">
           <div className="flex gap-1">
-            <span className="text-xl text-[var(--n64-a-clr)] font-medium m ">Games: </span>
+            <span className="text-xl text-[var(--n64-a-clr)] font-medium ">Games: </span>
             <span className="text-xl  ">{stats[0]}</span>
           </div>
         </motion.button>

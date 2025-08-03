@@ -11,9 +11,9 @@ export default function GameLayout() {
  
     return (
         <AnimatePresence mode="wait">
-        <AnimationWrapper>
+   
         <Outlet/>
-        </AnimationWrapper>
+    
         </AnimatePresence>
 
      

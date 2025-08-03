@@ -71,7 +71,7 @@ export default function Login() {
 
     
     return (
-      <div>
+      <div className="p-2">
            <div className="authentication-box" >
            <h1 className="mt-3"> Gameok Login </h1>
            
@@ -105,10 +105,10 @@ export default function Login() {
      whileTap={{ scale: 0.95 }}
      transition= {{duration: 0.1}} type="submit" className="form-button" >Login</motion.button>
           
-          <div style= {{margin: "0 auto", display: "inline-flex"}}> 
+          <div className= "form-link" style= {{margin: "0 auto", display: "inline-flex"}}> 
           
           
-          Not a member? Sign up  <Link className=" ml-1 underline  text-[var(--accent-clr)]"to="/register">
+          Not a member? Sign up  <Link className=" form-link ml-1 underline  text-[var(--accent-clr)]"to="/register">
           <motion.div
        
 >

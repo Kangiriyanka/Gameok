@@ -6,12 +6,12 @@
   background-color: var(--base-clr);
   border-right: 1px solid var(--base-clr);
   box-shadow: 1px 0px 2px var(--base-clr);
-  transition: 300ms ease-in-out;
+  
 
   position: sticky;
   top: 0;
   align-self: start;
-  transition: 300ms ease-in-out;
+
   overflow: hidden;
   text-wrap: nowrap;
 
@@ -219,13 +219,15 @@
 
     #sidebar {
       height: 60px;
+   
       width: 100%;
       border-right: none;
       border-top: 1px solid var(--n64-gray-clr);
       position: fixed;
       top: unset;
       bottom: 0;
-      padding: 0;
+      padding-top: 0rem;
+  
       z-index: 10;
 
      > ul {

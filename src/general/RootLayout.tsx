@@ -13,7 +13,7 @@ export default function RootLayout() {
 
  
     return (
-        <div id= "layout">
+        <div id="layout">
         <Sidebar isAdmin = {isAdmin} />
         <main>
       

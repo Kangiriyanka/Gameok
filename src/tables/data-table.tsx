@@ -63,9 +63,9 @@ export function DataTable<TData, TValue>({
   })
  
   return (
-    <div className=" relative top-8 left-12 ">
+    <div>
       {/* Filter Component */}
-      <div className="flex items-center py-4">
+      <div className="search flex items-center py-4">
         <Input
           placeholder="Filter titles..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -78,7 +78,7 @@ export function DataTable<TData, TValue>({
       {/* End Filter Component */}
 
       
-    <div className="border-1 border-[var(--base-clr)] rounded-lg  w-[80%]">
+    <div className="games-table border-1 border-[var(--base-clr)] rounded-lg w-[80%]">
       <Table>
         <TableHeader >
           {table.getHeaderGroups().map((headerGroup) => (

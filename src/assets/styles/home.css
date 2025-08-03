@@ -1,27 +1,22 @@
-.home-container {
-    h2 {
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        font-size: 1.8rem;
-    }
-
-
+.stats-container {
+    margin: 1.5rem 0;
 }
 
-
-
 .recharts-container {
-    margin-bottom: 1rem;
+    margin: 1.5rem 0;
     gap: 1rem;
     display: flex;
+   
+
     
 }
 
 
 
-.stats {
+.stats-btn {
 
     padding: 1.5rem;
+    width: 10rem;
 }
 
 .toggle-button {
@@ -44,6 +39,7 @@
 .btn-container {
     display: flex;
     gap: 1rem;
+    margin: 1.5rem 0;
 }
 
 
@@ -55,29 +51,90 @@ hr {
 }
 
 
-.home-container {
 
-  position: relative;
-  top: 2rem;
-  left: 3rem;
-  width: 100%;
+@media(max-width: 1400px) {
+
+
+    .recharts-container {
+        flex-direction: column;
+
+    }
+
+   
 
 }
-
-
 
 
 @media(max-width: 800px) {
 
+
+
+
+   .home-container h2 {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+   }
+
+
+ 
+   .btn-container {
+    justify-content: center ;
+    align-items: center;
+    gap: 1rem;
+  
+   }
+
+   .toggle-button {
+    font-size: 1.5rem;
+    width: 12rem;
+   }
+
+    .stats-container {
+    
+    align-items: center;
+    justify-content: center;
+
+    
+ 
+  
+   }
+
+   .stats-btn {
+
+    padding: 1.5rem;
+    width: 15rem;
+    
+    
+    
+    div {
+        justify-content: center;
+    
+    }
+
+    span {
+        font-size: 1.6rem;
+    }
+   
+    
+}
+
+    .recharts-wrapper {
+       
+        width: 40rem !important;
+        height: 25rem !important;
+       
+    }
+
+    .recharts-container{
+         padding: 1rem;
+    }
+
   
 
-   .home-container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-   
-   }
+
+ 
    
 }
+
 
 
