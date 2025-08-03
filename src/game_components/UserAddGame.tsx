@@ -182,15 +182,15 @@ function UserAddGame() {
     return (
 
 
-        <div className= "add-game-container">
+        <div className= "">
            <div className="page-header">
            <h1> Add Games</h1>
            {showSuccessBox ? <SuccessBox handleDismiss={successDismiss} key={count}  response = {`Game added!`} count= {count}/> : ""}
            
-        </div>  
+          </div>  
         
          
-        <div className="mt-5 relative flex flex-col top-8 left-12 w-[80%]" >
+        <div className=" add-game-container mt-5 relative flex flex-col w-[80%]" >
         <div className= "search flex items-center justify-between">
         <h2 > Select a console </h2>
         <div className="flex items-center gap-2 border-1  border-2 border-[var(--n64-gray-clr)]  rounded-lg p-2">

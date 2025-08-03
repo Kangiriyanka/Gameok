@@ -20,6 +20,7 @@ export default function AnimationWrapper({ children }: PageWrapperProps) {
   return (
   
     <motion.div
+      className="page-wrapper"
       key = {location.key}
       variants={pageTransition}
       initial="initial"

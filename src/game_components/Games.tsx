@@ -5,8 +5,7 @@ import { columns,  } from "../tables/columns"
 import { DataTable } from "../tables/data-table"
 import { useState } from "react";
 import { fetchWithCSRF } from "../assets/scripts/csrf";
-import { pageTransition } from "@/assets/scripts/animations";
-import { motion } from "motion/react";
+
 
 
 function Games() {
@@ -60,19 +59,10 @@ function Games() {
    
     return (
    
-        <div
-        
-        className=" main-container">
-         <div className="page-header">
+        <div>
            <h1> My Games</h1>
-           
-           
-        </div>      
-
-
-
-     <DataTable columns={columns(deleteGame)} data={collection} />
-    </div>
+           <DataTable columns={columns(deleteGame)} data={collection} />
+         </div>
 
  
 

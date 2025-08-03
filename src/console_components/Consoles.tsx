@@ -56,8 +56,8 @@ function Consoles() {
  
   return (
 
-  <div className= "h-[100%]">
-  <h1 className="page-header">My Consoles</h1>
+  <div>
+  <h1 className="consoles-page-header">My Consoles</h1>
 
   
   {allConsoles && allConsoles.length > 0 ? (

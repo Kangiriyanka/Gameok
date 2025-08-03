@@ -192,5 +192,14 @@ box-shadow: var(--double-shadow);
         width: 75%;
         justify-self: center;
     }
+
+    .add-game-container {
+        width: 100%;
+    }
+
+    .search {
+        width: 100%;
+      
+    }
 }
 

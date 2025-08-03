@@ -2,28 +2,30 @@
 
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr ; 
-  margin-top: 3rem;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 2rem;
+
   width: 80%;
-  top: 3rem;
-  left: 3rem;
   overflow: hidden;
-  
-
-
   
 
 }
 
 .console-shelf.active {
-  height: 80%;
-  display: flex;
 
+  display: flex;
+ 
 
 }
 
 
 
+
+.return-svg {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.1rem;
+}
 
 
 
@@ -35,10 +37,12 @@
     border: 1px solid var(--n64-gray-clr);
     padding: 1rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     border-radius: 0.5rem;
     font-size: 1.1rem;
     margin: 1rem;
+    overflow: auto;
    
 
 
@@ -60,6 +64,7 @@
   height:  100%;
   margin: 0;
   padding: 0rem;
+  flex-direction: column;
 
  
 
@@ -68,7 +73,7 @@
 
 
   .console-name {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     text-align: left;
 
     
@@ -119,30 +124,67 @@
 
 
 
-@media(max-width: 800px) {
-
-    .console-shelf {
-      
-      grid-template-columns: repeat(1, 1fr);
-    }
-
-
-
-}
-
-
-
-
 
 @media(max-width: 1200px) {
 
     .console-shelf {
-          overflow: scroll;
+      
           grid-template-columns: repeat(2, 1fr);
+     
+     
     }
+
+
+}
+
+@media(max-width: 800px) {
+
+    .console-shelf {
+      
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(2, 1fr);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .console-container.active {
+      justify-content: center;
+      top: 1.5rem;
+    }
+
+    .console-container {
+
+      width: 50%;
+      margin: 1rem auto;
+     
+    }
+
+    .console-container.active .console-name{
+      font-size: 1.3rem;
+      text-align: center;
+
+    }
+
+
+    .consoles-page-header {
+      font-size: 1.9rem;
+     
+    }
+
+
+.return-svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.1rem;
+}
+
+
 
 
 
 }
+
+
+
 
 

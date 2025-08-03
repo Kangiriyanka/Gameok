@@ -15,9 +15,15 @@ input {
 
 
 
+
+/* End Table CSS */
+
+
+
 .card {
     box-shadow: var(--card-shadow);
     opacity: 0.9;
+    margin: 0.2rem;
 }
 
 .default-game-card  {
@@ -92,8 +98,8 @@ input {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  overflow-x: scroll;
-  border-bottom: 3px solid var(--n64-dark-gray-clr);
+  overflow: auto;
+
 
   
   
@@ -161,18 +167,46 @@ button[role="combobox"] {
 
 
 
-@media(max-width: 800px) {
 
-    tr {
-        font-size: 1rem;
+@media(max-width: 1400px) {
+
+  
+
+    .game-collection { 
+
+
+      grid-template-columns:  repeat(3, 1fr);
+ 
+     
     }
 
+}
 
+
+
+@media(max-width: 1200px) {
+
+     tr {
+        font-size: 1.2rem;
+    }
+
+        .games-table {
+        width: 100%;
+        }
 
   
 
-  
+    .game-collection { 
 
 
+      grid-template-columns:  repeat(2, 1fr);
+ 
+     
+    }
+    .card {
+     width: 10rem;
+    height: 8rem;
+}
 
 }
+

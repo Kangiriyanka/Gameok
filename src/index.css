@@ -106,7 +106,7 @@ body {
 
 }
 
-.page-header {
+.page-wrapper {
 
   position: relative;
   top: 2rem;
@@ -116,26 +116,30 @@ body {
 }
 
 
+
+
 @media(max-width: 800px) {
 
   
 
-    .page-header {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-    }
+   main {
+    text-align: center;
+   }
 
-    .main-container {
-        padding: 1rem;
-    }
 
     h2 {
         font-size: 1.4rem;
     }
+
+    .page-wrapper {
+
+  position: relative;
+  inset: 0;
+  padding: 1rem;
+  width: 100%;
+
+}
+    
 
    
 }

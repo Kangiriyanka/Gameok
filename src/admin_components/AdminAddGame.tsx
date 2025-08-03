@@ -134,7 +134,7 @@ function AddGame() {
 
       
       <label>
-   <span className="label-text">Upload Cover</span> 
+   <span className="label-text">Cover</span> 
   <input type="file" accept="image/*" onChange={handleFileUpload} />
 </label>
                <motion.button  whileHover={{ scale: 1.05}}
