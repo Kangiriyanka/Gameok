@@ -28,8 +28,8 @@ input {
 
 .default-game-card  {
 
-    width: 15rem;
-    height: 18rem;
+    width: 12rem;
+    height: 15rem;
     overflow: hidden;
     border-radius: .5rem;
    
@@ -98,7 +98,7 @@ input {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  overflow: auto;
+ 
 
 
   
@@ -186,9 +186,31 @@ button[role="combobox"] {
 
 @media(max-width: 1200px) {
 
-     tr {
-        font-size: 1.2rem;
+
+
+        .games-table {
+        width: 100%;
+        }
+
+  
+
+    .game-collection { 
+
+
+      grid-template-columns:  repeat(3, 1fr);
+ 
+     
     }
+    .card {
+     width: 10rem;
+    height: 12rem;
+}
+
+}
+
+@media(max-width: 1000px) {
+
+
 
         .games-table {
         width: 100%;
@@ -204,9 +226,10 @@ button[role="combobox"] {
      
     }
     .card {
-     width: 10rem;
-    height: 8rem;
+     width: 12rem;
+    height: 14rem;
 }
 
 }
+
 

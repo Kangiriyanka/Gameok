@@ -4,9 +4,10 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   margin-top: 2rem;
-
+  
   width: 80%;
-  overflow: hidden;
+
+
   
 
 }
@@ -14,6 +15,8 @@
 .console-shelf.active {
 
   display: flex;
+
+  
  
 
 }
@@ -42,7 +45,8 @@
     border-radius: 0.5rem;
     font-size: 1.1rem;
     margin: 1rem;
-    overflow: auto;
+ 
+ 
    
 
 
@@ -65,10 +69,15 @@
   margin: 0;
   padding: 0rem;
   flex-direction: column;
+  border: none;
+  box-shadow: none !important;
+
 
  
 
-  border: none;
+ 
+
+  /* border: none; */
   justify-content: flex-start;
 
 

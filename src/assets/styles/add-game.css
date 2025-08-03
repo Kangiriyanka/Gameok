@@ -137,6 +137,7 @@ box-shadow: var(--double-shadow);
     font-size: 1.5rem;
     font-weight: 700;
     border: 1px solid var(--n64-b-light-clr);
+    background:  var(--n64-b-clr);
     color: var(--n64-b-clr);
     border-radius: .5rem;
     padding: 1rem;
@@ -163,6 +164,7 @@ box-shadow: var(--double-shadow);
 
     .game-selector-container, .console-selector-container {
        grid-template-columns: repeat(2, 1fr);
+       overflow: visible;
        
    
     }
@@ -184,6 +186,7 @@ box-shadow: var(--double-shadow);
 
     .game-selector-container, .console-selector-container {
         grid-template-columns: 2fr;
+        overflow: visible;
        
    
     }
@@ -199,6 +202,7 @@ box-shadow: var(--double-shadow);
 
     .search {
         width: 100%;
+        
       
     }
 }

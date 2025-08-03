@@ -88,7 +88,7 @@ export default function Sidebar( {isAdmin}: SidebarProps) {
 
   
     return (
-        <div>
+        <div className="h-[105%] bg-[var(--n64-dark-gray-clr)] relative">
         <nav ref={sidebarRef} id="sidebar">
 
         <ul>
