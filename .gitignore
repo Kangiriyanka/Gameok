@@ -40,3 +40,4 @@ __pycache__/
 /backend/covers/
 /backend/memories/
 /backend/csv_uploads/
+/backend/migrations/

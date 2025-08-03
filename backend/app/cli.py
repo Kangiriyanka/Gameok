@@ -1,7 +1,7 @@
 from flask import Blueprint, app
 import os 
 from app import db 
-from app.models import User,Console
+from app.models import Game, User,Console
 import click
 
 
@@ -62,6 +62,21 @@ def add_consoles():
     click.echo(f"Succesfully added popular consoles. You can add more in the Add Consoles page")
 
 
+
+
+@bp.cli.command('delete-game')
+@click.argument('game_id', type=int)
+def delete_game(game_id):
+
+    game = Game.query.get(game_id)
+    if not game:
+        print(f"Game with id={game_id} not found.")
+        return
+
+    db.session.delete(game)
+    db.session.commit()
+    print(f"Deleted game with id={game_id} title={game.title}.")
+    
 
 @bp.cli.command('drop-tables')
 def drop_all_tables():

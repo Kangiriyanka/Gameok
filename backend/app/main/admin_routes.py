@@ -10,6 +10,7 @@ from app.models import Console, Game, GameConsole, GameOwnership, User
 from app.main.helpers import allowed_file
 from flask import request,jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required
+from werkzeug.utils import secure_filename
 from app.main.helpers import admin_only
 import csv
 
@@ -249,7 +250,7 @@ def add_games_from_csv():
       1. Scan each row to see if a field is empty.
       2. Check if the game already exists in the database.
       3. Check if the console exists in the database
-      3. Check if the cover photo in the row matches a file that exists in the csv_uploads folder
+      4. Check if the cover photo in the row matches a file that exists in the csv_uploads folder
       """
       
       csvfile = request.files['csvFile']
