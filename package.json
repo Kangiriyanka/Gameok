@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "backend": "cd backend && .venv/bin/flask run --no-debugger",
-    "create-venv": "cd backend && mkdir covers &&  python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt",
+    "create-venv": "cd backend && mkdir covers && mkdir csv_uploads && mkdir memories &&  python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt",
     "create-env": "cd backend && test -f .env || echo  \"SECRET_KEY= #fill\\nADMIN=#fill\\nEMAIL=#fill\\nPASSWORD= #fill\\nDATABASE_URL=sqlite:///gamelibrary.db\\nDATABASE_TRACKING=False\\nFLASK_APP=gameok.py\\nFLASK_ENV=development\\nFLASK_DEBUG=1\" > .env"
 
   },
