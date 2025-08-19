@@ -57,6 +57,7 @@ npm run backend
 
 and you'll be all set.
 
+Alternatively, you can install <a href="https://www.npmjs.com/package/concurrently#installation">concurrently</a> to run it only one terminal: 
 # Usage Guide 
 
 
