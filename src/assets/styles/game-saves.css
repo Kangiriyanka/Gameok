@@ -1,0 +1,98 @@
+.button-10 {
+    border: none;
+    padding: 0.5rem 1rem;
+    background-color: var(--n64-c-dark-clr);
+    font-size: 15px;
+    color:white;
+    text-transform: uppercase;
+    position: relative;
+    cursor: pointer;
+}
+
+.button-10:before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  /* Outside the div  */
+  top: -5px;
+  left: -5px;
+  border-top: 2px solid var(--n64-c-dark-clr);
+  border-left: 2px solid var(--n64-c-dark-clr);
+  transition: all 0.25s;
+}
+
+.button-10:hover:before,
+.button-10:hover:after {
+  height: 100%;
+  width: 100%;
+}
+
+.button-10:after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  bottom: -5px;
+  right: -5px;
+  border-bottom: 2px solid var(--n64-c-dark-clr);
+  border-right: 2px solid var(--n64-c-dark-clr);
+  transition: all 0.25s;
+}
+
+.file-button {
+  border: none;
+  padding: 0.5rem 1rem;
+  background-color: var(--n64-c-dark-clr);
+  font-size: 15px;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+/* corner frame */
+.file-button::before,
+.file-button::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transition: all 0.25s;
+}
+
+.file-button::before {
+  top: -5px;
+  left: -5px;
+  border-top: 2px solid var(--n64-c-dark-clr);
+  border-left: 2px solid var(--n64-c-dark-clr);
+}
+
+.file-button::after {
+  bottom: -5px;
+  right: -5px;
+  border-bottom: 2px solid var(--n64-c-dark-clr);
+  border-right: 2px solid var(--n64-c-dark-clr);
+}
+
+.file-button:hover::before,
+.file-button:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+
+.save-files-list {
+    list-style: none;
+    padding: 0;    
+    margin: 0;
+}
+
+.save-file-row {
+    border: red;
+}

@@ -38,6 +38,7 @@ __pycache__/
 
 /backend/instance/
 /backend/covers/
+/backend/gamesaves/
 /backend/memories/
 /backend/csv_uploads/
 /backend/migrations/

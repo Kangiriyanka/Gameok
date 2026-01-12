@@ -164,6 +164,8 @@ def approve_upload():
       return {"msg": "Failed to upload picture"}, 422
 
 
+
+# You also do this inside the gamesave_routes as the download endpoint
 @bp.route('/api/collection/uploads/<title>/<filename>')
 def uploaded_file(title, filename):
     game_dir_path = os.path.abspath(os.path.join(current_app.config["USER_UPLOAD_FOLDER"], title))

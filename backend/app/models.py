@@ -94,3 +94,27 @@ class GameConsole(db.Model):
     __tablename__ = "game_console"
     game_id = db.Column(db.Integer, db.ForeignKey('games.id', ondelete="CASCADE", name='fk_gameconsole_game' ) ,primary_key=True)
     console_id = db.Column( db.Integer, db.ForeignKey('consoles.id', name='fk_gameconsole_console' ), primary_key=True)
+
+
+
+# Relationship table for user_id and game_id to store game save files
+# If you want multiple save files for a game, the GameSave should have an id.
+# To get the fileurl, you can reconstruct with the filename and gametitle (not done here for now )
+class GameSave(db.Model):
+    __tablename__ = "game_saves"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id', ondelete="CASCADE"), nullable=False)
+    filename = db.Column(db.String(255), nullable=False)
+    filepath = db.Column(db.String(255), nullable=False)
+    # default -> no need to fill it.
+    upload_date = db.Column(db.DateTime, default=db.func.now())
+    
+    def to_json(self):
+        return {
+            "id": self.id,
+            "game_id": self.game_id,
+            "filename": self.filename,
+            "filepath": f'/api/gamesaves/download/{self.filename}',
+            "upload_date": self.upload_date.isoformat()
+        }

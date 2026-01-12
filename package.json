@@ -10,8 +10,8 @@
     "preview": "vite preview",
     "backend": "cd backend && .venv/bin/flask run --no-debugger",
     "create-venv": "cd backend && mkdir covers && mkdir csv_uploads && mkdir memories &&  python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt",
-    "create-env": "cd backend && test -f .env || echo  \"SECRET_KEY= #fill\\nADMIN=#fill\\nEMAIL=#fill\\nPASSWORD= #fill\\nDATABASE_URL=sqlite:///gamelibrary.db\\nDATABASE_TRACKING=False\\nFLASK_APP=gameok.py\\nFLASK_ENV=development\\nFLASK_DEBUG=1\" > .env"
-
+    "create-env": "cd backend && test -f .env || echo  \"SECRET_KEY= #fill\\nADMIN=#fill\\nEMAIL=#fill\\nPASSWORD= #fill\\nDATABASE_URL=sqlite:///gamelibrary.db\\nDATABASE_TRACKING=False\\nFLASK_APP=gameok.py\\nFLASK_ENV=development\\nFLASK_DEBUG=1\" > .env",
+    "r": "concurrently \"npm run backend\" \"npm run dev\""
   },
   "dependencies": {
     "@mdxeditor/editor": "^3.39.1",
@@ -41,6 +41,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.2",
+    "concurrently": "^9.2.0",
     "eslint": "^9.29.0",
     "eslint-plugin-react-dom": "^1.52.2",
     "eslint-plugin-react-hooks": "^5.2.0",

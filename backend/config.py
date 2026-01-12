@@ -24,6 +24,7 @@ class Config:
     JWT_TOKEN_LOCATION = ["cookies"]
     UPLOAD_FOLDER = os.path.join(basedir, 'covers')
     USER_UPLOAD_FOLDER = os.path.join(basedir, 'memories')
+    GAMESAVE_UPLOAD_FOLDER = os.path.join(basedir, 'gamesaves')
     CSV_UPLOAD_FOLDER = os.path.join(basedir, 'csv_uploads')
     
 

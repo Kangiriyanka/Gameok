@@ -38,6 +38,8 @@ def get_all_game_titles():
 
 
 
+
+
 @bp.route('/api/game/user_add_game', methods= ["POST"])
 @jwt_required()
 def user_add_game():
@@ -98,13 +100,15 @@ def delete_game(a_game_id):
     
 
 
+
+
+
 #  Send a file from within a directory using send_file().
 @bp.route('/api/game/fetch_cover/<a_game_title>/', methods= ["GET"])
 def fetch_image(a_game_title):
     
      filename = Game.query.filter_by(title=a_game_title).first().cover_photo
      game_dir_path = os.path.abspath(os.path.join(current_app.config["UPLOAD_FOLDER"], a_game_title.strip()))
-     print(game_dir_path)
      return send_from_directory(game_dir_path, filename)
      
      
