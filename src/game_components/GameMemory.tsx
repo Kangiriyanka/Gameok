@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom'
 import { motion } from 'motion/react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import SaveFileUploader from './SaveFileUploader'
 
 import {
   fetchSaveFiles,
@@ -21,6 +22,8 @@ function GameMemory() {
   const { id, title } = useParams()
   const [file, setFile] = useState<File | null>(null)
   const [uploadSuccess, setUploadSuccess] = useState(false)
+  const [inputKey, setInputKey] = useState(0)
+
 
   // Auto-dismiss upload success message
   useAutoDismiss(uploadSuccess, setUploadSuccess)
@@ -42,6 +45,9 @@ function GameMemory() {
       await uploadSaveFile(file, id)
       setUploadSuccess(true)
       setFile(null)
+      setInputKey(prev => prev + 1)
+      
+      
 
       const saves = await fetchSaveFiles(id)
       setSaveFiles(saves)
@@ -80,17 +86,18 @@ function GameMemory() {
     fetchMemories()
   }, [id])
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      setFile(e.target.files[0])
-      setUploadSuccess(false)
-    }
-  }
+  
+
+  const handleFileChange = (file: File) => {
+  setFile(file)
+  setUploadSuccess(false)
+  
+}
 
   return (
     <div className="page-header">
       <div className="flex items-center gap-3">
-        <h1 className="flex items-center">Memories of {title}</h1>
+        <h1 className="flex items-center">{title}</h1>
 
         <motion.div
           whileHover={{
@@ -117,7 +124,10 @@ function GameMemory() {
         </motion.div>
       </div>
 
+
       <article className="memory-article">
+
+        <h1 className="flex items-center !text-[var(--n64-c-light-clr)]">Memories</h1>
         {memories ? (
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {memories}
@@ -126,35 +136,21 @@ function GameMemory() {
           <p className="text-xl">No memories added yet.</p>
         )}
 
-        <hr className="border-0 h-1 bg-yellow-400 my-4 shadow-[0_0_4px_#f3f34f]" />
+  
 
-        <h1 className="flex items-center">Upload save files</h1>
+         <h1 className="flex mt-20 !text-[var(--n64-c-light-clr)]">Saves</h1>
 
         <div className="upload-container mt-5 mb-5">
-          <input
-            type="file"
-            id="save-file-input"
-            className="file-input-hidden"
-            onChange={handleFileChange}
-          />
+          
 
-          <label htmlFor="save-file-input" className="file-button">
-            Choose File
-          </label>
-
-          <button
-            className="ml-5 button-10"
-            onClick={handleUpload}
-            disabled={!file}
-          >
-            Save
-          </button>
+          
 
           <div className="saved-files-container">
             {saveFiles.length > 0 ? (
-              <ul className="save-files-list">
+              // List style none doesn't work if you put a div inside
+              <div>
+              <ul className="save-files-list !list-none ">
               
-
                 {saveFiles.map((saveFile: any, index: number) => (
                   <li key={saveFile.id}>
                     <div className= "save-file-row">
@@ -175,9 +171,22 @@ function GameMemory() {
                       {title}-{index + 1}-{saveFile.filename.split('-')[5]}
                     </a>
 
+                        
+
+
+
+
                     <button
-                      onClick={async () => {
+                      onClick={async (e) => {
                         try {
+                          e.preventDefault()
+
+                        const confirmed = window.confirm(
+                          'Are you sure you want to delete this save file?'
+                        )
+                         if (confirmed) {
+                        
+                        }
                           await deleteSaveFile(saveFile.id)
                           const saves = await fetchSaveFiles(id!)
                           setSaveFiles(saves)
@@ -186,18 +195,39 @@ function GameMemory() {
                         }
                       }}
                     >
-                     ✘
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+  <rect x="4" y="5" width="16" height="2" fill="currentColor" rx="1"/>
+  <path d="M6 7 L7 21 C7 21.5 7.5 22 8 22 L16 22 C16.5 22 17 21.5 17 21 L18 7 Z" 
+        fill="currentColor"/>
+  <path d="M9 5 L9 3 C9 2.5 9.5 2 10 2 L14 2 C14.5 2 15 3 15 3 L15 5" 
+        stroke="var(--n64-start-clr)" stroke-width="2" fill="none"/>
+  <line x1="10" y1="9" x2="10" y2="19" stroke="var(--n64-start-clr)" stroke-width="1.5"/>
+  <line x1="14" y1="9" x2="14" y2="19" stroke="var(--n64-start-clr)" stroke-width="1.5"/>
+</svg>
                     </button>
                     </div>
                   </li>
                 ))}
                 
-                <h2 className="text-[#f3f34f] text-lg font-bold uppercase mb-4 border-b-2 border-yellow-400 pb-1">
-  Total saves: {saveFiles.length}
-</h2>
+                
+       
               </ul>
+
+               
+
+ 
+               <SaveFileUploader key = {inputKey} onFileChange={handleFileChange} onUpload={handleUpload} disabled={!file} />
+
+
+              </div>
+              
             ) : (
+              <div>
               <p>No save files uploaded yet.</p>
+               <SaveFileUploader onFileChange={handleFileChange} onUpload={handleUpload} disabled={!file} />
+              </div>
+
+              
             )}
           </div>
         </div>
