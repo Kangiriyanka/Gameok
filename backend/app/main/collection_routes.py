@@ -44,6 +44,7 @@ def get_graph_data():
 
     year_brackets = {label: 0 for label in brackets }
     series_data = defaultdict(int)
+    developer_data = defaultdict(int)
     
    
     user= get_jwt_identity()
@@ -54,6 +55,7 @@ def get_graph_data():
     for game in games:
         
         series_data[game.series] += 1
+        developer_data[game.developer or "Unknown"] += 1
 
      
         year = game.year
@@ -66,13 +68,15 @@ def get_graph_data():
 
 
     series_data = dict(sorted(series_data.items(), key= lambda x:x[1], reverse=True))
+    developer_data = dict(sorted(developer_data.items(), key= lambda x:x[1], reverse=True))
     year_data = [{"years": label, "games": count} for label,count in year_brackets.items()]
     series_data = [{"series": series, "games": count} for series,count in series_data.items()][:5]
+    developer_data = [{"developer": developer, "games": count} for developer,count in developer_data.items()][:5]
     
     
    
     #Returns a response object with the application/json mimetype
-    return jsonify(year_data= year_data, series_data= series_data , total= sum(year_brackets.values()))
+    return jsonify(year_data= year_data, series_data= series_data, developer_data= developer_data, total= sum(year_brackets.values()))
 
 
 # Game Ownership routes

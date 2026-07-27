@@ -24,5 +24,5 @@ export async function statsLoader(): Promise<number[]> {
 
 
 
-  return [games_result.total, consoles_result.graph_data, games_result.year_data, games_result.series_data, consoles_result.consoles.length];
+  return [games_result.total, consoles_result.graph_data, games_result.year_data, games_result.series_data, consoles_result.consoles.length, games_result.developer_data];
 }

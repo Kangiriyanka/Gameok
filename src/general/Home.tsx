@@ -22,6 +22,7 @@ export default function Home() {
   const [toggleYear, setToggleYear] = useState(true)
   const [toggleSeries, setToggleSeries] = useState(false)
   const [toggleConsoles, setToggleConsoles] = useState(false)
+  const [toggleDevelopers, setToggleDevelopers] = useState(false)
   
   const WIDTH = 720
   const HEIGHT= 400
@@ -32,18 +33,28 @@ export default function Home() {
        setToggleSeries(false)
        setToggleYear(true)
        setToggleConsoles(false)
+       setToggleDevelopers(false)
     }
 
      if (type === "series") {
        setToggleSeries(true)
        setToggleYear(false)
        setToggleConsoles(false)
+       setToggleDevelopers(false)
     }
 
     if (type === "consoles") {
        setToggleSeries(false)
        setToggleYear(false)
        setToggleConsoles(true)
+       setToggleDevelopers(false)
+    }
+
+    if (type === "developers") {
+       setToggleSeries(false)
+       setToggleYear(false)
+       setToggleConsoles(false)
+       setToggleDevelopers(true)
     }
 
     
@@ -123,6 +134,14 @@ export default function Home() {
          className={`toggle-button ${toggleConsoles ? "active-button" : ""}`}> Consoles Data
 
          </motion.button>
+
+         <motion.button 
+          whileHover={{ scale: 1.10}}
+         whileTap={{ scale: 0.95 }}
+         onClick ={() => toggleData("developers")} 
+         className={`toggle-button ${toggleDevelopers ? "active-button" : ""}`}> Developers Data
+
+         </motion.button>
          </div>
 
          
@@ -163,6 +182,18 @@ export default function Home() {
                       <div className="recharts-container   ">
                 <SeriesBarChart width={WIDTH} height= {HEIGHT} data = {stats[1]} x_key="console" y_key= "games" />
                 <ConsolesPieChart width={WIDTH} height= {HEIGHT} data = {stats[1]} name_key="console" data_key="games"/>
+
+                </div>
+                </motion.div>
+          
+          } 
+
+          {toggleDevelopers &&
+                <motion.div key="developers-charts" variants={containerVariants} initial="initial" animate="animate" exit="exit">
+                    <h2> Top 5 Developers </h2>
+                      <div className="recharts-container   ">
+                <SeriesBarChart width={WIDTH} height= {HEIGHT} data = {stats[5]} x_key="developer" y_key= "games" />
+                <SeriesPieChart width={WIDTH} height= {HEIGHT} data = {stats[5]} name_key="developer" data_key="games"/>
 
                 </div>
                 </motion.div>

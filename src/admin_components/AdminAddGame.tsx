@@ -9,6 +9,7 @@ type GameData = {
   title: string;
   year: string;
   series: string;
+  developer: string;
   console: string;
   coverPhoto: File | null;
 }
@@ -24,6 +25,7 @@ function AddGame() {
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
   const [series, setSeries] = useState("");
+  const [developer, setDeveloper] = useState("");
   const [consoleName, setConsoleName] = useState('');
   const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
   const [csvFile, setCsvFile] = useState<File | null>(null);
@@ -73,6 +75,7 @@ function AddGame() {
     formData.append('title', data.title);
     formData.append('year', data.year);
     formData.append('series', data.series);
+    formData.append('developer', data.developer);
     formData.append('console', data.console);
 
     
@@ -144,6 +147,7 @@ function AddGame() {
       "title": title,
       "year": year,
       "series": series,
+      "developer": developer,
       "console": consoleName,
       "coverPhoto": coverPhoto 
     }
@@ -203,6 +207,10 @@ function AddGame() {
       <label>
           <span className="label-text">Series</span> 
         <input type="text" value={series} onChange={(e) => setSeries(e.target.value)}/>
+      </label>
+      <label>
+          <span className="label-text">Developer</span> 
+        <input type="text" value={developer} onChange={(e) => setDeveloper(e.target.value)}/>
       </label>
     
 
