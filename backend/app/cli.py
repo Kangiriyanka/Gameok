@@ -42,7 +42,7 @@ def add_consoles():
     {"name": "Nintendo 64", "firm": "Nintendo", "year": 1996},
     {"name": "Nintendo DS", "firm": "Nintendo", "year": 2004},
     {"name": "Nintendo Switch", "firm": "Nintendo", "year": 2017},
-    {"name": "Nintendo Gamecube", "firm": "Nintendo", "year": 2001},
+    {"name": "Nintendo GameCube", "firm": "Nintendo", "year": 2001},
     {"name": "Super Nintendo", "firm": "Nintendo", "year": 1991},
     {"name": "Wii", "firm": "Nintendo", "year": 2006},
     {"name": "Xbox", "firm": "Microsoft", "year": 2001},
