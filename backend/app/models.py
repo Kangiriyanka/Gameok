@@ -55,6 +55,7 @@ class Game(db.Model):
     title= db.Column(db.String(100))
     year = db.Column(db.Integer)
     series= db.Column(db.String(100))
+    developer = db.Column(db.String(100))
     cover_photo = db.Column(db.String(100))  
     users = relationship("User", secondary="game_ownership", back_populates="games", passive_deletes=True) 
     consoles = relationship("Console", secondary="game_console", back_populates="games", passive_deletes=True)
@@ -67,6 +68,7 @@ class Game(db.Model):
             "title": self.title,
             "year": self.year,
             "series": self.series,
+            "developer": self.developer,
             "cover_photo": self.cover_photo
         }
     

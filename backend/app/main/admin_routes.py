@@ -47,9 +47,10 @@ def add_game():
    a_title = request.form['title']
    a_year = int(request.form['year'])
    a_series = request.form['series']
+   a_developer = request.form['developer']
 
   
-   posted_game = Game(title=a_title, year=a_year, series=a_series)
+   posted_game = Game(title=a_title, year=a_year, series=a_series, developer=a_developer)
    current_game = Game.query.filter_by(title=request.form["title"].strip()).first()
    console= Console.query.filter_by(name=request.form["console"]).first()
 
@@ -285,7 +286,8 @@ def add_games_from_csv():
                      return {"msg": f"Cover photo for {row["title"]} is invalid"}, 422
                 
              
-                new_game = Game(title=row["title"], year=row["year"], series=row["series"], cover_photo=row["cover_photo"] +".jpg")
+                developer = row.get("developer") or "Unknown"
+                new_game = Game(title=row["title"], year=row["year"], series=row["series"], developer=developer, cover_photo=row["cover_photo"] +".jpg")
                 games_to_add.append((new_game,jpg_cover_location,console))
              
                 
